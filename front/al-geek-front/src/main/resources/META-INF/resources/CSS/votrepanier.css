@@ -1,0 +1,162 @@
+.bigPanel {
+	border: 1px solid #79a5bb;
+	width: 70vw;
+	margin: 20px auto;
+	padding :30px 15px;
+	text-align: center;
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+
+h2 {
+	padding-bottom: 25px;
+	_color:#18254a !important;
+}
+
+.h2white {
+	color:#eb951b !important;
+}
+
+
+h3 {
+	padding-bottom: 15px;
+}
+
+
+.panoG {
+	width:900px;
+	.border: 2px solid red;
+}
+
+.panoD {
+	width:350px;
+	.border: 2px solid green;
+	background-color: #17244a;
+	-webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.2);
+	
+	padding: 20px;
+}
+
+.panoG table {
+	width: 100%;
+}
+
+.ligneProduit {
+	.border: 2px solid hotpink;
+	margin: 10px auto;
+	display: flex;
+	width: 800px; 
+	justify-content: space-around;
+	font-size: 25px;
+}
+
+
+.delete a {
+	color:#10182e;
+	
+}
+
+
+.delete a:hover {
+	color:#ec9b26;
+}
+
+
+.titreCol {
+	text-align:center;
+	color:#ec971e;
+	font-size:24px;
+	padding: 0 15px;
+	padding-bottom: 25px;
+}
+
+
+
+.tdNom {
+	font-size:20px;
+	padding: 0 15px;
+	
+}
+
+.tdNom a{
+	color:#17244a;
+}
+
+.tdNom a:hover {
+	color:#ed9d2c;
+	cursor: pointer !important;
+}
+
+
+.tdQuantite {
+	font-size:20px;
+	padding: 0 15px;
+}
+
+
+.tdPrix {
+	font-size:20px;
+	padding: 0 25px;
+	white-space: nowrap;
+}
+
+
+.photo {
+	height: 80px;
+	margin-bottom: 8px;
+}
+
+
+.btnDelete {
+	background-color: white;
+	color:#17244a;
+	border: 1px solid #17244a;
+	border-radius: 25px;
+	margin-bottom: 5px;
+	padding: 1px 6px;
+	font-size: 14px;
+}
+
+.btnDelete:hover {
+	color:#ec971f;
+	border: 1px solid #ec971f;
+}
+
+.qteTotale {
+	font-size:18px;
+	padding-bottom: 20px;
+	color:#eb951b;
+}
+
+
+
+.somme {
+	font-size:25px;	
+	color:#eb951b;
+}
+
+
+.alignSomme {
+	.border: 2px solid hotpink;
+	color:#eb951b;
+	display: flex;
+	justify-content:center;
+	width:300px;
+	font-size:30px;
+	text-align:center;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.euro {
+	margin-left: 6px;
+}
+
+.btn-warning {
+	margin-bottom: 20px !important;
+}

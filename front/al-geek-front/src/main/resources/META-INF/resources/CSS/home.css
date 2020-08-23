@@ -1,0 +1,248 @@
+.homeProduits {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+	width: 90vw;
+    height: 300px;
+}
+
+.homeProduitsContainer {
+	position: relative;
+}
+
+.leftGradient {
+	position: absolute;
+	left: 0;
+	width: 30px;
+	top: 0;
+	bottom: 18px;
+	background: linear-gradient(90deg, #dad9d7, transparent);
+}
+
+.rightGradient {
+	position: absolute;
+	right: 0;
+	width: 30px;
+	top: 0;
+	bottom: 18px;
+	background: linear-gradient(-90deg, #dad9d7, transparent);
+}
+
+.cadrePrix {
+	border: 1px groove white;
+	width:315px;
+	border-radius:10px;
+	height:315px;
+	transition: 0.3s;
+ 	box-shadow: 0px 2px 11px 2px #00000010;
+ 	background: white;
+ 	text-align: center;
+ 	padding-top:125px;
+}
+
+
+.cadrePrix:hover {
+ 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+ 	border: 1px groove #ed9f2f;
+  	transition:0.2s;
+}
+
+.cadrePrix:hover .titre {
+	color:#ed9f2f;
+	transition:0.2s;
+}
+
+
+
+
+
+/* Carte produit */
+
+.carteProduit {
+border-radius: 10px;
+    width: 215px;
+    margin: 10px;
+    padding: 3px;
+    box-shadow: 0px 2px 11px 2px #00000010;
+    background: white;
+    flex-shrink: 0;  
+}
+
+
+.carteProduit:hover {
+	box-shadow: 0 0px 10px 0 rgba(0,0,0,0.5);
+    transition: 0.2s;
+}
+
+
+.photoProduit {
+	height: 100px;
+}
+
+.footerCarteProduit {
+	background-color: #162141;
+	border-radius: 5px;
+	box-shadow: 3px 3px 15px 1px rgba(0,0,0,0.1);
+	margin: 20px;
+	padding: 12px;
+}
+
+
+
+.titreProduit {
+    height: 70px;
+    padding: 13px;
+    font-size: 13px;
+    display: flex;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+}
+
+.container {
+	padding: 2px 16px;
+}
+
+.conteneurImage {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.conteneurImage img {
+	width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.clink:link {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+.clink:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+.clink:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.divBtn {
+	margin-top:15px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.ui-widget input {
+	width: 60px;
+	height:38px;
+	text-align: center;
+}
+
+.divPrix {
+	text-align: center;
+}
+
+.prix {
+	font-size: 20px;
+	.margin-top:5px;
+	color:white;
+}
+
+.carteProduit:hover .prix  {
+	color:#ed9d2b;
+	transition:0.2s;
+}
+
+
+.btn-warning {
+	font-size:15px;
+	background-color: red;
+}
+
+
+.ordiSelected {
+	.border : 1px solid hotpink;
+  	.background: violet;
+	display:flex;
+	justify-content: space-around;
+  	margin : 0 25px 35px 25px;
+}
+
+
+
+.photoOrdi {
+	.border : 1px solid orange;
+	padding : 0 50px;
+}
+
+.photoOrdi2 {
+	height: 150px;
+}
+
+.nomOrdi {
+	.border : 1px solid green;
+	margin: 0 20px;
+	padding : 0 30px;
+	font-size:25px;
+}
+
+.prixOrdi {
+    solid blue: ;
+    margin-right: 20px;
+    padding: 0 30px;
+    white-space: nowrap;
+    /* white-space: normal; */
+    font-size: 26px;
+}
+
+
+.divCarac {
+	.border:1px solid grey;
+	text-aling :center;
+	display: flex;
+	justify-content: center;
+	margin-top:40px;
+	margin-bottom: 40px;
+}
+
+.divCarac tr:nth-child(even) {
+	background: #f4efdc;
+	border : 1px solid #18254a;
+	font-size: 18px;
+}
+
+.divCarac tr:nth-child(odd) {
+	background: #FFF;
+	border : 1px solid #18254a;
+	font-size: 18px;
+}
+
+.divCarac td {
+	border : 1px solid #18254a;
+}
+
+h3 {
+	color:#162142 !important;
+}
+
+
+.colG {
+	color:#162144;
+	padding: 8px 60px;
+}
+
+.colD {
+	padding: 8px 60px;
+}
+
+.btn-warning {
+	margin-bottom: 40px !important;
+}

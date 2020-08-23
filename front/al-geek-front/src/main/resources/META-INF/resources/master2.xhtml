@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<f:view>
+	<h:head>
+		<title><ui:insert name="title"></ui:insert></title>
+		<ui:insert name="CSS"></ui:insert>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" />
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="CSS/master2.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/master_resp.css" />
+		<link rel="icon" type="image/ico" href="IMG/logoALGeek2.ico" />
+	</h:head>
+
+	<h:body>
+		<header>
+			<ui:include src="header.xhtml"></ui:include>
+		</header>
+
+		<div class="main-content">
+			<ui:insert name="content">
+				<ui:include src="main.xhtml"></ui:include>
+			</ui:insert>
+		</div>
+
+		<footer>
+			<ui:include src="footer.xhtml"></ui:include>
+		</footer>
+	</h:body>
+</f:view>
+</html>

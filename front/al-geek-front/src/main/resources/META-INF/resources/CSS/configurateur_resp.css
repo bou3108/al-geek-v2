@@ -1,0 +1,43 @@
+@media only screen and (max-width: 720px) {
+  .composantsDiv {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .configMain {
+  	padding: 0;
+  }
+  
+  .configContainer {
+  	flex-direction: column-reverse;
+  }
+  
+  .configRecap {
+  	width: 100%;
+    max-width: unset;
+  }
+  
+  .overlayContainer {
+	background: #3a4158e8;
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-width: unset;
+    max-height: unset;
+    min-width: unset;
+    min-height: unset;
+  	
+  }
+  
+  .boutonFermer {
+      margin-right: 20px;
+  }
+  
+  .carteProduit {
+  	  width: 200px;
+      margin: 7px;
+   }
+}
+

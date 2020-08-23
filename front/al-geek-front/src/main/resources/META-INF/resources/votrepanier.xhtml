@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:pf="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+	<ui:composition template="master2.xhtml">
+		<ui:define name="title">Votre panier | Al-Geek</ui:define>
+		<ui:define name="CSS">
+			<link type="text/css" rel="stylesheet" href="CSS/votrepanier.css" />
+		</ui:define>
+		<ui:define name="content">
+			<h:form id="form1">
+				<div class="bigPanel">
+
+					<div class="panoG">
+						<h2>#{panierBean.titrePanier}</h2>
+
+						<table cellpadding="20px" align="center">
+							<tr>
+								<th class="titreCol"></th>
+								<th class="titreCol">
+								<h:outputLabel rendered="#{panierBean.panier.listLC.size() > 0}">Produit</h:outputLabel></th>
+								<th class="titreCol"><h:outputLabel
+										rendered="#{panierBean.panier.listLC.size() > 0}">Quantité</h:outputLabel></th>
+								<th class="titreCol"><h:outputLabel
+										rendered="#{panierBean.panier.listLC.size() > 0}">Prix</h:outputLabel></th>
+							</tr>
+							<ui:repeat var="lc" value="#{panierBean.panier.listLC}">
+								<tr>
+									<td class="tdPhoto"><h:graphicImage class="photo"
+											value="IMG/#{lc.produit.photo}" /></td>
+									<td class="tdNom"><h:commandLink action="#{ficheProduitBean.afficherProduit(lc.produit.id)}" >
+									<label>#{lc.produit.type.nom}  #{lc.produit.nom}</label>
+									</h:commandLink></td>
+									<td class="tdQuantite"><label>#{lc.quantite}</label></td>
+									<td class="tdPrix"><label>#{lc.produit.prix} <h:outputText
+												value="€" rendered="#{lc.produit.prix != null}" /></label></td>
+									<td class="delete">
+										<h:commandButton action="#{panierBean.retirerProduitDuPanier(lc.produit)}" title="Retirer ce produit" class="btnDelete" value="X"/>															
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+
+					</div>
+
+					<div class="panoD">
+						<div class="recapitulatif">
+
+							<h2 class="h2white">Récapitulatif</h2>
+
+							<label class="qteTotale">Nb d'articles dans votre panier
+								: <h:outputText
+									value="#{panierBean.afficherQuantiteProduitsDansPanier()}">
+								</h:outputText>
+							</label>
+
+							<h:form id="form2" styleClass="panelGrid"
+								rendered="#{panierBean.panier.listLC.size() > 0}">
+
+								<div>
+									<label class="somme">Total :</label>
+								</div>
+								<div class="alignSomme">
+									<div>
+										<h:outputText value="#{panierBean.afficherPrixTotal()}">
+											<f:convertNumber pattern="#0.00" />
+										</h:outputText>
+									</div>
+									<div class="euro">
+										<h:outputLabel value=" €" />
+									</div>
+								</div>
+
+							</h:form>
+
+
+							<b:commandButton class="btn-warning" action="#{commandeBean.effectuerCommande()}"
+								value="Finaliser ma commande" look="warning" size="lg"
+								rendered="#{panierBean.panier.listLC.size() > 0}" />
+						</div>
+					</div>
+
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</f:view>
+</html>

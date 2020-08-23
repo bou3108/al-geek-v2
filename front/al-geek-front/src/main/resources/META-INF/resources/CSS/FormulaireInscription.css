@@ -1,0 +1,57 @@
+.bigPanel {
+	.border: 1px solid #79a5bb;
+	width:70vw;
+	margin : 20px auto;
+	padding-top:10px;
+	padding-bottom:50px;
+	text-align:center;
+	background-color: white;
+}
+
+.formInscript {
+	.border: 1px solid green;
+	_color:#79a5bb;
+	font-size:16px;
+}
+
+.formInscript div {
+	padding:12px;
+}
+
+.titreInscript {
+	font-size:30px;
+	text-align:center;
+}
+
+.colInscript {
+	.border: 1px solid hotpink;
+	display:flex;
+	justify-content: center;
+}
+
+.ColLabel {
+	display:flex;
+	flex-direction: column;
+}
+
+.ColLabel label {
+	margin:8px;
+	text-align:right;
+	font-size:18px;
+	color: #18254a;
+}
+
+.ColInputText {
+	display:flex;
+	flex-direction: column;	
+}
+
+.ColInputText input {
+	margin:7px;
+	color:black;
+}
+
+.btnInscript {
+	text-align:center;
+	.padding:15px;
+}

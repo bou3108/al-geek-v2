@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:pf="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+
+	<ui:define name="title">Connexion | Al-Geek</ui:define>
+
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/connexion.css" />
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<div class="connexDiv connexDiv2">
+				<div>
+					<div class="connex">
+						<div class="connexGauche">
+							<h:outputLabel> Email </h:outputLabel>
+							<h:outputLabel> Mot de passe </h:outputLabel>
+						</div>
+						<div class="connexDroite">
+							<h:inputText value="#{connectBean.email}" />
+							<h:inputSecret value="#{connectBean.password}" />
+						</div>
+					</div>
+					<div class="connexBtn centerElts">
+						<b:commandButton value="Se connecter" look="warning" size="lg"
+								action="#{connectBean.doConnecter}" />
+					</div>
+					<div class="connexInfo centerElts">
+						<div><h:outputLabel> Vous n'avez pas de compte ?</h:outputLabel></div>
+						<div><h:commandLink action="#{connectBean.goToFormulaireInscription}"> Cliquez ici pour en créer un.</h:commandLink></div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

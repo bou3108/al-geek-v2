@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view locale="fr">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="https://kit.fontawesome.com/6c4d56803d.js"/>
+	<title>Insert title here</title>
+	<link type="text/css" rel="stylesheet" href="CSS/connexion.css" />
+</h:head>
+
+<h:body>
+<h:form>
+	<div class="relativeHeader">
+	
+		<div class="absoluteImage">
+			<img src="IMG/fondv2.png" alt="" />
+		</div>
+		
+	
+		<div class="absoluteTitre">
+			<a href="home.xhtml" class="logo-site">AL-Geek</a>
+		</div>
+		
+		<div class="first-bar">
+			<div style="flex-grow: 1;"></div>
+			<div class="connect">
+				<h:panelGroup rendered="#{connectBean.checkClientConnecte()}" layout="block">
+					<h:commandLink action="#{connectBean.showOverlay}">
+						<f:ajax render="@form"/>
+						<b:iconAwesome value="user" solid="true"> &nbsp;Connexion</b:iconAwesome>
+					</h:commandLink>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{!connectBean.checkClientConnecte()}" layout="block">
+					<a href="votrepanier.xhtml"><b:iconAwesome value="user" solid="true"/>&nbsp; #{connectBean.client.prenom}</a>
+					<p:menubar styleClass="menuBarConnect">
+				        <p:submenu label="#{connectBean.client.prenom}">
+				            <p:menuitem value="Espace perso" action="#{connectBean.goToEspacePerso}" />
+				            <p:menuitem value="Déconnexion" action="#{connectBean.doDeconnecter()}" />
+				        </p:submenu>
+					</p:menubar>				 
+				</h:panelGroup>
+			</div>
+			
+			<div class="panier">
+				<h:panelGroup class="badge-panier" rendered="#{panierBean.afficherQuantiteProduitsDansPanier() > 0}">
+					#{panierBean.badgeQuantiteProduitsDansPanier()}
+				</h:panelGroup>
+				<a href="votrepanier.xhtml"><b:iconAwesome value="shopping-cart" solid="true"/> &nbsp;Mon panier</a>
+			</div>
+		</div>
+	</div>
+
+
+<p:toolbar id="tb">
+    <p:toolbarGroup align="center"> 
+<div class="nav-bar">
+	<nav class="nav">
+			<p:menubar model="#{menuCategoriesBean.model}" styleClass="menuBarItem" />
+		<!-- 		<a href="#"><b:iconAwesome value="desktop" solid="true"/> &nbsp;Nos produits</a> -->
+<!-- 		<a href="#"><b:iconAwesome value="hands-helping"/> &nbsp;Achat guidé</a>
+		<a href="#"><b:iconAwesome value="tools"/> &nbsp;Montage sur mesure</a>
+		<a href="#"><b:iconAwesome value="search-dollar"/> &nbsp;Bons plans</a> -->
+	</nav>
+</div>
+    </p:toolbarGroup>
+</p:toolbar>
+<p:sticky target="tb" /> 
+
+
+		<h:panelGroup styleClass="overlay" rendered="#{connectBean.overlayVisible}" layout="block">
+			<div>				
+				<h:commandLink style="float: right;" action="#{connectBean.hideOverlay}">
+					<f:ajax render="@form"></f:ajax>
+					<b:iconAwesome value="times-circle" solid="true" style="font-size:24px;color:#10182e" onmouseout="this.style.color='#79a5bb';" onmouseover="this.style.color='#f0ad4e';"/>
+				</h:commandLink>
+				<h:commandButton value="Démo" action="#{connectBean.boutonDemoConnect}"/>
+				<div class="connex">
+					<div class="connexGauche">
+						<h:outputLabel> Email </h:outputLabel>
+						<h:outputLabel> Mot de passe </h:outputLabel>
+					</div>
+					<div class="connexDroite">
+						<h:inputText value="#{connectBean.email}" />
+						<h:inputSecret value="#{connectBean.password}" />
+					</div>
+				</div>
+				<div class="connexBtn">
+					<b:commandButton value="Se connecter" look="warning" size="lg" action="#{connectBean.doConnecter}"/>
+			
+				</div>
+					<h:outputLabel style="color:red;font-size:large; margin:0" rendered="#{connectBean.client == null}">Email ou mot de passe incorrect</h:outputLabel>
+				<div class="connexInfo" style="margin-top:-30px">
+					<br/><br/>	
+					<h:outputLabel> Vous n'avez pas de compte ?</h:outputLabel><br/>
+					<h:commandLink action="#{connectBean.goToFormulaireInscription}"> Cliquez ici pour en créer un</h:commandLink>
+				</div>
+				
+			</div>	
+		</h:panelGroup>
+
+</h:form>
+</h:body>
+</f:view>
+</html>

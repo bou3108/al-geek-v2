@@ -1,0 +1,172 @@
+.bigPanel {
+	border: 1px solid #79a5bb;
+	width: 70vw;
+	margin: 20px auto;
+	padding :30px 15px;
+	text-align: center;
+	background-color: white;
+	display: flex;
+	flex-direction:column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+
+h3 {
+	background-color: #18254a;
+	border-radius: 5px;
+	padding: 5px 0 5px 30px;
+	text-align: left !important;
+	color:#efa945 !important;
+	
+}
+
+
+h4 {
+	color:#18254a !important;
+	font-size:22px !important;
+}
+
+
+.infosClient {
+	.border:1px solid red;
+	margin-bottom: 30px;
+}
+
+
+.identite {
+	.border:1px solid orange;
+	display: flex;
+	flex-wrap :wrap;
+	justify-content: space-around;
+	margin : 25px;
+	
+}
+
+.id1 {
+	.border:4px solid #408080;
+	min-width:350px;
+	text-align: left;
+}
+
+
+.id2 {
+	.border:4px solid #408080;
+	min-width:350px;
+	text-align: left;
+}
+
+
+.id3 {
+	.border:4px solid #408080;
+	width:350px;
+	text-align: left;
+}
+
+.identite label , .codeBank label{
+	padding-left: 25px;
+	padding-right:10px;
+	font-size: 18px;
+	margin: 6px 0;
+}
+
+
+.champClient {
+	font-size: 18px;
+	margin: 6px 0;
+}
+
+
+.paiement {
+	.border:1px solid green;
+	
+}
+
+
+.cadreCB {
+	.border:2px	solid hotpink;
+	display: flex;
+	justify-content: center;
+}
+
+
+.logoCB {
+	width: 75px;
+	margin:12px 30px 20px 30px
+}
+
+
+.codeBank {
+	.border:2px solid black;
+	
+}
+
+.codeBank label {
+	padding-right:10px;
+	font-size: 18px;
+	margin: 12px 0;
+}
+
+.champCBnum {
+	font-size: 15px;
+}
+
+.champCBdate {
+	font-size: 15px;
+	width: 80px;
+}
+
+.champCBcrypto {
+	font-size: 15px;
+	width: 50px;
+}
+
+.btn-warning {
+	margin-top:15px;
+	margin-left: 35px;
+}
+
+
+.iconCheck {
+	font-size: 50px;
+	color:green;
+	font-size:28px;
+	margin-bottom: 10px;
+}
+
+.regex {
+	color:red;
+	font-size:18px;
+}
+
+.tabl {
+	.border:1px solid hotpink;
+}
+
+tr label {
+	margin : 0 50px;
+	margin-top:10px;
+	font-size: 20px;
+}
+
+.montantTotal {
+	margin-top:35px;
+	font-size:32px;
+	color:#18254a;
+}
+
+.alignSomme {
+	.border: 2px solid hotpink;
+	color:#eb951b;
+	display: flex;
+	justify-content:center;
+	width:300px;
+	font-size:30px;
+	text-align:center;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.euro {
+	margin-left: 6px;
+}

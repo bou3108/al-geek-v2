@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:pf="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="triChoisi"
+			value="#{catalogueBean.triChoisi}" />
+		<f:viewParam name="typeProduitId"
+			value="#{catalogueBean.typeProduitId}" />
+		<f:viewAction action="#{catalogueBean.chargerCatalogue}" />
+	</f:metadata>
+
+	<ui:define name="title">Catalogue | Al-Geek</ui:define>
+
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/catalogue.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/catalogue_resp.css" />
+	</ui:define>
+
+	<ui:define name="content">
+	<script>
+		function doFiltres() {
+			document.getElementsByClassName("boutonFiltre")[0]
+					.click();
+		}
+	</script>			
+	<h:form>
+		<div class="catalogContainer">
+
+			<div class="catalogFiltres">
+				<h2>Filtrer les produits</h2>
+
+				<div>
+					<h4>Par référence</h4>
+					<h:inputText value="#{catalogueBean.filtreReference}" class="txtSearch"
+						onblur="doFiltres()" />
+				</div>
+
+				<div>
+					<h4>Par marques</h4>
+					<h:selectManyCheckbox value="#{catalogueBean.filtreMarques}"
+						layout="pageDirection" onclick="doFiltres()">
+						<f:selectItems var="m" value="#{catalogueBean.marquesVisibles}"
+							itemLabel="#{m.nom}" itemValue="#{m}"></f:selectItems>
+					</h:selectManyCheckbox>
+				</div>
+
+				<div>
+					<h4>Par prix</h4>
+
+					<h:outputText id="displayRange"
+						value="Entre #{catalogueBean.prixMinVisible} and #{catalogueBean.prixMaxVisible}" />
+					<pf:slider for="prixMin,prixMax" display="displayRange"
+						style="width: 90%; margin: auto;" range="true"
+						displayTemplate="Entre {min} et {max}"
+						minValue="#{catalogueBean.filtrePrixMin}"
+						maxValue="#{catalogueBean.filtrePrixMax}"
+						onSlideEnd="doFiltres()" />
+
+					<h:inputHidden id="prixMin"
+						value="#{catalogueBean.prixMinVisible}" />
+					<h:inputHidden id="prixMax"
+						value="#{catalogueBean.prixMaxVisible}" />
+				</div>
+
+				<div
+					style="display: flex; justify-content: center; margin: 15px 0;">
+					<b:commandButton id="doFiltresButton"
+						action="#{catalogueBean.appliquerFiltres}" look="warning" size="lg"
+						styleClass="boutonFiltre" value="Appliquer">
+						<f:ajax execute="@form" render="@form" />
+					</b:commandButton>
+				</div>
+
+			</div>
+
+			<div style="display: flex; flex-direction: column; flex-grow: 1;">
+				<div class="divTri">
+						<h:outputLabel value="Triez les articles : " />
+						<h:selectOneMenu id="tri" value="#{catalogueBean.triChoisi}" onchange="doFiltres()" >
+							<f:selectItem itemLabel="par nom (défaut)" itemValue="triNomAlpha" />
+							<f:selectItem itemLabel="du - cher au + cher" itemValue="triPrixCroissant" />
+							<f:selectItem itemLabel="du + cher au - cher" itemValue="triPrixDecroissant" />
+							<f:selectItem itemLabel="par marques (A à Z)" itemValue="triMarqueCroissant" />
+							<f:selectItem itemLabel="par marques (Z à A)" itemValue="triMarqueDecroissant" />
+						</h:selectOneMenu>
+				</div>
+				
+				<div class="catalogContent">
+					<ui:repeat value="#{catalogueBean.produitsFiltres}" var="p">
+						<div class="carteProduit">
+							<h:commandLink class="clink"
+								action="#{ficheProduitBean.afficherProduit(p.id)}">
+								<div class="titreProduit">
+									<span><h:outputText value="#{p.nom}" /></span>
+								</div>
+	
+								<div class="photoProduit">
+									<div class="conteneurImage">
+										<h:graphicImage value="IMG/#{p.photo}" />
+									</div>
+								</div>
+							</h:commandLink>
+	
+							<div class="footerCarteProduit">
+								<div class="divPrix">
+									<label class="prix">#{p.prix} <h:outputText value="€"
+											rendered="#{p != null}" /></label>
+								</div>
+	
+								<div class="divQte">
+									<div>
+										<pf:spinner class="ui-widget" min="1" id="basic"
+											value="#{p.quantite}" />
+									</div>
+									<b:commandButton class="btn-warning" value="Ajouter"
+										action="#{panierBean.ajouterAuPanierDepuisCatalogue(p.quantite, p)}"
+										look="warning" size="lg" iconAwesome="fa-cart-plus">
+										<f:ajax execute="@form" render="@form" />
+									</b:commandButton>
+								</div>
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
+			</div>			
+		</div>
+	</h:form>
+			
+	</ui:define>
+
+</ui:composition>
+</html>

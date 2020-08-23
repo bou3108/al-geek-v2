@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+	<h:head>
+	</h:head>
+
+	<ui:composition template="master2.xhtml">
+		<ui:define name="title">Fiche produit | Al-Geek</ui:define>
+		<ui:define name="CSS">
+			<link type="text/css" rel="stylesheet" href="CSS/ficheproduit.css" />
+		</ui:define>
+		<ui:define name="content" bootsFacesDecorator="true">
+			<h:form>
+				<div class="bigPanel">
+
+					<div class="divTitre">
+						<label>#{ficheProduitBean.produit.type.nom} #{ficheProduitBean.produit.nom}</label>
+					</div>
+					<div class="divMarque">
+						<b>#{ficheProduitBean.produit.marque.nom}</b>
+					</div>
+
+					<div class="littlePanel">
+						<div class="divPhoto">
+							<h:graphicImage class="photo"
+								value="IMG/#{ficheProduitBean.produit.photo}" />
+						</div>
+
+						<div class="divInfo">
+						
+							<div class="divPrix">
+								<label class="prix">#{ficheProduitBean.produit.prix} <h:outputText
+										value="€" rendered="#{ficheProduitBean.produit != null}" /></label>
+								<div>
+									<div class="divQuantité">
+										<h:outputLabel for="@next" value="Quantité :&#160;&#160;" />
+										<pf:spinner class="ui-widget" min="1" id="basic"
+											value="#{ficheProduitBean.produit.quantite}" />
+									</div>
+									<div>
+										<b:commandButton class="btn-warning" value="Ajouter au panier" action="#{panierBean.ajouterAuPanierDepuisFiche}"
+											look="warning" size="lg" iconAwesome="fa-cart-plus"></b:commandButton>
+									</div>
+								</div>
+							</div>
+							
+							
+							<h2>Caractéristiques techniques</h2>
+							<div class="divCarac">
+								<table border="1" cellpadding="20px" align="left">
+									<ui:repeat var="c"
+										value="#{ficheProduitBean.produit.caracteristiques}">
+										<tr>
+											<td class="colG">
+											<b> 
+												<h:outputText value="#{ficheProduitBean.traduireCaracteristique(c.getCle())}" />
+											</b></td>
+											<td class="colD">#{c.valeurAffichage}</td>
+										</tr>
+									</ui:repeat>
+								</table>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</f:view>
+</html>

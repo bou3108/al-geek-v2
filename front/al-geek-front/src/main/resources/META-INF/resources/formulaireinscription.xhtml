@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="master2.xhtml">
+
+	<ui:define name="title">Formulaire d'inscription | Al-Geek</ui:define>
+
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/FormulaireInscription.css" />
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		<div class="bigPanel">
+			<div class="formInscript">
+				<div class="titreInscript">Formulaire d'inscription</div>
+				<h:commandButton action="#{inscriptionBean.boutonDemoNewClient}" value="Démo"/>
+				<div class="colInscript">
+					<div class="ColLabel">
+						<label>Adresse Email</label> <label>Mot de passe</label>
+					</div>
+					<div class="ColInputText">
+						<h:inputText value="#{inscriptionBean.email}" />
+						<h:inputSecret value="#{inscriptionBean.password}" />
+					</div>
+				</div>
+				<div class="colInscript">
+					<div class="ColLabel">
+						<label>Nom</label> <label>Prénom</label> <label>Adresse</label>
+						<label>Code postal</label> <label>Ville</label>
+
+					</div>
+					<div class="ColInputText">
+						<h:inputText value="#{inscriptionBean.nom}" />
+						<h:inputText value="#{inscriptionBean.prenom}" />
+						<h:inputText value="#{inscriptionBean.adresse}" />
+						<h:inputText value="#{inscriptionBean.codePostal}" />
+						<h:inputText value="#{inscriptionBean.ville}" />
+					</div>
+				</div>
+				<div class="btnInscript">
+					<b:commandButton value="Créer un compte"
+						action="#{inscriptionBean.doInscription()}" look="warning"
+						size="lg" />
+				</div>
+			</div>
+			<h:messages></h:messages>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

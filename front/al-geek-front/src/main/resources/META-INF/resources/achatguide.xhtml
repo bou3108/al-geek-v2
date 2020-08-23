@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+	<ui:define name="title">Achat guidé | Al-Geek</ui:define>
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/achatguide.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/achatguide_resp.css" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+		<div class="bigPanelColumn">
+		<h2>Quel type d'ordinateur souhaitez-vous ?</h2>
+		<div class="littlePanel">
+	
+				<h:commandLink action="#{achatGuideBean.chargerPortables}">
+				<div class="cadreOrdi">
+				<label class="titre">Je souhaite un ordinateur portable</label> 
+				<div class="cadrePhoto">
+				<h:graphicImage class="photo1" name="IMG/_portable.jpg" />
+				</div>
+				</div>
+				</h:commandLink> 
+			
+				<h:commandLink action="#{achatGuideBean.chargerOrdiBureau}">
+				<div class="cadreOrdi">
+				<label class="titre">Je souhaite un ordinateur de bureau</label> 
+				<div class="cadrePhoto">
+				<h:graphicImage class="photo2" name="IMG/_ordibureau.jpg" />
+				</div> 
+				</div>
+				</h:commandLink>
+			</div>
+		</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

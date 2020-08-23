@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:pf="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="typeProduitId"
+			value="#{catalogueBean.typeProduitId}" />
+		<f:viewAction action="#{catalogueBean.chargerCatalogue}" />
+	</f:metadata>
+
+	<ui:define name="title">Configurateur | Al-Geek</ui:define>
+
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/configurateur.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/configurateur_resp.css" />
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="configFull">
+			<h:form>
+				<div class="configContainer">
+					<!-- CONFIGURATEUR -->
+					<div class="configMain">
+						<div class="configComposantsContainer">
+						
+							<h:commandLink action="#{configurateurBean.boutonDemo}" value="demo" />
+						
+							<div class="composantsDiv">
+								<ui:repeat var="choix" value="#{configurateurBean.selection}">
+									<div class="carteComposant">
+
+										<!-- 								Si le produit n'a pas encore été choisi -->
+										<h:panelGroup style="display: flex;" layout="block"
+											rendered="#{choix.produit == null}">
+											<div class="typeComposant">
+												<h3>#{choix.typeProduit.nom}</h3>
+											</div>
+											<h:commandButton styleClass="boutonAjouter"
+												action="#{configurateurBean.afficherOverlay(choix.typeProduit.id)}"
+												value="Ajouter">
+												<f:ajax execute="@form" render="@form"></f:ajax>
+											</h:commandButton>
+										</h:panelGroup>
+
+										<!-- 								Si un produit est choisi -->
+										<h:panelGroup layout="block"
+											rendered="#{choix.produit != null}">
+											<div style="display: flex;">
+												<div class="typeComposant">
+													<h3>#{choix.typeProduit.nom}</h3>
+												</div>
+
+												<h:commandButton styleClass="boutonRetirer"
+													action="#{configurateurBean.retirerProduit(choix.typeProduit)}"
+													value="Retirer">
+													<f:ajax execute="@form" render="@form"></f:ajax>
+												</h:commandButton>
+											</div>
+
+											<div style="display: flex;">
+												<div class="divPhoto">
+													<h:graphicImage class="photo"
+														value="IMG/#{choix.produit.photo}" />
+												</div>
+												<div>
+													<div>
+														<h:outputText value="#{choix.produit.nom}" />
+													</div>
+													<div>
+														<b><h:outputText value="#{choix.produit.marque.nom}" /></b>
+													</div>
+													<div>
+														<h:commandLink value="Voir le détail"
+															action="#{ficheProduitBean.afficherProduit(choix.produit.id)}"
+															target="_blank" look="warning" size="lg"></h:commandLink>
+													</div>
+												</div>
+											</div>
+
+											<!-- 											Message d'erreur s'il y a -->
+											<h:panelGroup styleClass="confWarning"
+												rendered="#{! choix.message.isEmpty()}" layout="block">
+												<b:iconAwesome value="warning" /> #{choix.message}
+											</h:panelGroup>
+										</h:panelGroup>
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+					</div>
+					
+					<!-- RECAPITULATIF -->
+					<div class="configRecap">
+						<h2>Récapitulatif</h2>
+
+						<!-- 					Message d'erreur pour composants manquants -->
+						<h:panelGroup styleClass="confWarning"
+							rendered="#{!configurateurBean.messageComposantsManquants.isEmpty()}"
+							layout="block">
+							<b:iconAwesome value="warning" /> #{configurateurBean.messageComposantsManquants}
+						</h:panelGroup>
+
+
+						<h:panelGroup
+							rendered="#{configurateurBean.messageComposantsManquants.isEmpty()}"
+							layout="block">
+							<h:panelGroup styleClass="recapItem"
+								rendered="#{configurateurBean.isSelectionVide()}" layout="block">
+								<p>Démarrez votre configuration en choisissant vos
+									composants : la compatibilité est assurée!</p>
+							</h:panelGroup>
+
+							<h:panelGroup styleClass="confConfirm"
+								rendered="#{!configurateurBean.isSelectionVide()}"
+								layout="block">
+								<b:iconAwesome value="thumbs-up" /> Votre configuration est complète !
+							</h:panelGroup>
+						</h:panelGroup>
+
+						<ui:repeat var="choix" value="#{configurateurBean.selection}">
+							<h:panelGroup class="recapItem" layout="block"
+								rendered="#{choix.produit != null}">
+								<div>
+									<b>#{choix.produit.type.nom} :</b>
+								</div>
+								<div style="display: flex;">
+									<div style="flex-grow: 1; text-overflow: ellipsis;">
+										<p>#{choix.produit.nom}</p>
+									</div>
+									<div class="recapPrixComp" style="width: 50px;">#{choix.produit.prix}€</div>
+								</div>
+							</h:panelGroup>
+						</ui:repeat>
+
+						<h:panelGroup styleClass="recapItem"
+							rendered="#{! configurateurBean.isSelectionVide()}"
+							layout="block">
+							<b>Total :</b>
+							<h:outputText styleClass="recapPrixTotal"
+								value="#{configurateurBean.getPrixTotal()}">
+								<f:convertNumber pattern="#0.00" />
+							</h:outputText>
+							<b>€</b>
+							
+							<div style="text-align: center;">
+								<b:commandButton class="btn-warning btn-panier" value="Ajouter au panier" action="#{configurateurBean.ajouterAuPanier()}"
+									look="warning" size="lg" iconAwesome="fa-cart-plus"></b:commandButton>
+							</div>
+						</h:panelGroup>
+					</div>
+
+					<!-- OVERLAY -->
+					<h:panelGroup rendered="#{configurateurBean.overlayVisible}"
+						styleClass="composantOverlay" layout="block">
+						<div class="overlayContainer">
+							<h:panelGroup styleClass="closeDiv" layout="block">
+								<span class="overlayNumProduits">#{configurateurBean.overlayProduits.size()}
+									produit(s) compatible(s)</span>
+								<h:commandLink action="#{configurateurBean.fermerOverlay}" styleClass="closeOverlayLink">
+									<f:ajax execute="@form" render="@form"></f:ajax>
+									<b:iconAwesome styleClass="boutonFermer" value="times-circle" solid="true" style="font-size:24px;color:#79a5bb" onmouseout="this.style.color='#79a5bb';" onmouseover="this.style.color='#f0ad4e';"/>
+								</h:commandLink>
+							</h:panelGroup>
+
+
+							<div class="listeProduits">
+								<ui:repeat value="#{configurateurBean.overlayProduits}" var="p">
+									<div class="carteProduit">
+										<div class="titreProduit">
+											<span><h:outputText value="#{p.nom}" /></span>
+										</div>
+
+										<h:commandLink class="clink"
+											action="#{configurateurBean.choisirProduit(p)}">
+											<div class="photoProduit">
+												<div class="conteneurImage">
+													<h:graphicImage value="IMG/#{p.photo}" />
+												</div>
+
+												<div class="carteProduitOverlay">Choisir</div>
+											</div>
+										</h:commandLink>
+
+										<div class="footerCarteProduit">
+											<div class="divPrix">
+												<label class="prix">#{p.prix} <h:outputText
+														value="€" rendered="#{p != null}" /></label>
+											</div>
+											<div>
+												<span class="btn-warning"> <b:iconAwesome
+														name="fa-external-link-alt"></b:iconAwesome> <h:commandLink
+														value="Voir le détail"
+														action="#{ficheProduitBean.afficherProduit(p.id)}"
+														target="_blank" look="warning" size="lg"></h:commandLink>
+												</span>
+
+											</div>
+										</div>
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+						<script>
+					(function() {
+						const compOverlay = document.getElementsByClassName("composantOverlay")[0];
+						const container = document.getElementsByClassName("overlayContainer")[0];
+						const closeLink = document.getElementsByClassName("closeOverlayLink")[0];
+						
+						compOverlay.onclick =  e => {
+							closeLink.click();
+						}
+						
+						container.onclick = e => {
+							e.stopPropagation()
+						}
+					})()
+					//})
+					</script>
+					</h:panelGroup>
+
+
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

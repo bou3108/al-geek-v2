@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+	<ui:define name="title">Ma commande | Al-Geek</ui:define>
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/macommande.css" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="bigPanel">
+			<div class="infosClient">
+				<h:form>
+					<h3>Informations client</h3>
+					<div class="identite">
+						<div class="id1">
+							<h4>Vous êtes :</h4>
+							<label>Nom : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.nom}" />
+							<br /> <label>Prénom : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.prenom}" />
+							<br /> <label>Email : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.email}" />
+						</div>
+
+						<div class="id2">
+							<h4>Adresse de facturation :</h4>
+							<label>Adresse : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.adresse}" />
+							<br /> <label>Code postal : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.codePostal}" />
+							<br /> <label>Ville : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.ville}" />
+						</div>
+
+						<div class="id3">
+							<h4>Adresse de livraison :</h4>
+							<label>Adresse : </label>
+							<h:inputText class="champClientInp" />
+							<br /> <label>Code postal : </label>
+							<h:inputText class="champClientInp" />
+							<br /> <label>Ville : </label>
+							<h:inputText class="champClientInp" />
+						</div>
+					</div>
+
+					<div class="paiement">
+						<h3>Paiement</h3>
+						<h4>Type de paiement</h4>
+						<div class="cadreCB">
+							<p:selectOneRadio id="customRadio"
+								value="#{commandeBean.infosBank.typeCarte}" layout="custom">
+								<f:selectItem itemLabel="Image1" itemValue="CB" />
+								<f:selectItem itemLabel="Image2" itemValue="Visa" />
+								<f:selectItem itemLabel="Image3" itemValue="MasterCard" />
+							</p:selectOneRadio>
+							<h:panelGrid columns="6" cellpadding="5">
+								<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+								<h:graphicImage class="logoCB" value="/IMG/logoCB.jpg" />
+								<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+								<h:graphicImage class="logoCB" value="/IMG/logoVISA.jpg" />
+								<p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+								<h:graphicImage class="logoCB" value="/IMG/logoMC.jpeg" />
+							</h:panelGrid>
+						</div>
+						<div>
+							<label>N° Carte</label>
+							<h:inputText class="champCBnum"
+								value="#{commandeBean.infosBank.numCarte}" />
+							<br /> <label>Date d'expiration</label>
+							<h:inputText class="champCBdate"
+								value="#{commandeBean.infosBank.dateCarte}">
+								<f:convertDateTime pattern="MM/yyyy" />
+							</h:inputText>
+							<br /> <label>Cryptogramme</label>
+							<h:inputText class="champCBcrypto"
+								value="#{commandeBean.infosBank.cryptogramme}" />
+							<br />
+							<b:commandButton class="btn-warning" value="Payer"
+								action="#{commandeBean.validerPaiement}" look="warning"
+								size="lg" iconAwesome="fa-cart-plus" />
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

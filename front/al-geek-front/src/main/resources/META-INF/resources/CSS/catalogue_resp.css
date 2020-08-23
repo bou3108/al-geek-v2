@@ -1,0 +1,35 @@
+@media only screen and (max-width: 720px) {
+  
+  .catalogContainer {
+  	flex-direction: column;
+  }
+  
+  .catalogFiltres {
+  	width: 100%;
+    max-width: unset;
+  }
+  
+  .carteProduit {
+    width: 90%;
+    height: unset;
+  }
+  
+  .titreProduit {
+  	padding: 5px;
+  }
+  
+  .photoProduit {
+    height: 100px;
+  }
+  
+  .conteneurImage {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .conteneurImage img {
+    width: 100px;
+    height: 100px;
+  }
+}
+

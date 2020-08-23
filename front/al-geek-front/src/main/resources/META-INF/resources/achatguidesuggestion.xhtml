@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+	<ui:define name="title">Suggestion | Al-Geek</ui:define>
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/achatguide.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/achatguide_resp.css" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<div class="bigPanelColumn">
+				<h2>Nos suggestions</h2>
+				
+				<h:panelGroup rendered="#{achatGuideBean.listFiltreeParPrix.size() == 0}">
+					<label class="msgNoSug">Aucun ordinateur ne correspond à vos critères</label>
+					<a class="lienRecom" href="achatguide.xhtml?faces-redirect=true">Recommencer l'achat guidé</a>
+				</h:panelGroup>
+				
+				<div class="littlePanelColumn">
+				<ui:repeat var="p" value="#{achatGuideBean.listFiltreeParPrix}">
+					<h:commandLink class="clink" action="#{panierBean.selectionnezOrdiAchatGuide(p)}">
+					<div class="carteProduit">
+								<div class="titreProduit">
+									<span><h:outputText value="#{p.nom}" /></span>
+								</div>
+							
+								<div class="photoProduit">
+									<div class="conteneurImage">
+										<h:graphicImage value="IMG/#{p.photo}" />
+									</div>
+								</div>
+						
+						<div class="footerCarteProduit">
+								<div class="divPrix">
+									<label class="prix">#{p.prix} <h:outputText value="€" rendered="#{p != null}" /></label>
+								</div>
+	
+						</div>
+					</div>
+					</h:commandLink>
+				</ui:repeat>
+				
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui" >
+
+<ui:composition template="master2.xhtml">
+	<ui:define name="title">Ma commande | Al-Geek</ui:define>
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/macommande.css" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="bigPanel">
+		
+			<div class="infosClient">
+				<h:form>				
+					<h2>Informations client</h2>
+					<div class="identite">
+						<div class="id1">
+							<h4>Vous êtes :</h4>
+							<label>Nom : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.nom}" />
+							<br /> <label>Prénom : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.prenom}" />
+							<br /> <label>Email : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.email}" />
+						</div>
+
+						<div class="id2">
+							<h4>Votre adresse :</h4>
+							<label>Adresse : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.adresse}" />
+							<br /> <label>Code postal : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.codePostal}" />
+							<br /> <label>Ville : </label>
+							<h:outputText class="champClient"
+								value="#{connectBean.client.ville}" />
+						</div>
+
+					</div>
+
+					<h2 style="margin-top:60px !important">Récapitulatif de votre commande</h2>
+					<div>
+						<table cellpadding="20px" align="center" class="tabl">
+							<ui:repeat var="lc" value="#{panierBean.panier.listLC}">
+								<tr>
+									<td class="tdNom"><label>#{lc.produit.type.nom} #{lc.produit.nom}</label></td>
+									<td class="tdQuantite"><label>#{lc.quantite} x</label></td>
+									<td class="tdPrix"><label>#{lc.produit.prix} <h:outputText
+												value="€" rendered="#{lc.produit.prix != null}" /></label></td>							
+								</tr>
+							</ui:repeat>
+						</table>
+							<label class="montantTotal">Montant total :&nbsp; </label>
+									<div class="alignSomme">
+									<div>
+										<h:outputText value="#{panierBean.afficherPrixTotal()}">
+											<f:convertNumber pattern="#0.00" />
+										</h:outputText>
+									</div>
+									<div class="euro">
+										<h:outputLabel value=" €" />
+									</div>
+									</div>
+					</div>
+
+
+					<div class="paiement">
+						<h2 style="margin-top:60px !important">Paiement</h2>
+						<div class="cadreCB">
+							<p:selectOneRadio id="customRadio" 
+								value="#{commandeBean.infosBank.typeCarte}" layout="custom">
+								<f:selectItem itemLabel="Image1" itemValue="CB" />
+								<f:selectItem itemLabel="Image2" itemValue="Visa" />
+								<f:selectItem itemLabel="Image3" itemValue="MasterCard" />
+				
+							</p:selectOneRadio>
+							<h:panelGrid columns="6" cellpadding="5">
+								<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+								<h:graphicImage class="logoCB" value="/IMG/logoCB.jpg" />
+								<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+								<h:graphicImage class="logoCB" value="/IMG/logoVISA.jpg" />
+								<p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+								<h:graphicImage class="logoCB" value="/IMG/logoMC.jpeg" />
+							</h:panelGrid>
+						</div>
+						<h:message for="customRadio" class="regex"/>
+							<h:commandButton value="démo" action="#{commandeBean.boutonDemoCodeBank}"/>
+						<div class="codeBank">
+							<label>N° Carte</label>
+							<h:inputText class="champCBnum" id="numCB"
+								value="#{commandeBean.infosBank.numCarte}" />
+								<br /> 
+								<h:message for="numCB" class="regex"/>
+							<br /> 
+							
+							<label>Date d'expiration</label>
+							<h:inputText class="champCBdate" id="dateCB" 
+								value="#{commandeBean.infosBank.dateCarte}" 
+								converterMessage="Le format de la date doit être : MM/AAAA"> 
+<!-- 								required="true" 
+								requiredMessage="message 3 !!!" 
+ 								validatorMessage="message 4 !!!"> -->
+								<f:convertDateTime pattern="MM/yyyy" />
+							</h:inputText>
+								<br/>
+								<h:message for="dateCB" class="regex"/>
+							<br/> 
+							
+							<label>Cryptogramme</label>
+							<h:inputText class="champCBcrypto" id="cryptoCB"  
+								value="#{commandeBean.infosBank.cryptogramme}" />
+								<br /> 
+								<h:message for="cryptoCB" class="regex"/>
+							<br />
+							
+							
+							<b:commandButton class="btn-warning" value="Payer"
+								action="#{commandeBean.validerPaiement}" look="warning"
+								size="lg" />
+						</div>
+					</div>
+
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

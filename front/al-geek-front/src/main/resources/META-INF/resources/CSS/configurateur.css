@@ -1,0 +1,308 @@
+.configContainer {
+	display: flex;
+	height: 100%;
+}
+
+.configFull {
+	width: 100%;
+}
+
+.configFull form {
+	height: 100%;
+}
+
+.configMain {
+	padding: 12px 8px;
+	flex-grow: 1;
+}
+
+.configComposantsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.composantsDiv {
+	width: 90%;
+    background: white;
+    max-width: 785px;
+}
+
+.configRecap {
+	padding: 12px 8px;
+	min-width: 290px;
+	max-width: 360px;
+	background: #1a2852;
+	height: 100%;
+	box-shadow: 3px 0px 15px 2px #0000004d inset;
+	_overflow-y: scroll;
+}
+
+.configRecap h2 {
+	font-size: 24px;
+}
+
+/* Carte composant */
+.carteComposant {
+	background: #162143;
+    padding: 10px 16px;
+    margin: 12px 30px;
+    max-width: 800px;
+    color: #efa945;
+    border-radius: 20px;
+    border: 2px #efa945 solid;
+}
+
+.carteComposant .typeComposant {
+	flex-grow: 1;
+}
+
+.typeComposant {
+	margin-left : 12px;
+}
+
+.boutonAjouter {
+	padding: 8px 17px;
+	background: #59a7ce;
+	border-radius: 17px;
+	color: white;
+	border: 0;
+	font-weight: bold;
+	font-size: larger;
+	margin: 10px 12px;
+}
+
+.boutonRetirer {
+    padding: 8px 17px;
+    background: #dd594a;
+	border-radius: 17px;
+    color: white;
+    border: 0;
+    font-weight: bold;
+    font-size: larger;
+    margin: 10px 12px;
+}
+
+.divPhoto {
+	width: 75px;
+    height: 75px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    margin-right: 12px;
+    margin-left: 5px;
+}
+
+.divPhoto img {
+	width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+/* Overlay */
+.composantOverlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #00000066;
+	display: flex;
+	justify-content: center;
+    z-index: 10000;
+}
+
+.overlayContainer {
+	min-width: 800px;
+	min-height: 600px;
+	max-width: 80%;
+	max-height: 80%;
+	background: #3a4158;
+	margin: auto;
+	box-shadow: 3px 0px 10px 2px #0000004d;
+	display: flex;
+	flex-direction: column;
+}
+
+.closeDiv {
+	text-align: right;
+	display: block;
+	padding: 5px 10px;
+	font-size: 21px;
+	font-weight: bold;
+}
+
+.confWarning {
+	background: #ff8d17 linear-gradient(0deg, #c35825, transparent);
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 2px 10px;
+}
+
+.confConfirm {
+	background: #1bc538 linear-gradient(0deg, #3c763d, transparent);
+    color: white;
+    padding: 5px;
+    border-radius: 6px;
+}
+/* carte produit */
+.carteProduit {
+	transition: 0.3s;
+	width: 250px;
+	margin: 10px;
+	padding: 3px;
+	box-shadow: 0px 2px 11px 2px #00000010;
+	background: #545f86;
+	border: 1px solid #efa945;
+	border-radius: 10px;
+	background: #162143;
+	color: #ed9d2c;
+}
+
+.photoProduit {
+	position: relative;
+}
+
+.carteProduitOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #16214387;
+	opacity: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	font-size: 29px;
+	font-weight: bold;
+}
+
+ a .carteProduitOverlay, a:hover .carteProduitOverlay {
+	color: #f5cb8b !important;
+	text-decoration: none;
+}
+
+ a:hover .carteProduitOverlay {
+	color: #efa945 !important;
+}
+
+.carteProduitOverlay:hover {
+	opacity: 1;
+}
+
+.footerCarteProduit {
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.footerCarteProduit button {
+	font-size: 14px;
+	padding: 8px;
+}
+
+.carteProduit:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.overlayNumProduits {
+	float: left;
+	font-size: 15px;
+	padding: 5px 5px;
+	color: #efa945;
+}
+
+label.prix {
+	font-size: 20px;
+}
+
+.divPrix {
+	margin-bottom: 5px;
+}
+
+.titreProduit {
+	height: 65px;
+	padding: 13px;
+	font-size: 15px;
+	display: flex;
+	color: #ec9b26;
+	font-weight: bold;
+	text-align: center;
+	justify-content: center;
+}
+
+.container {
+	padding: 2px 16px;
+}
+
+.conteneurImage {
+	width: 120px;
+	_height: 120px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.conteneurImage img {
+	width: 120px;
+	height: 120px;
+	object-fit: contain;
+}
+
+.listeProduits {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+	flex: 0 0 10vw;
+	flex-grow: 1;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.btn-warning {
+	padding: 6px;
+	border-radius: 7px;
+	color: white;
+	margin-top: 5px;
+}
+
+.btn-panier {
+	padding: 0 8px !important;
+    height: 34px !important;
+    font-size: 14px !important;
+}
+
+.btn-warning a {
+	color: white;
+	padding: 4px;
+}
+
+/* Recap */
+.recapItem {
+	padding: 5px 16px;
+	transition: 0.3s;
+	margin: 10px;
+	box-shadow: 0px 2px 11px 2px #00000010;
+	background: #162143;
+	position: relative;
+	border: 1px solid #efa945;
+	border-radius: 10px;
+	color: #ffc26b;
+}
+
+.recapPrixComp {
+	float: right;
+	font-weight: bold;
+	margin-left: 8px;
+}
+
+.recapPrixTotal {
+	font-weight: bold;
+	margin-left: 8px;
+	font-size: 22px;
+}

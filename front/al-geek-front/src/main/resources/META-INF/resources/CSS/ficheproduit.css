@@ -1,0 +1,125 @@
+.bigPanel {
+	_border: 1px solid #79a5bb;
+	width:70vw;
+	margin : 20px auto;
+	padding-top:10px;
+	padding-bottom:50px;
+	text-align:center;
+	background-color: white;
+}
+
+
+.divTitre {
+	_border: 5px solid red;
+	margin-top:20px;
+	font-size:44px;
+}
+
+.divMarque {
+	margin-bottom :40px;
+	font-size: 28px;
+}
+
+.littlePanel {
+	_border: 5px solid yellow;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+
+.divPhoto {
+	_border: 5px solid orange;
+	min-width: 200px;
+	margin: 20px;
+	width: 30%;
+}
+
+
+.photo {
+	_border: 1px solid HOTPINK;
+	width:80%;
+}
+
+.divInfo {
+	_border: 5px solid green;
+	_margin: 20px;
+	_min-width: 291px;
+	font-size: 1.5em;
+	_width: 61%;
+}
+
+.divQuantité {
+	margin-top:15px;
+}
+
+.ui-widget input {
+	width: 60px;
+	height:38px;
+	text-align: center;
+}
+
+.divPrix {
+	padding: 9px;
+    margin: 0 70px;
+    margin-bottom: 60px;
+    justify-content: space-evenly;
+    box-shadow: 3px 3px 15px 1px rgba(143,143,143,0.74);
+    display: flex;
+    border-radius: 14px;
+    background: #17244a;
+    border: solid 2px #efa945cc;
+    color: #efa945;
+    max-width: 500px;
+	
+    white-space: nowrap;
+}
+
+.divPrix button {
+	margin: 6px;
+}
+
+.prix {
+	font-size: 40px;
+	margin: auto;
+}
+
+..btn-warning {
+	font-size:25px;
+	background-color: red;
+}
+
+.divCarac {
+	.border:1px solid grey;
+	text-aling :center;
+	display: flex;
+	justify-content: center;
+	margin-top:40px;
+	margin-bottom: 40px;
+}
+
+.divCarac tr:nth-child(even) {
+	background: #f4efdc;
+	border : 1px solid #18254a;
+	font-size: 18px;
+}
+
+.divCarac tr:nth-child(odd) {
+	background: #FFF;
+	border : 1px solid #18254a;
+	font-size: 18px;
+}
+
+.divCarac td {
+	border : 1px solid #18254a;
+}
+
+
+.colG {
+	_color:#79a5bb;
+	padding: 8px 25px;
+}
+
+.colD {
+	padding: 8px 25px;
+}

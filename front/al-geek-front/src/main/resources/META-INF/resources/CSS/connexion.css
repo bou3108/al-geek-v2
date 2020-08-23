@@ -1,0 +1,110 @@
+.overlay {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 10px;
+	background: rgba(0,0,0,0.55);
+	border: 0;
+	color:#10182e;
+	z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay > div {
+	position: absolute;
+	padding: 10px;
+	
+    height: 480px;
+    width: 500px;
+
+	background: #ffffff;
+	border-radius: 15px;
+	box-shadow: 10px 10px 35px 0px rgba(0,0,0,0.25);
+}
+
+
+.connex {
+	.border: 1px solid hotpink;
+	display: flex;
+	margin-top:60px;
+	font-size:23px;
+	justify-content: center;
+}
+
+
+.connexGauche {
+	.border : 1px solid blue;
+	display: flex;
+	flex-direction: column;
+	text-align:right;	
+}
+
+.connexGauche label {
+	margin-bottom:24px;
+	font-size:22px;
+}
+	
+.connexDroite {
+	.border : 1px solid green;
+	display: flex;
+	flex-direction: column;
+	margin-left:15px;	
+}
+
+.connexDroite input {
+	margin-bottom:25px;
+	color:black;
+	font-size:18px;
+}
+
+.connexBtn {
+	color:black;
+}
+
+.connexInfo {
+	font-size:28px;
+}
+
+.connexInfo a {
+	font-size:16px;
+	text-decoration: none;
+}
+
+.connexInfo a:hover {
+	color:#f0ad4e;
+	text-decoration: none;
+}
+.connexDiv {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	color: #79a5bb;
+}
+
+.connexDiv > div{
+	margin: 75px;
+	padding: 10px;
+	
+    height: 420px;
+    width: 500px;
+
+	background: #ffffff;
+	border-radius: 15px;
+	box-shadow: 10px 10px 35px 0px rgba(0,0,0,0.25);
+}
+
+.centerElts {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 45px;
+}
+
+.connexDiv2 label {
+	color:#10182e !important;
+}

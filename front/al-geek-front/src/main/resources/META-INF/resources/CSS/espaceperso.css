@@ -1,0 +1,92 @@
+.bigPanel {
+	_border: 1px solid #79a5bb;
+	width: 70vw;
+	margin: 20px auto;
+	padding: 15px;
+	text-align: center;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.littlePanel {margin: 10px auto;font-size: 22px;}
+
+h3 {
+	margin-bottom: 25px !important;
+}
+
+table {
+	margin-bottom: 25px !important;
+}
+
+.titreCol {
+	font-size: 22px;
+	color: #18254a;
+	text-align: center;
+	padding: 5px 80px;
+	border: 1px solid #18254a;;
+	background: #f4efdc;
+}
+
+.lcCmd { .
+	border: 1px solid #18254a;
+	text-align: left; .
+	margin-left: 250px;
+	font-size: 18px;
+}
+
+tr:nth-child(even) {
+	border: 1px solid #18254a;
+}
+
+tr:nth-child(odd) {
+	border: 1px solid #18254a;
+}
+
+td {
+	border: 1px solid #18254a;
+}
+
+.separForm {
+	display: flex;
+	justify-content: center;
+}
+
+.champ {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	margin-right: 5px;
+}
+
+.infosP {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-left: 5px;
+}
+
+
+
+.champLabel {
+	margin-bottom: 17px;
+	color:#18254a;
+}
+
+
+.champInfo {
+	margin-bottom: 12px;
+}
+
+
+.btnSauv {
+	margin-top: 25px;
+}
+
+.msgModif {
+	margin-top:15px;
+	font-size: 20px;
+	color:green;
+}

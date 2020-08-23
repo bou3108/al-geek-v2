@@ -1,0 +1,43 @@
+@media only screen and (max-width: 720px) {
+  
+  .cadreOrdi {
+    width: 280px;
+  }
+  
+  .titre {
+  	font-size: 20px;
+  	margin-bottom: 30px;
+  }
+  
+  .photo1 {
+  	width: 250px;
+    height: 173px;
+  }
+  
+  .photo2 {
+  	width: 250px;
+    height: 173px;
+  }
+  
+  .cadreUsage {
+    width: 165px;
+    height: 150px;
+    padding-top: 46px;
+  }
+  
+  .cadrePrix {
+    width: 165px;
+    height: 150px;
+    padding-top: 46px;
+  }
+  
+  .cadrePlus {
+	  width: 150px;
+	  height: 150px;
+  }
+  
+  .cadrePlus {
+  	width: 100%;
+  }
+}
+

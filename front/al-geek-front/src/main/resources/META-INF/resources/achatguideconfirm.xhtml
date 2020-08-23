@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" 
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+	<ui:define name="title">Confirmation | Al-Geek</ui:define>
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/achatguide.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/configurateur.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/achatguide_resp.css" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<div class="bigPanelColumn">
+				<h2>Votre sélection</h2>
+				<div style="width: 100%;">
+
+				<!-- si choix ordi bureau -->
+				<h:panelGroup layout="block" rendered="#{panierBean.typeOrdi}">
+						<table class="ordiSelected" cellpadding="30px">
+							<tr>
+								<td class="photoOrdi"><h:graphicImage class="photoOrdi2"
+									value="IMG/#{panierBean.ordiSelected.photo}" /></td>
+								<td class="nomOrdi"><label>#{panierBean.ordiSelected.nom}</label></td>
+								<td class="prixOrdi"><label>#{panierBean.ordiSelected.prix} <h:outputText
+									value="€" rendered="#{panierBean.ordiSelected.prix != null}" /></label></td>																																	
+							</tr>
+						</table>
+						
+							<h3> Caractéristiques techniques</h3>
+							<div class="divCarac">
+								<table border="1" cellpadding="20px" align="left">
+									<ui:repeat var="c"
+										value="#{panierBean.ordiSelected.caracteristiques}">
+										<tr>
+											<td class="colG">
+											<b> 
+												<h:outputText value="#{ficheProduitBean.traduireCaracteristique(c.getCle())}" />
+											</b></td>
+											<td class="colD">#{c.valeurAffichage}</td>
+										</tr>
+									</ui:repeat>
+								</table>
+							</div>
+						
+						<h2> Avez-vous également besoin de périphériques ?</h2>
+					
+					<div class="produitAdd">
+						<h:commandLink class="lienNone" action="#{achatGuideBean.afficherOverlayPlus(7)}">
+						<div class="cadrePlus">
+						<h:graphicImage class="photoClavier" name="IMG/MSI_OPTIX_MAG271CQR.jpg"></h:graphicImage>
+						<label>Ecran</label>
+						<h:panelGroup class="ombrage" rendered="#{achatGuideBean.ecranIsSelected}">
+						<label>Sélectionné</label>&nbsp;&nbsp;<i class="fas fa-check"></i>
+						</h:panelGroup>
+						</div>
+						<f:ajax execute="@form" render="@form"></f:ajax>						
+						</h:commandLink>
+						
+						<h:commandLink class="lienNone" action="#{achatGuideBean.afficherOverlayPlus(6)}">
+						<div class="cadrePlus">
+						<h:graphicImage class="photoClavier" name="IMG/Logitech_K120_business.jpg"></h:graphicImage>
+						<label>Clavier</label>
+						<h:panelGroup class="ombrage" rendered="#{achatGuideBean.clavierIsSelected}">
+						<label>Sélectionné</label>&nbsp;&nbsp;<i class="fas fa-check"></i>
+						</h:panelGroup>
+						</div>
+						<f:ajax execute="@form" render="@form"></f:ajax>
+						</h:commandLink>
+						
+						<h:commandLink class="lienNone" action="#{achatGuideBean.afficherOverlayPlus(12)}">
+						<div class="cadrePlus">
+						<h:graphicImage class="photoClavier" name="IMG/Logitech_B100.jpg"></h:graphicImage>
+						<label>Souris</label>
+						<h:panelGroup class="ombrage" rendered="#{achatGuideBean.sourisIsSelected}">
+						<label>Sélectionné</label>&nbsp;&nbsp;<i class="fas fa-check"></i>
+						</h:panelGroup>
+						</div>
+						<f:ajax execute="@form" render="@form"></f:ajax>
+						</h:commandLink>
+					</div>	
+					<b:commandButton class="btn-warning" action="#{panierBean.afficherPanier()}" value="Finalisez votre commande" size="lg"/>
+
+				</h:panelGroup>				
+				
+				<!-- si choix ordi portable -->
+				<h:panelGroup layout="block" rendered="#{!panierBean.typeOrdi}">
+
+						<table class="ordiSelected" cellpadding="30px">
+							<tr>
+								<td class="photoOrdi"><h:graphicImage class="photoOrdi2"
+									value="IMG/#{panierBean.ordiSelected.photo}" /></td>
+								<td class="nomOrdi"><label>#{panierBean.ordiSelected.nom}</label></td>
+								<td class="prixOrdi"><label>#{panierBean.ordiSelected.prix} <h:outputText
+									value="€" rendered="#{panierBean.ordiSelected.prix != null}" /></label></td>																																	
+							</tr>
+						</table>
+						<h3> Caractéristiques techniques</h3>
+							<div class="divCarac">
+								<table border="1" cellpadding="20px" align="left">
+									<ui:repeat var="c"
+										value="#{panierBean.ordiSelected.caracteristiques}">
+										<tr>
+											<td class="colG">
+											<b> 
+												<h:outputText value="#{ficheProduitBean.traduireCaracteristique(c.getCle())}" />
+											</b></td>
+											<td class="colD">#{c.valeurAffichage}</td>
+										</tr>
+									</ui:repeat>
+								</table>
+							</div>
+						<div>
+						<b:commandButton class="btn-warning" action="#{panierBean.ajouterAuPanierDepuisAchatGuide()}" value="Sélectionnez ce produit" size="lg"/>
+						</div>
+				</h:panelGroup>		
+				</div >
+			</div>
+			
+			<!-- OVERLAY -->
+			<h:panelGroup rendered="#{achatGuideBean.overlayVisible}"
+						styleClass="composantOverlay" layout="block">
+						<div class="overlayContainer">
+							<h:panelGroup styleClass="closeDiv" layout="block">
+								<span class="overlayNumProduits">#{achatGuideBean.overlayProduits.size()}
+									produit(s) compatible(s)</span>
+								<h:commandLink action="#{achatGuideBean.fermerOverlay}" styleClass="closeOverlayLink">
+									<f:ajax execute="@form" render="@form"></f:ajax>
+									<b:iconAwesome value="times-circle" solid="true" style="font-size:24px;color:#79a5bb" onmouseout="this.style.color='#79a5bb';" onmouseover="this.style.color='#f0ad4e';"/>
+								</h:commandLink>
+							</h:panelGroup>
+
+
+							<div class="listeProduits">
+								<ui:repeat value="#{achatGuideBean.overlayProduits}" var="p">
+									<div class="carteProduit">
+										<div class="titreProduit">
+											<span><h:outputText value="#{p.nom}" /></span>
+										</div>
+
+										<h:commandLink class="clink"
+											action="#{achatGuideBean.choisirProduit(p)}">
+											<div class="photoProduit">
+												<div class="conteneurImage">
+													<h:graphicImage value="IMG/#{p.photo}" />
+												</div>
+
+												<div class="carteProduitOverlay">Choisir</div>
+											</div>
+										</h:commandLink>
+
+										<div class="footerCarteProduit">
+											<div class="divPrix">
+												<label class="prix">#{p.prix} <h:outputText
+														value="€" rendered="#{p != null}" /></label>
+											</div>
+											<div>
+												<span class="btn-warning"> <b:iconAwesome
+														name="fa-external-link-alt"></b:iconAwesome> <h:commandLink
+														value="Voir le détail"
+														action="#{ficheProduitBean.afficherProduit(p.id)}"
+														target="_blank" look="warning" size="lg"></h:commandLink>
+												</span>
+
+											</div>
+										</div>
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+						<script>
+					(function() {
+						const compOverlay = document.getElementsByClassName("composantOverlay")[0];
+						const container = document.getElementsByClassName("overlayContainer")[0];
+						const closeLink = document.getElementsByClassName("closeOverlayLink")[0];
+						
+						compOverlay.onclick =  e => {
+							closeLink.click();
+						}
+						
+						container.onclick = e => {
+							e.stopPropagation()
+						}
+					})()
+					//})
+					</script>
+					</h:panelGroup>
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

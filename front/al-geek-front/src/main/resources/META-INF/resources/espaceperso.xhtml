@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master2.xhtml">
+	<ui:define name="title">Mon espace perso | Al-Geek</ui:define>
+	<ui:define name="CSS">
+		<link type="text/css" rel="stylesheet" href="CSS/espaceperso.css" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<div class="bigPanel">
+
+				<h3>Historique de vos commandes</h3>
+				<div class="littlePanel">
+					<table cellpadding="50px" align="center">
+						<tr>
+							<th class="titreCol"><h:outputLabel>Facture</h:outputLabel></th>
+							<th class="titreCol"><h:outputLabel>Passée le </h:outputLabel></th>
+							<th class="titreCol"><h:outputLabel>Prix</h:outputLabel></th>
+						</tr>
+						<ui:repeat var="cmd" value="#{espacePersoBean.historique}">
+							<tr>
+								<td>n° <h:outputText value="#{cmd.id}" /></td>
+								<td><h:outputText value="#{cmd.dateDeLaCommande}">
+										<f:convertDateTime pattern="d MMMM yyyy" />
+									</h:outputText></td>
+								<td><h:outputText value="#{cmd.prix}"> 
+										<f:convertNumber pattern="#0.00" />
+									</h:outputText> €</td>
+							</tr>
+						</ui:repeat>
+					</table>
+				</div>
+
+
+				<div class="littlePanel">
+					<h3>Vos informations personnelles</h3>
+					<div class="separForm">
+						<div class="champ">
+							<label class="champLabel">Nom </label> 
+							<label class="champLabel">Prénom </label> 
+							<label class="champLabel">Email </label>
+							<label class="champLabel">Adresse </label> 
+							<label class="champLabel">Code postal </label> 
+							<label class="champLabel">Ville</label>
+						</div>
+						<div class="infosP">
+							<h:inputText class="champInfo"
+								value="#{connectBean.client.nom}" />
+							<h:inputText class="champInfo"
+								value="#{connectBean.client.prenom}" />
+							<h:inputText class="champInfo"
+								value="#{connectBean.client.email}" />
+							<h:inputText class="champInfo"
+								value="#{connectBean.client.adresse}" />
+							<h:inputText class="champInfo"
+								value="#{connectBean.client.codePostal}" />
+							<h:inputText class="champInfo"
+								value="#{connectBean.client.ville}" />
+						</div>
+					</div>
+				</div>
+				<div class="msgModif">
+					<h:outputText value="#{espacePersoBean.msgModif}"/>
+				</div>
+				<div>
+					<b:commandButton value="Sauvegarder" action="#{espacePersoBean.modifInfosClient}"
+						look="warning" size="lg" class="btnSauv"/>
+				</div>
+
+
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
