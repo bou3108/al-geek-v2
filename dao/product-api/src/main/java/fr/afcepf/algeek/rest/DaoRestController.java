@@ -3,6 +3,7 @@ package fr.afcepf.algeek.rest;
 import fr.afcepf.algeek.converter.CaracteristiqueConverter;
 import fr.afcepf.algeek.converter.ProduitConverter;
 import fr.afcepf.algeek.dao.CaracteristiqueDao;
+import fr.afcepf.algeek.dao.CategorieDao;
 import fr.afcepf.algeek.dao.ProduitDao;
 import fr.afcepf.algeek.dto.Caracteristique;
 import fr.afcepf.algeek.dto.Produit;
@@ -23,6 +24,9 @@ public class DaoRestController {
     private CaracteristiqueDao caracteristiqueDao;
     @Autowired
     private ProduitDao produitDao;
+    @Autowired
+    private CategorieDao categorieDao;
+
     private final ProduitConverter produitConverter = new ProduitConverter();
     private final CaracteristiqueConverter caracteristiqueConverter = new CaracteristiqueConverter();
 
@@ -96,14 +100,22 @@ public class DaoRestController {
         return productsDTO;
     }
 
-    @GetMapping(value = "/type={id}")
-    public List<Produit> getProduitParType(@PathVariable Long id){
-        List<fr.afcepf.algeek.entity.Produit> products;
-        products = produitDao.findByTypeId(id);
-
+    @GetMapping(value = "/type={id}&with={chargerCaracs}")
+    public List<Produit> getProduitParType(@PathVariable Long id, @PathVariable boolean chargerCaracs){
+        List<fr.afcepf.algeek.entity.Produit> products = produitDao.findByTypeId(id);
         List<Produit> productsDTO = new ArrayList<>();
+
         for (fr.afcepf.algeek.entity.Produit p : products) {
-            productsDTO.add(produitConverter.convertToDTO(p));
+            Produit produitDTO = produitConverter.convertToDTO(p);
+            if(chargerCaracs) {
+                List<fr.afcepf.algeek.entity.Caracteristique> caracsEntity = caracteristiqueDao.findByProduit(p);
+                List<Caracteristique> caracteristiques = new ArrayList<>();
+                for (fr.afcepf.algeek.entity.Caracteristique c : caracsEntity) {
+                    caracteristiques.add(caracteristiqueConverter.convertToDTO(c));
+                }
+                produitDTO.setCaracteristiques(caracteristiques);
+            }
+            productsDTO.add(produitDTO);
         }
         return productsDTO;
     }
@@ -111,7 +123,9 @@ public class DaoRestController {
     @GetMapping(value = "/carac/id={id}")
     public ResponseEntity<List<Caracteristique>> getCaracteristiques (@PathVariable Long id) {
         if (produitDao.findById(id).isPresent()) {
+            System.out.println("on rentre dans le if DAO");
             List<fr.afcepf.algeek.entity.Caracteristique> caracEntity = caracteristiqueDao.findByProduit(produitDao.findById(id).get());
+            System.out.println("on a récupéré une liste de caractéristiques");
             List<Caracteristique> caracDTO = new ArrayList<>();
             for (fr.afcepf.algeek.entity.Caracteristique c : caracEntity) {
                 caracDTO.add(caracteristiqueConverter.convertToDTO(c));
@@ -120,5 +134,15 @@ public class DaoRestController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping(value = "/nouveautes")
+    public ResponseEntity<List<Produit>> getNouveautes() {
+        List<fr.afcepf.algeek.entity.Produit> nouveautesEntity = produitDao.findTop30ByOrderByDateAjoutDesc();
+        List<Produit> nouveautesDTO = new ArrayList<>();
+        for (fr.afcepf.algeek.entity.Produit p : nouveautesEntity) {
+            nouveautesDTO.add(produitConverter.convertToDTO(p));
+        }
+        return new ResponseEntity<>(nouveautesDTO, HttpStatus.OK);
     }
 }

@@ -9,7 +9,7 @@ public interface ProductService {
 
     Produit getProduitAvecCaracteristiques(Long id);
 
-    Produit getProduitParType (Long id, boolean chargeCaracteristiques);
+    List<Produit> getProduitParType (Long id, boolean chargerCaracteristiques);
 
     List<Produit> filtrerUsageOccasionnel (List<Produit> produits, String typeOrdi);
 

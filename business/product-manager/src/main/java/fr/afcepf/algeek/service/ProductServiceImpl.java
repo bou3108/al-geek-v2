@@ -1,5 +1,6 @@
 package fr.afcepf.algeek.service;
 
+import fr.afcepf.algeek.dto.Caracteristique;
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import org.springframework.http.HttpEntity;
@@ -21,20 +22,32 @@ public class ProductServiceImpl implements ProductService {
     private RestTemplate restTemplate = new RestTemplate();
     private String urlProductApi = "http://localhost:8080/items";
 
-    // TO DO
+
     @Override
     public Produit getProduitAvecCaracteristiques(Long id) {
         Produit produit = rechercherParId(id);
-        String url = urlProductApi = "/carac/id=" + id;
-
-        return restTemplate.getForObject(url, Produit.class);
+        String url = urlProductApi + "/carac/id=" + id;
+        try {
+            Caracteristique[] caracteristiquesArray = restTemplate.getForObject(url, Caracteristique[].class);
+            List<Caracteristique> caracteristiques = Arrays.asList(caracteristiquesArray);
+            produit.setCaracteristiques(caracteristiques);
+            return produit;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public Produit getProduitParType(Long id, boolean chargeCaracteristiques) {
-        String url = urlProductApi + "/type=" + id;
-
-        return restTemplate.getForObject(url, Produit.class);
+    public List<Produit> getProduitParType(Long id, boolean chargerCaracteristiques) {
+        String url = urlProductApi + "/type=" + id + "&with=" + chargerCaracteristiques;
+        try {
+            Produit[] produitsByTypeArray = restTemplate.getForObject(url, Produit[].class);
+            List<Produit> produitsByType = Arrays.asList(produitsByTypeArray);
+            return produitsByType;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // TO DO
@@ -64,7 +77,14 @@ public class ProductServiceImpl implements ProductService {
     // TO DO
     @Override
     public List<Produit> getNouveautes() {
-        return null;
+        String url = urlProductApi + "/nouveautes";
+        try {
+            Produit[] products = restTemplate.getForObject(url, Produit[].class);
+            List<Produit> nouveautes = Arrays.asList(products);
+            return nouveautes;
+        } catch (Exception e) {
+            return  null;
+        }
     }
 
     // TO DO

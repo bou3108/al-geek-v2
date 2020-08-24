@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -17,6 +18,36 @@ public class ProductRestController {
     @Autowired
     private ProductService productService;
     private String urlProductManager = "http://localhost:8180/items/";
+
+    @GetMapping(value = "/nouveautes")
+    public ResponseEntity<List<Produit>> getNouveautes(){
+        List<Produit> nouveautes = productService.getNouveautes();
+        if(nouveautes != null) {
+            return new ResponseEntity<>(nouveautes, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/type={id}&withCarac={chargerCarac}")
+    public ResponseEntity<List<Produit>> getProduitParType(@PathVariable Long id, @PathVariable boolean chargerCarac) {
+        List<Produit> produits = productService.getProduitParType(id, chargerCarac);
+        if (produits != null) {
+            return new ResponseEntity<>(produits, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/carac/id={id}")
+    public ResponseEntity<Produit> getProduitAvecCaracteristiques(@PathVariable Long id) {
+        Produit produit = productService.getProduitAvecCaracteristiques(id);
+        if(produit != null) {
+            return new ResponseEntity<>(produit, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @PostMapping(value = "/add")
     public ResponseEntity<Produit> ajouterProduit(@RequestBody Produit produit) {

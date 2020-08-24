@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProduitDao extends CrudRepository<Produit, Long> {
 
     List<Produit> findByTypeId(Long id);
+
+    List<Produit> findTop30ByOrderByDateAjoutDesc();
 }
