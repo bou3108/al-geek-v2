@@ -12,11 +12,13 @@ import javax.inject.Inject;
 import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.InfosBancaires;
 import fr.afcepf.algeek.dto.LigneCommande;
+import fr.afcepf.algeek.service.CommandeService;
 import fr.afcepf.algeek.web.panier.Panier;
 
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @SessionScoped
@@ -40,6 +42,9 @@ public class CommandeBean implements Serializable {
 	// test
 	@Getter @Setter
 	private String login;
+
+	@Autowired
+	CommandeService commandeService;
 	
 	
 	@PostConstruct
@@ -101,14 +106,15 @@ public class CommandeBean implements Serializable {
 		
 	}
 
-	// TODO: Remplace les appels à méthode des Services par un appel REST à order-manager
 	private void ajouterInformationsBancaire(InfosBancaires infos) {
+		commandeService.ajouterInformationsBancaire(infos);
 	}
 
 	private void ajouterCommande(Commande commande) {
+		commandeService.ajouterCommande(commande);
 	}
 
 	private void ajouterLigneDeCommande(LigneCommande ligneCommande) {
-
+		commandeService.ajouterLigneDeCommande(ligneCommande);
 	}
 }

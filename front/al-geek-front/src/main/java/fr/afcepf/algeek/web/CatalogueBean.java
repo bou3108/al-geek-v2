@@ -13,10 +13,13 @@ import javax.faces.view.ViewScoped;
 import fr.afcepf.algeek.dto.Marque;
 import fr.afcepf.algeek.dto.Produit;
 
+import fr.afcepf.algeek.service.ProduitService;
+import fr.afcepf.algeek.service.VenteService;
 import fr.afcepf.algeek.tools.tri.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @ViewScoped
@@ -48,6 +51,12 @@ public class CatalogueBean implements Serializable {
 	
 	@ManagedProperty("#{param.typeProduitId}")
 	private Long typeProduitId;
+
+	@Autowired
+	ProduitService produitService;
+
+	@Autowired
+	VenteService venteService;
 	
 	@PostConstruct
 	public void init() {
@@ -161,13 +170,11 @@ public class CatalogueBean implements Serializable {
 		//System.out.println("------------------- tri choisi : " + triChoisi);
 	}
 
-	// TODO: Remplace l'appel à CatalogueService par un appel à best-sales-orchestrator
-	private List<Produit> getMeilleuresVentes(int size) {
-		return null;
+	private List<Produit> getMeilleuresVentes(int taille) {
+		return venteService.getMeilleuresVentes(taille);
 	}
 
-	// TODO: Remplace l'appel à ProduitService par un appel à product-manager
-	private List<Produit> getProduitsParType(Long typeProduitId, boolean i) {
-		return null;
+	private List<Produit> getProduitsParType(Long typeProduitId, boolean chargerCaracteristiques) {
+		return produitService.getProduitsParType(typeProduitId, chargerCaracteristiques);
 	}
 }

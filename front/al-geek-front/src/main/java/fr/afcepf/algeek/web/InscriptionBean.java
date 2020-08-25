@@ -6,6 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import fr.afcepf.algeek.dto.Client;
+import fr.afcepf.algeek.service.ClientService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,39 +36,26 @@ public class InscriptionBean implements Serializable {
 	@Autowired
 	ConnectBean connectBean;
 
-	// TODO: faire un appel REST à customer-manager pour réaliser l'insciption
+	@Autowired
+	ClientService clientService;
+
 	public String doInscription() {
 
-//		Client cl= new Client();
-//		cl.setNom(nom);
-//		cl.setPrenom(prenom);
-//		cl.setEmail(email);
-//		cl.setAdresse(adresse);
-//		cl.setCodePostal(codePostal);
-//		cl.setVille(ville);
-//
-//		Credentials cred = new Credentials();
-//
-//		try {
-//			Authentification.initializeCredentials(cred, password);
-//			cl.setSalt(cred.getSalt());
-//			cl.setHashedPassword(cred.getHashedPassword());
-//			if (cldao.findByEmail(cl.getEmail()) == null) {
-//				cldao.save(cl);
-//			}
-//			else {
-//				System.out.println("CETTE EMAIL EXISTE DEJA");
-//			}
-//		} catch (AuthentificationException e) {
-//			return null;
-//		}
-//
-//		connectBean.setClient(cl);
-//		return "home.xhtml?faces-redirect=true";
+		Client client = new Client();
+		client.setNom(nom);
+		client.setPrenom(prenom);
+		client.setEmail(email);
+		client.setAdresse(adresse);
+		client.setCodePostal(codePostal);
+		client.setVille(ville);
 
-		return null;
+		if (!clientService.doInscription(client, password)) {
+			return null;
+		}
+
+		connectBean.setClient(client);
+		return "home.xhtml?faces-redirect=true";
 	}
-	
 	
 	public String boutonDemoNewClient() {
 		 nom = "Durand";
