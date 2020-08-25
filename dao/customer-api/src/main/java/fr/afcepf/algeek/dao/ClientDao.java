@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ClientDao extends CrudRepository<Client, Long> {
 
+    public Client findByEmail(String email);
+
+
 }

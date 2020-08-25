@@ -24,7 +24,12 @@ public class DaoRestController {
     @GetMapping(value = "/id={id}")
     public Client getClientById(@PathVariable Long id){
         Client client = new ClientConverter().convertToDTO(clientDao.findById(id).get());
+        return client;
+    }
 
+    @GetMapping(value = "/email={email}")
+    public Client getByEmail(@PathVariable String email){
+        Client client = new ClientConverter().convertToDTO(clientDao.findByEmail(email));
         return client;
     }
 

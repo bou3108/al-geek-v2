@@ -110,9 +110,7 @@ public class Client implements Serializable {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getEmail() {
-		return email;
-	}
+	public String getEmail() { return email; }
 	public void setEmail(String email) {
 		this.email = email;
 	}
