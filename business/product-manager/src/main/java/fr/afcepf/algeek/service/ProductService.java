@@ -11,14 +11,6 @@ public interface ProductService {
 
     List<Produit> getProduitParType (Long id, boolean chargerCaracteristiques);
 
-    List<Produit> filtrerUsageOccasionnel (List<Produit> produits, String typeOrdi);
-
-    List<Produit> filtrerUsageRegulier (List<Produit> produits, String typeOrdi);
-
-    List<Produit> filtrerUsageIntensif (List<Produit> produits, String typeOrdi);
-
-    List<Produit> trierMoinsCherAuPlusCher (Long idType);
-
     List<Produit> getNouveautes();
 
     List<TypeProduit> getTypesComposants();

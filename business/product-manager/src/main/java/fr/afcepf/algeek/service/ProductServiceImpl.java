@@ -11,16 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private RestTemplate restTemplate = new RestTemplate();
-    private String urlProductApi = "http://localhost:8080/items";
+    private String urlProductApi = "http://localhost:8080/db/product";
+//    private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product";
 
 
     @Override
@@ -48,30 +46,6 @@ public class ProductServiceImpl implements ProductService {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    // TO DO
-    @Override
-    public List<Produit> filtrerUsageOccasionnel(List<Produit> produits, String typeOrdi) {
-        return null;
-    }
-
-    // TO DO
-    @Override
-    public List<Produit> filtrerUsageRegulier(List<Produit> produits, String typeOrdi) {
-        return null;
-    }
-
-    // TO DO
-    @Override
-    public List<Produit> filtrerUsageIntensif(List<Produit> produits, String typeOrdi) {
-        return null;
-    }
-
-    // TO DO
-    @Override
-    public List<Produit> trierMoinsCherAuPlusCher(Long idType) {
-        return null;
     }
 
     // TO DO

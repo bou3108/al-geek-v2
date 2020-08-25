@@ -64,16 +64,11 @@ public class DaoRestController {
 
     @PutMapping(value = "/update")
     public ResponseEntity<Produit> modifierProduit(@RequestBody Produit produit) {
-        System.out.println("dans la méthode modifier, début");
         fr.afcepf.algeek.entity.Produit p = produitConverter.convertToEntity(produit);
-        System.out.println("après la conversion en entité");
         try {
-            System.out.println("dans le try");
             p = produitDao.save(p);
-            System.out.println("après le save");
             return new ResponseEntity<Produit>(produitConverter.convertToDTO(p), HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println("dans l'exception");
             return new ResponseEntity<Produit>(HttpStatus.BAD_REQUEST);
         }
     }

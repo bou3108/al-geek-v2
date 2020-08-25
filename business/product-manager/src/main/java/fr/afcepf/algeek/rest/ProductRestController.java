@@ -12,12 +12,11 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/items")
+@RequestMapping
 public class ProductRestController {
 
     @Autowired
     private ProductService productService;
-    private String urlProductManager = "http://localhost:8180/items/";
 
     @GetMapping(value = "/nouveautes")
     public ResponseEntity<List<Produit>> getNouveautes(){
@@ -55,27 +54,25 @@ public class ProductRestController {
         if (addedProduct != null) {
             return new ResponseEntity<>(addedProduct, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping(value = "/id={id}")
+    @PutMapping(value = "/update")
     public ResponseEntity<Produit> modifierProduit(@RequestBody Produit produit) {
-        try {
-            productService.modifier(produit);
+        if (productService.modifier(produit) != null) {
             return new ResponseEntity<>(produit, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping(value = "/id={id}")
     public ResponseEntity<Produit> supprimerProduit(@PathVariable Long id) {
         Produit p = productService.rechercherParId(id);
-        try {
-            productService.supprimer(id);
+        if(productService.supprimer(id)) {
             return new ResponseEntity<>(p, HttpStatus.OK);
-        } catch (Exception e) {
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -94,7 +91,7 @@ public class ProductRestController {
         if (productService.getAll() != null) {
             return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
