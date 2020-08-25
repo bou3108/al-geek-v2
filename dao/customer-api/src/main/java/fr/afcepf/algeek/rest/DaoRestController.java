@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/customer-api/private/customer", headers = "Accept=application/json")
+@RequestMapping(value = "", headers = "Accept=application/json")
 public class DaoRestController {
 
     @Autowired
@@ -21,14 +21,14 @@ public class DaoRestController {
 
     private final ClientConverter clientConverter = new ClientConverter();
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id={id}")
     public Client getClientById(@PathVariable Long id){
         Client client = new ClientConverter().convertToDTO(clientDao.findById(id).get());
 
         return client;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/all")
     public List<Client> getAllClients(){
         List<fr.afcepf.algeek.entity.Client> clients = new ArrayList<>();
         clients = (List<fr.afcepf.algeek.entity.Client>) clientDao.findAll();
@@ -52,7 +52,7 @@ public class DaoRestController {
         }
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "id={id}")
     public ResponseEntity<Client> supprimerClient(@PathVariable Long id){
         Client deletedClient = null;
         if (clientDao.findById(id).isPresent()){
