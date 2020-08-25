@@ -20,7 +20,7 @@ import java.util.Map;
 public class ProductServiceImpl implements ProductService {
 
     private RestTemplate restTemplate = new RestTemplate();
-    private String urlProductApi = "http://localhost:8080/items";
+    private String urlProductApi = "http://localhost:8080/db/product/";
 
 
     @Override
