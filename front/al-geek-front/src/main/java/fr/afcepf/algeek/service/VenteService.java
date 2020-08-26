@@ -1,7 +1,11 @@
 package fr.afcepf.algeek.service;
 
+import fr.afcepf.algeek.dto.Categorie;
 import fr.afcepf.algeek.dto.Produit;
+import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,19 +17,17 @@ import java.util.List;
 @Service
 public class VenteService {
 
-    private static RestTemplate restTemplate= new RestTemplate();
+    private final ResponseEntityRestCommunicator<Produit> productCommunicator = new ResponseEntityRestCommunicator<Produit>(Produit.class, Produit[].class);
 
-    private String gatewayUrl = "http://ip:port/al-geek-gateway";
+    private final String gatewayUrl = "http://ip:port/gateway";
 
     // Remplace l'appel à CatalogueService par un appel à sales-orchestrator
     public List<Produit> getMeilleuresVentes(int size) {
-        List<Produit> products = new ArrayList<>();
-        try {
-            Produit[] bestSalesProducts = restTemplate.getForObject(gatewayUrl + "/sale/best-sales/ + size", Produit[].class);
-            products = Arrays.asList(bestSalesProducts);
-        } catch (Exception ex) {
-            log.error("getMeilleuresVentes : " + ex.getMessage() , ex);
+        String url = gatewayUrl + "/sales/best-sales/" + size;
+        ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
         }
-        return products;
+        return null;
     }
 }

@@ -2,7 +2,11 @@ package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Client;
 import fr.afcepf.algeek.dto.Commande;
+import fr.afcepf.algeek.dto.LigneCommande;
+import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,34 +18,39 @@ import java.util.List;
 @Service
 public class ClientService {
 
-    private static RestTemplate restTemplate = new RestTemplate();
+    private final ResponseEntityRestCommunicator<Commande> cmdCommunicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
+    private final ResponseEntityRestCommunicator<Client> customerCommunicator = new ResponseEntityRestCommunicator<Client>(Client.class, Client[].class);
 
     private String gatewayUrl = "http://ip:port/al-geek-gateway";
 
     // Remplace l'appel à getCommandesPourClient de CommandeService par un appel REST à customer-manager
     public List<Commande> getCommandesPourClient(Long clientId) {
-        ArrayList<Commande> commandes = new ArrayList<>();
-        try {
-            Commande[] cmd = restTemplate.getForObject(gatewayUrl + "/order/customer/" + clientId, Commande[].class);
-            commandes = (ArrayList<Commande>) Arrays.asList(cmd);
-        } catch (Exception ex) {
-            log.error("getCommandesPourClient : " + ex.getMessage() , ex);
+        String url = gatewayUrl + "/order/customer/id=" + clientId;
+        ResponseEntity<List<Commande>> response = cmdCommunicator.getList(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
         }
-        return commandes;
+        return null;
     }
 
     // Remplace l'appel à modifier de ClientService par un appel REST à customer-manager
-    public void modifierClient(Client client) {
-        try {
-            restTemplate.put(gatewayUrl + "/customer", client);
-        } catch (Exception ex) {
-            log.error("modifierClient : " + ex.getMessage() , ex);
+    public Client modifierClient(Client client) {
+        String url = gatewayUrl + "/customer/update";
+        ResponseEntity<Client> response = customerCommunicator.put(url, client);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
         }
+        return null;
     }
 
     // Remplace l'appel à doConnecter de ClientService par un appel REST à customer-manager
     public Client connect(String email, String password) {
-        return restTemplate.getForObject(gatewayUrl + "/customer/connect", Client.class, email, password);
+        String url = gatewayUrl + "/customer/authentication/email=" + email + "&password=" + password;
+        ResponseEntity<Client> response = customerCommunicator.get(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
+        return null;
     }
 
     public boolean doInscription(Client client, String password) {

@@ -1,9 +1,10 @@
 package fr.afcepf.algeek.service;
 
-import fr.afcepf.algeek.dto.Commande;
-import fr.afcepf.algeek.dto.InfosBancaires;
-import fr.afcepf.algeek.dto.LigneCommande;
+import fr.afcepf.algeek.dto.*;
+import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,18 +12,37 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class CommandeService {
 
-    private static RestTemplate restTemplate = new RestTemplate();
+    private final ResponseEntityRestCommunicator<Commande> cmdCommunicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
+    private final ResponseEntityRestCommunicator<InfosBancaires> infoCommunicator = new ResponseEntityRestCommunicator<InfosBancaires>(InfosBancaires.class, InfosBancaires[].class);
+    private final ResponseEntityRestCommunicator<LigneCommande> lgCmdCommunicator = new ResponseEntityRestCommunicator<LigneCommande>(LigneCommande.class, LigneCommande[].class);
 
-    private String gatewayUrl = "http://ip:port/al-geek-gateway";
+    private String gatewayUrl = "http://ip:port/gateway";
 
     // Remplace les appels à méthode des Services par un appel REST à order-manager
-    public void ajouterInformationsBancaire(InfosBancaires infos) {
+    public InfosBancaires ajouterInformationsBancaire(InfosBancaires infos) {
+        String url = gatewayUrl + "/order/bank/add";
+        ResponseEntity<InfosBancaires> response = infoCommunicator.post(url, infos);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
+        return null;
     }
 
-    public void ajouterCommande(Commande commande) {
+    public Commande ajouterCommande(Commande commande) {
+        String url = gatewayUrl + "/order/add";
+        ResponseEntity<Commande> response = cmdCommunicator.post(url, commande);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
+        return null;
     }
 
-    public void ajouterLigneDeCommande(LigneCommande ligneCommande) {
-
+    public LigneCommande ajouterLigneDeCommande(LigneCommande ligneCommande) {
+        String url = gatewayUrl + "/order/lines/add";
+        ResponseEntity<LigneCommande> response = lgCmdCommunicator.post(url, ligneCommande);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
+        return null;
     }
 }
