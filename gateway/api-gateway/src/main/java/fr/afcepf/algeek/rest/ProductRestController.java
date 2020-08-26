@@ -1,7 +1,9 @@
 package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.dto.Produit;
+import fr.afcepf.algeek.dto.TypeProduit;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -11,11 +13,12 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/product", headers = "Accept=application/json")
+@RequestMapping(value = "/product")
 public class ProductRestController {
 
     ResponseEntityRestCommunicator<Produit> communicator = new ResponseEntityRestCommunicator<Produit>(Produit.class, Produit[].class);
-    private static RestTemplate restTemplate = new RestTemplate();
+    ResponseEntityRestCommunicator<Produit[]> confCommunicator = new ResponseEntityRestCommunicator<Produit[]>(Produit[].class, Produit[][].class);
+    ResponseEntityRestCommunicator<TypeProduit> tpcommunicator = new ResponseEntityRestCommunicator<TypeProduit>(TypeProduit.class, TypeProduit[].class);
 
     private String productManagerUrl = "http://ip:port/manager/product/";
 
@@ -55,14 +58,14 @@ public class ProductRestController {
     }
 
     // "http://ip:port/gateway/product/nouveautes"
-    @GetMapping("/nouveautes")
+    @GetMapping("/latest")
     public ResponseEntity<List<Produit>> getLatestProducts() {
-        String url = productManagerUrl + "/nouveautes";
+        String url = productManagerUrl + "/latest";
         return communicator.getList(url);
     }
 
     // "http://ip:port/gateway/product/details/id={id}"
-    @GetMapping("/details")
+    @GetMapping("/details/id={id}")
     public ResponseEntity<Produit> getDetailedProduct(@RequestParam(value = "id", required = false) Long productId) {
         String url = productManagerUrl + "/details/id=" + productId;
         return communicator.get(url);
@@ -75,38 +78,4 @@ public class ProductRestController {
         return communicator.getList(url);
     }
 
-    // "http://ip:port/al-geek-gateway/product/types/all"
-    @GetMapping("/types/all")
-    public ResponseEntity<List<Produit>> getAllProductTypes() {
-        String url = productManagerUrl + "/types/all";
-        return communicator.getList(url);
-    }
-
-    // "http://ip:port/al-geek-gateway/product/casual-use"
-    @GetMapping("/casual-use/kind={computerKind}")
-    public ResponseEntity<List<Produit>> getProductForCasualUse(@RequestBody List<Produit> productsList, @PathVariable String computerKind) {
-        String url = productManagerUrl + "/casual-use/kind=" + computerKind;
-        return null;
-    }
-
-    // "http://ip:port/al-geek-gateway/product/regular-use"
-    @GetMapping("/regular-use/kind={computerKind}")
-    public ResponseEntity<List<Produit>> getProductForRegularUse(List<Produit> productsList, String computerKind) {
-        String url = productManagerUrl + "/regular-use/kind=" + computerKind;
-        return null;
-    }
-
-    // "http://ip:port/al-geek-gateway/product/intensive-use"
-    @GetMapping("/intensive-use/kind={computerKind}")
-    public ResponseEntity<List<Produit>> getProductForIntensiveUse(List<Produit> productsList, String computerKind) {
-        String url = productManagerUrl + "/intensive-use/kind=" + computerKind;
-        return null;
-    }
-
-    // "http://ip:port/al-geek-gateway/product/sort/price/ascending"
-    @GetMapping("/sort/price/ascending/id={id}")
-    public ResponseEntity<List<Produit>> sortFromCheapestToMostExpensive(@RequestParam(value = "id", required = false) Long idType) {
-        String url = productManagerUrl + "/sort/price/ascending/id=" + idType;
-        return communicator.getList(url);
-    }
 }

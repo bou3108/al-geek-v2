@@ -10,7 +10,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/customer", headers = "Accept=application/json")
+@RequestMapping(value = "/customer")
 public class CustomerRestController {
 
     ResponseEntityRestCommunicator<Client> communicator = new ResponseEntityRestCommunicator<Client>(Client.class, Client[].class);

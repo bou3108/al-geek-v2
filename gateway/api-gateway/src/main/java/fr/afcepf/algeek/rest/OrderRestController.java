@@ -1,6 +1,8 @@
 package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.dto.Commande;
+import fr.afcepf.algeek.dto.InfosBancaires;
+import fr.afcepf.algeek.dto.LigneCommande;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +12,15 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/order", headers = "Accept=application/json")
+@RequestMapping(value = "/order")
 public class OrderRestController {
 
     ResponseEntityRestCommunicator<Commande> communicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
+    ResponseEntityRestCommunicator<LigneCommande> lgCommunicator = new ResponseEntityRestCommunicator<LigneCommande>(LigneCommande.class, LigneCommande[].class);
+    ResponseEntityRestCommunicator<InfosBancaires> biCommunicator = new ResponseEntityRestCommunicator<InfosBancaires>(InfosBancaires.class, InfosBancaires[].class);
 
     private String orderManagerUrl = "http://ip:port/manager/order";
+
 
     // "http://ip:port/gateway/order/all"
     @GetMapping("/all")
@@ -58,4 +63,19 @@ public class OrderRestController {
         String url = orderManagerUrl + "/customer/id=" + id;
         return communicator.getList(url);
     }
+
+    // "http://ip:port/gateway/order/add"
+    @PostMapping("/lines/add")
+    public ResponseEntity<LigneCommande> addLineOrder(@RequestBody LigneCommande line) {
+        String url = orderManagerUrl + "/add";
+        return lgCommunicator.post(url, line);
+    }
+
+    // "http://ip:port/gateway/order/add"
+    @PostMapping("/bank/add")
+    public ResponseEntity<InfosBancaires> addBankInformations(@RequestBody InfosBancaires infos) {
+        String url = orderManagerUrl + "/add";
+        return biCommunicator.post(url, infos);
+    }
+
 }

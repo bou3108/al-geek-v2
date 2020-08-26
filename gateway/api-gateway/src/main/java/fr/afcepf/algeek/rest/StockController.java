@@ -12,7 +12,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/product", headers = "Accept=application/json")
+@RequestMapping(value = "/sales")
 public class StockController {
 
     ResponseEntityRestCommunicator<Object> communicator = new ResponseEntityRestCommunicator<Object>(Object.class, Object[].class);
