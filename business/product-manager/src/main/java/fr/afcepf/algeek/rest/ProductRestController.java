@@ -18,80 +18,43 @@ public class ProductRestController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "/nouveautes")
+    @GetMapping(value = "/latest")
     public ResponseEntity<List<Produit>> getNouveautes(){
-        List<Produit> nouveautes = productService.getNouveautes();
-        if(nouveautes != null) {
-            return new ResponseEntity<>(nouveautes, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.getNouveautes();
     }
 
-    @GetMapping(value = "/type={id}&withCarac={chargerCarac}")
-    public ResponseEntity<List<Produit>> getProduitParType(@PathVariable Long id, @PathVariable boolean chargerCarac) {
-        List<Produit> produits = productService.getProduitParType(id, chargerCarac);
-        if (produits != null) {
-            return new ResponseEntity<>(produits, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping(value = "/type={id}&with={chargerCarac}")
+    public ResponseEntity<List<Produit>> getProduitsParType(@PathVariable Long id, @PathVariable boolean chargerCarac) {
+        return productService.getProduitsParType(id, chargerCarac);
     }
 
     @GetMapping(value = "/carac/id={id}")
     public ResponseEntity<Produit> getProduitAvecCaracteristiques(@PathVariable Long id) {
-        Produit produit = productService.getProduitAvecCaracteristiques(id);
-        if(produit != null) {
-            return new ResponseEntity<>(produit, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.getProduitAvecCaracteristiques(id);
     }
 
     @PostMapping(value = "/add")
     public ResponseEntity<Produit> ajouterProduit(@RequestBody Produit produit) {
-        Produit addedProduct = productService.ajouter(produit);
-        if (addedProduct != null) {
-            return new ResponseEntity<>(addedProduct, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.ajouter(produit);
     }
 
     @PutMapping(value = "/update")
     public ResponseEntity<Produit> modifierProduit(@RequestBody Produit produit) {
-        if (productService.modifier(produit) != null) {
-            return new ResponseEntity<>(produit, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.modifier(produit);
     }
 
     @DeleteMapping(value = "/id={id}")
     public ResponseEntity<Produit> supprimerProduit(@PathVariable Long id) {
-        Produit p = productService.rechercherParId(id);
-        if(productService.supprimer(id)) {
-            return new ResponseEntity<>(p, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.supprimer(id);
     }
 
     @GetMapping(value = "/id={id}")
     public ResponseEntity<Produit> getProductById(@PathVariable Long id) {
-        if(productService.rechercherParId(id) != null) {
-            return new ResponseEntity<Produit>(productService.rechercherParId(id), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.rechercherParId(id);
     }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<Produit>> getAll() {
-        if (productService.getAll() != null) {
-            return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return productService.getAll();
     }
 }

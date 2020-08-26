@@ -2,28 +2,26 @@ package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
+import org.springframework.http.ResponseEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface ProductService {
 
-    Produit getProduitAvecCaracteristiques(Long id);
+    ResponseEntity<Produit> getProduitAvecCaracteristiques(Long id);
 
-    List<Produit> getProduitParType (Long id, boolean chargerCaracteristiques);
+    ResponseEntity<List<Produit>> getProduitsParType (Long id, boolean chargerCaracteristiques);
 
-    List<Produit> getNouveautes();
+    ResponseEntity<List<Produit>> getNouveautes();
 
-    List<TypeProduit> getTypesComposants();
+    ResponseEntity<Produit> ajouter (Produit p);
 
-    boolean estCompatibleAvec(Produit premier, Produit second);
+    ResponseEntity<Produit> supprimer (Long id);
 
-    Produit ajouter (Produit p);
+    ResponseEntity<Produit> modifier (Produit p);
 
-    boolean supprimer (Long id);
+    ResponseEntity<Produit> rechercherParId (Long id);
 
-    Produit modifier (Produit p);
-
-    Produit rechercherParId(Long id);
-
-    List<Produit> getAll();
+    ResponseEntity<List<Produit>> getAll();
 }

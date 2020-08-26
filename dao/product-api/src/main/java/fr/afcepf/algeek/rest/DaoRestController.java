@@ -2,11 +2,14 @@ package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.converter.CaracteristiqueConverter;
 import fr.afcepf.algeek.converter.ProduitConverter;
+import fr.afcepf.algeek.converter.TypeProduitConverter;
 import fr.afcepf.algeek.dao.CaracteristiqueDao;
 import fr.afcepf.algeek.dao.CategorieDao;
 import fr.afcepf.algeek.dao.ProduitDao;
+import fr.afcepf.algeek.dao.TypeProduitDao;
 import fr.afcepf.algeek.dto.Caracteristique;
 import fr.afcepf.algeek.dto.Produit;
+import fr.afcepf.algeek.dto.TypeProduit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +28,13 @@ public class DaoRestController {
     @Autowired
     private ProduitDao produitDao;
     @Autowired
+    private TypeProduitDao typeProduitDao;
+    @Autowired
     private CategorieDao categorieDao;
 
     private final ProduitConverter produitConverter = new ProduitConverter();
     private final CaracteristiqueConverter caracteristiqueConverter = new CaracteristiqueConverter();
+    private final TypeProduitConverter typeProduitConverter = new TypeProduitConverter();
 
     @PostMapping(value = "/add")
     public ResponseEntity<Produit> ajouterProduit(@RequestBody Produit produit) {
@@ -38,7 +44,7 @@ public class DaoRestController {
             returnedProduct = produitConverter.convertToDTO(addedEntity);
             return new ResponseEntity<Produit>(returnedProduct, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Produit>(HttpStatus.ALREADY_REPORTED);
+            return new ResponseEntity<Produit>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -139,5 +145,15 @@ public class DaoRestController {
             nouveautesDTO.add(produitConverter.convertToDTO(p));
         }
         return new ResponseEntity<>(nouveautesDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/configure/typeProduit={nomProduit}")
+    public ResponseEntity<TypeProduit> getTypeProduit(@PathVariable String nomProduit) {
+        try {
+            TypeProduit typeProduit = typeProduitConverter.convertToDTO(typeProduitDao.findByNom(nomProduit));
+            return new ResponseEntity<>(typeProduit, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
