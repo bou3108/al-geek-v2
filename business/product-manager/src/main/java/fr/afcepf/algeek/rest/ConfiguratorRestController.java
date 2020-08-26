@@ -22,24 +22,30 @@ public class ConfiguratorRestController {
      * Retourne une ResponseEntity contenant soit la liste de tous les composants ordinateurs, soit un code HTTP NOT_FOUND
      * @return
      */
-    @GetMapping(value = "/typeComposants")
+    @GetMapping(value = "/types/all")
     public ResponseEntity<List<TypeProduit>> getTypesComposants() {
         return configuratorService.getTypesComposants();
     }
 
     /**
-     * Retourne une ResponseEntity contenant true si les deux premiers Produit du tableau passé en paramètre sont compatibles,
-     * false sinon.
+     * Retourne une ResponseEntity contenant OK si les deux premiers Produit du tableau passé en paramètre sont compatibles,
+     * NOT_ACCEPTABLE sinon, et BAD_REQUEST en cas d'exception.
      *
      * @param produits
      * @return
      */
-    @GetMapping(value = "/compatibility")
-    public ResponseEntity<Boolean> isCompatibleWith (@RequestBody Produit[] produits) {
-        if (configuratorService.estCompatibleAvec(produits[0], produits[1])) {
-            return new ResponseEntity<>(true, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(false, HttpStatus.OK);
+    @PostMapping(value = "/compatibility")
+    // PASSER LA METHODE EN GET
+    public ResponseEntity<Produit> isCompatibleWith (@RequestBody Produit[] produits) {
+        try {
+            if (configuratorService.estCompatibleAvec(produits[0], produits[1])) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
     }
 }

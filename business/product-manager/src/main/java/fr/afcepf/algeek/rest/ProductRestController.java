@@ -1,5 +1,6 @@
 package fr.afcepf.algeek.rest;
 
+import fr.afcepf.algeek.dto.Categorie;
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ProductRestController {
         return productService.getProduitsParType(id, chargerCarac);
     }
 
-    @GetMapping(value = "/carac/id={id}")
+    @GetMapping(value = "/details/id={id}")
     public ResponseEntity<Produit> getProduitAvecCaracteristiques(@PathVariable Long id) {
         return productService.getProduitAvecCaracteristiques(id);
     }
@@ -56,5 +57,10 @@ public class ProductRestController {
     @GetMapping(value = "/all")
     public ResponseEntity<List<Produit>> getAll() {
         return productService.getAll();
+    }
+
+    @GetMapping(value = "/root")
+    public ResponseEntity<Categorie> getRootCategorie() {
+        return productService.getRootCategorie();
     }
 }

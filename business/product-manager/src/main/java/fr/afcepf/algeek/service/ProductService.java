@@ -1,5 +1,6 @@
 package fr.afcepf.algeek.service;
 
+import fr.afcepf.algeek.dto.Categorie;
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import org.springframework.http.ResponseEntity;
@@ -24,4 +25,6 @@ public interface ProductService {
     ResponseEntity<Produit> rechercherParId (Long id);
 
     ResponseEntity<List<Produit>> getAll();
+
+    ResponseEntity<Categorie> getRootCategorie();
 }

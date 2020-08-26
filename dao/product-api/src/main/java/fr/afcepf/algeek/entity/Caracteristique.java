@@ -1,5 +1,7 @@
 package fr.afcepf.algeek.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -37,6 +39,7 @@ public class Caracteristique implements Serializable {
     private Boolean valeurBoolean;
 
     @ManyToOne
+    @JsonIgnore
     private Produit produit;
 
     // ===================================================

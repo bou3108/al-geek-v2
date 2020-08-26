@@ -20,38 +20,38 @@ public class FilterRestController {
      * Renvoie une liste de Produits adaptés à un usage occasionnel.
      *
      * @param produits
-     * @param typeOrdi : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_bur_usage").
+     * @param computerKind : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_bur_usage").
      *
      * @return
      */
-    @GetMapping(value = "/occasional/type={typeOrdi}")
-    public List<Produit> getFilteredOccasionalUse (@RequestBody List<Produit> produits, @PathVariable String typeOrdi) {
-        return filterService.filtrerUsageOccasionnel(produits, typeOrdi);
+    @GetMapping(value = "/use/casual/kind={computerKind}")
+    public List<Produit> getFilteredOccasionalUse (@RequestBody List<Produit> produits, @PathVariable String computerKind) {
+        return filterService.filtrerUsageOccasionnel(produits, computerKind);
     }
 
     /**
      * Renvoie une liste de produits adaptés à un usage régulier
      *
      * @param produits
-     * @param typeOrdi : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_port_usage").
+     * @param computerKind : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_port_usage").
      * @return
      */
-    @GetMapping(value = "/regular/type={typeOrdi}")
-    public List<Produit> getFilteredRegularUse (@RequestBody List<Produit> produits, @PathVariable String typeOrdi) {
-        return filterService.filtrerUsageRegulier(produits, typeOrdi);
+    @GetMapping(value = "/use/regular/kind={computerKind}")
+    public List<Produit> getFilteredRegularUse (@RequestBody List<Produit> produits, @PathVariable String computerKind) {
+        return filterService.filtrerUsageRegulier(produits, computerKind);
     }
 
     /**
      * Renvoie une liste de produits adaptés à un usage intensif.
      *
      * @param produits
-     * @param typeOrdi : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_bur_usage").
+     * @param computerKind : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_bur_usage").
      *
      * @return
      */
-    @GetMapping(value = "/intensive/type={typeOrdi}")
-    public List<Produit> getFilteredIntensiveUse (@RequestBody List<Produit> produits, @PathVariable String typeOrdi) {
-        return filterService.filtrerUsageIntensif(produits, typeOrdi);
+    @GetMapping(value = "/use/intensive/kind={computerKind}")
+    public List<Produit> getFilteredIntensiveUse (@RequestBody List<Produit> produits, @PathVariable String computerKind) {
+        return filterService.filtrerUsageIntensif(produits, computerKind);
     }
 
     /**
@@ -59,7 +59,7 @@ public class FilterRestController {
      * @param id
      * @return
      */
-    @GetMapping(value = "/sort-up/type={id}")
+    @GetMapping(value = "/sort/price/ascending/id={id}")
     public ResponseEntity<List<Produit>> trierMoinsCherAuPlusCher (@PathVariable Long id) {
         return filterService.trierMoinsCherAuPlusCher(id);
     }

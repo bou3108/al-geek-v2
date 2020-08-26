@@ -1,6 +1,7 @@
 package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Caracteristique;
+import fr.afcepf.algeek.dto.Categorie;
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
@@ -27,6 +28,8 @@ public class ProductServiceImpl implements ProductService {
             new ResponseEntityRestCommunicator<>(Produit.class, Produit[].class);
     private ResponseEntityRestCommunicator<Caracteristique> caracteristiqueResponseEntityRestCommunicator =
             new ResponseEntityRestCommunicator<>(Caracteristique.class, Caracteristique[].class);
+    private  ResponseEntityRestCommunicator<Categorie> categorieResponseEntityRestCommunicator =
+            new ResponseEntityRestCommunicator<>(Categorie.class, Categorie[].class);
 
 
 //    private String urlProductApi = "http://localhost:8080/db/product";
@@ -134,5 +137,11 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<List<Produit>> getAll() {
         String url = urlProductApi + "/all";
         return produitResponseEntityRestCommunicator.getList(url, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<Categorie> getRootCategorie() {
+        String url = urlProductApi + "/root";
+        return categorieResponseEntityRestCommunicator.get(url, HttpStatus.NOT_FOUND);
     }
 }

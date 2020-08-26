@@ -11,9 +11,10 @@ public class CategorieConverter {
         Categorie dto = new Categorie();
         dto.setId(categorie.getId());
         dto.setNomAffiche(categorie.getNomAffiche());
-        dto.setTypeProduit(new TypeProduitConverter().convertToDTO(categorie.getTypeProduit()));
-        dto.setParent(convertToDTO(categorie.getParent()));
-
+        if(categorie.getTypeProduit() != null) {
+            dto.setTypeProduit(new TypeProduitConverter().convertToDTO(categorie.getTypeProduit()));
+        }
+        dto.setParent(null);
         List<Categorie> enfantsDTO = new ArrayList<>();
         for (fr.afcepf.algeek.entity.Categorie c : categorie.getEnfants()) {
             enfantsDTO.add(convertToDTO(c));
@@ -22,6 +23,7 @@ public class CategorieConverter {
 
         return dto;
     }
+
 
     public fr.afcepf.algeek.entity.Categorie convertToEntity (Categorie categorie) {
         fr.afcepf.algeek.entity.Categorie entity = new fr.afcepf.algeek.entity.Categorie();

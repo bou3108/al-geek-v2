@@ -1,6 +1,7 @@
 package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.converter.CaracteristiqueConverter;
+import fr.afcepf.algeek.converter.CategorieConverter;
 import fr.afcepf.algeek.converter.ProduitConverter;
 import fr.afcepf.algeek.converter.TypeProduitConverter;
 import fr.afcepf.algeek.dao.CaracteristiqueDao;
@@ -8,6 +9,7 @@ import fr.afcepf.algeek.dao.CategorieDao;
 import fr.afcepf.algeek.dao.ProduitDao;
 import fr.afcepf.algeek.dao.TypeProduitDao;
 import fr.afcepf.algeek.dto.Caracteristique;
+import fr.afcepf.algeek.dto.Categorie;
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,7 @@ public class DaoRestController {
     private final ProduitConverter produitConverter = new ProduitConverter();
     private final CaracteristiqueConverter caracteristiqueConverter = new CaracteristiqueConverter();
     private final TypeProduitConverter typeProduitConverter = new TypeProduitConverter();
+    private final CategorieConverter categorieConverter = new CategorieConverter();
 
     @PostMapping(value = "/add")
     public ResponseEntity<Produit> ajouterProduit(@RequestBody Produit produit) {
@@ -154,6 +157,18 @@ public class DaoRestController {
             return new ResponseEntity<>(typeProduit, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value= "/root")
+    public ResponseEntity<Categorie> getRootCategorie() {
+        try {
+            fr.afcepf.algeek.entity.Categorie categorie = categorieDao.findFirstByParentIsNull();
+            Categorie cat = categorieConverter.convertToDTO(categorie);
+            return new ResponseEntity<>(cat, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }
