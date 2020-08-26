@@ -2,10 +2,9 @@ package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.dto.Commande;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -14,81 +13,49 @@ import java.util.List;
 @RequestMapping(value = "/order", headers = "Accept=application/json")
 public class OrderRestController {
 
-    private static RestTemplate restTemplate = new RestTemplate();
+    ResponseEntityRestCommunicator<Commande> communicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
 
     private String orderManagerUrl = "http://ip:port/manager/order";
 
     // "http://ip:port/gateway/order/all"
     @GetMapping("/all")
-    public List<Commande> getAllOrders() {
-        List<Commande> ordersList = null;
-        try {
-            Commande[] orders = restTemplate.getForObject(orderManagerUrl, Commande[].class);
-            ordersList = Arrays.asList(orders);
-        } catch (Exception ex) {
-            log.error("getAllOrders : " + ex.getMessage(), ex);
-        }
-        return ordersList;
+    public ResponseEntity<List<Commande>> getAllOrders() {
+        String url = orderManagerUrl + "/all";
+        return communicator.getList(url);
     }
 
     // http://ip:port/gateway/order/id={id}"
     @GetMapping("/id={id}")
-    public Commande getOrder(@RequestParam(value = "id", required = false) Long id) {
-        Commande order = null;
-        try {
-            order = restTemplate.getForObject(orderManagerUrl + "/" + id, Commande.class);
-        } catch (Exception ex) {
-            log.error("getOrder : " + ex.getMessage(), ex);
-        }
-        return order;
+    public ResponseEntity<Commande> getOrder(@RequestParam(value = "id", required = false) Long id) {
+        String url = orderManagerUrl + "/id=" + id;
+        return communicator.get(url);
     }
-    // List<Commande> getCommandesPourClient(Long clientId)
 
     // "http://ip:port/gateway/order/add"
     @PostMapping("/add")
-    public Commande addOrder(@RequestBody Commande order) {
-        try {
-            Commande addedOrder = restTemplate.postForObject(orderManagerUrl, order, Commande.class);
-            return addedOrder;
-        } catch (Exception ex) {
-            log.error("addOrder : " + ex.getMessage(), ex);
-        }
-        return null;
+    public ResponseEntity<Commande> addOrder(@RequestBody Commande order) {
+        String url = orderManagerUrl + "/add";
+        return communicator.post(url, order);
     }
 
-    // "http://ip:port/al-geek-gateway/order/update"
+    // "http://ip:port/gateway/order/update"
     @PutMapping("/update")
-    public void updateOrder(@RequestBody Commande order) {
-        try {
-            restTemplate.put(orderManagerUrl, order);
-        } catch (Exception ex) {
-            log.error("updateOrder : " + ex.getMessage(), ex);
-        }
+    public ResponseEntity<Commande> updateOrder(@RequestBody Commande order) {
+        String url = orderManagerUrl + "/update";
+        return communicator.put(url, order);
     }
 
-    // "http://ip:port/al-geek-gateway/order"
+    // "http://ip:port/gateway/order/id={id}"
     @DeleteMapping("id={id}")
-    public Commande deleteOrder(@RequestBody Commande order) {
-        try {
-            restTemplate.delete(orderManagerUrl + "/id=" + order.getId());
-        } catch (Exception ex) {
-            log.error("deleteOrder : " + ex.getMessage(), ex);
-        }
-        return null;
+    public ResponseEntity<Commande> deleteOrder(@RequestBody Commande order) {
+        String url = orderManagerUrl + "/id=" + order.getId();
+        return communicator.delete(url);
     }
 
-    // "http://ip:port/al-geek-gateway/order/customer/id={id}"
+    // "http://ip:port/gateway/order/customer/id={id}"
     @GetMapping("/customer/id={id}")
-    public List<Commande> getAllOrdersForCustomer(@RequestParam(value = "id", required = true) Long id) {
-        List<Commande> ordersList = null;
-        try {
-            if (id != null) {
-                Commande[] orders = restTemplate.getForObject(orderManagerUrl + "/customer/id=" + id, Commande[].class);
-                ordersList = Arrays.asList(orders);
-            }
-        } catch (Exception ex) {
-            log.error("getAllOrdersForCustomer : " + ex.getMessage(), ex);
-        }
-        return ordersList;
+    public ResponseEntity<List<Commande>> getAllOrdersForCustomer(@RequestParam(value = "id", required = true) Long id) {
+        String url = orderManagerUrl + "/customer/id=" + id;
+        return communicator.getList(url);
     }
 }

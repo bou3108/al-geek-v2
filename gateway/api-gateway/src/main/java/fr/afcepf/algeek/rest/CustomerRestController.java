@@ -2,11 +2,9 @@ package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.dto.Client;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -15,75 +13,49 @@ import java.util.List;
 @RequestMapping(value = "/customer", headers = "Accept=application/json")
 public class CustomerRestController {
 
-    private static RestTemplate restTemplate = new RestTemplate();
+    ResponseEntityRestCommunicator<Client> communicator = new ResponseEntityRestCommunicator<Client>(Client.class, Client[].class);
 
     private String customerManagerUrl = "http://ip:port/manager/customer";
 
     // "http://ip:port/gateway/customer/all"
     @GetMapping("/all")
-    public List<Client> getAllCustomers() {
-        List<Client> listClients = null;
-        try {
-            Client[] clients = restTemplate.getForObject(customerManagerUrl, Client[].class);
-            listClients = Arrays.asList(clients);
-        } catch (Exception ex) {
-            log.error("getAllCustomers failed : " + ex.getMessage(), ex);
-        }
-        return listClients;
+    public ResponseEntity<List<Client>> getAllCustomers() {
+        String url = customerManagerUrl + "/all";
+        return communicator.getList(url);
     }
 
     // http://ip:port/gateway/customer/id={id}"
     @GetMapping("/id={id}")
-    public Client getCustomer(@RequestParam(value = "id", required = false) Long id) {
-        try {
-            return restTemplate.getForObject(customerManagerUrl + "/" + id, Client.class);
-        } catch (Exception ex) {
-            log.error("getCustomer failed : " + ex.getMessage(), ex);
-        }
-        return null;
+    public ResponseEntity<Client> getCustomer(@RequestParam(value = "id", required = false) Long id) {
+        String url = customerManagerUrl + "/id=" + id;
+        return communicator.get(url);
     }
 
     // "http://ip:port/gateway/customer/add"
     @PostMapping("/add")
-    public Client addCustomer(@RequestBody Client customer) {
-        try {
-            return restTemplate.postForObject(customerManagerUrl, customer ,Client.class);
-        } catch (Exception ex) {
-            log.error("addCustomer failed : " + ex.getMessage(), ex);
-        }
-        return null;
+    public ResponseEntity<Client> addCustomer(@RequestBody Client customer) {
+        String url = customerManagerUrl + "/add";
+        return communicator.post(url, customer);
     }
 
     // "http://ip:port/gateway/customer/update"
     @PutMapping("/update")
-    public void updateCustomer(@RequestBody Client customer) {
-        try {
-            restTemplate.put(customerManagerUrl, customer);
-        } catch (Exception ex) {
-            log.error("updateCustomer failed : " + ex.getMessage(), ex);
-        }
+    public ResponseEntity<Client> updateCustomer(@RequestBody Client customer) {
+        String url = customerManagerUrl + "/update";
+        return communicator.put(url, customer);
     }
 
     // "http://ip:port/gateway/customer/id={id}"
     @DeleteMapping("/id={id}")
-    public Client deleteCustomer(@RequestBody Client customer) {
-        try {
-            restTemplate.delete(customerManagerUrl + "/id=" + customer.getId());
-        } catch (Exception ex) {
-            log.error("deleteCustomer failed : " + ex.getMessage(), ex);
-        }
-        return null;
+    public ResponseEntity<Client> deleteCustomer(@RequestBody Client customer) {
+        String url = customerManagerUrl + "/id=" + customer.getId();
+        return communicator.delete(url);
     }
 
     // "http://ip:port/gateway/customer/authentication?email=dev@dev.dev?password=xxxxxxxx"
     @GetMapping("/authentication")
-    public Client connect(@RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String password) {
-        Client client = null;
-        try {
-            client = restTemplate.getForObject(customerManagerUrl + "/authentication/email=" + email + "&password=" + password, Client.class);
-        } catch (Exception ex) {
-            log.error("connect failed : " + ex.getMessage(), ex);
-        }
-        return client;
+    public ResponseEntity<Client> connect(@RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String password) {
+        String url = customerManagerUrl + "/authentication/email=" + email + "&password=" + password;
+        return communicator.get(url);
     }
 }
