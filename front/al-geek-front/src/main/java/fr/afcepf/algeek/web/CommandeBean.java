@@ -78,7 +78,7 @@ public class CommandeBean implements Serializable {
 		// persistance des coord.bancaires ( !!! pas bien ...)
 		ajouterInformationsBancaire(infosBank);
 		
-		commande.setClient(connectBean.getClient());
+		commande.setClientId(connectBean.getClient().getId());
 		commande.setDateDeLaCommande(new Date());
 		commande.setPrix(panierBean.afficherPrixTotal());
 		commande.setInfosBank(infosBank);

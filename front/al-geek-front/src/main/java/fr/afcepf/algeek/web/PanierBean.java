@@ -62,12 +62,12 @@ public class PanierBean implements Serializable {
 	public void ajoutPanier(Produit p) {
 		titrePanier = "Votre panier";
 		for (LigneCommande lc : panier.getListLC()) {
-			if(lc.getProduit().getId().equals(p.getId())) {
+			if(lc.getProduitId().equals(p.getId())) {
 				lc.setQuantite(lc.getQuantite() + p.getQuantite());
 			}
 		}
 		if(!verifierDansPanier(p)) {
-			LigneCommande newlc = new LigneCommande(null, p.getQuantite(), p);
+			LigneCommande newlc = new LigneCommande(null, p.getQuantite(), p.getId());
 			panier.getListLC().add(newlc);			
 		}
 	}
@@ -110,7 +110,7 @@ public class PanierBean implements Serializable {
 	public boolean verifierDansPanier(Produit p) {
 		boolean b = false;
 		for (LigneCommande lc : panier.getListLC()) {
-			if (lc.getProduit().getId().equals(p.getId())) {
+			if (lc.getProduitId().equals(p.getId())) {
 				return true;
 			} 
 		}
@@ -125,7 +125,7 @@ public class PanierBean implements Serializable {
 		
 		try {
 			for (LigneCommande lc : panier.getListLC()) {
-				if (lc.getProduit().equals(p)) {
+				if (lc.getProduitId().equals(p.getId())) {
 
 					if (lc.getQuantite() > 1) {
 						lc.setQuantite(lc.getQuantite() - 1);
@@ -165,11 +165,12 @@ public class PanierBean implements Serializable {
 		Integer qte = afficherQuantiteProduitsDansPanier();
 		return qte.toString();
 	}
-	
+
+	// TODO: Fix sur le DTO de LigneCommande pour retourner le prix de la ligne
 	public double afficherPrixTotal() {
 		double somme = 0;
 		for (LigneCommande llcc : panier.getListLC()) {
-			somme += llcc.getProduit().getPrix() * llcc.getQuantite();			
+			//somme += llcc.getProduit().getPrix() * llcc.getQuantite();
 		}
 		return somme;
 	}

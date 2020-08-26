@@ -54,9 +54,16 @@ public class ClientService {
     }
 
     public boolean doInscription(Client client, String password) {
+        String url = gatewayUrl + "/customer/register/password=" + password;
+        ResponseEntity<Client> response = customerCommunicator.get(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return true;
+        }
+        return false;
+
         // TODO: Déplacer le code ci-dessous dans les web services business
 
-//		Credentials cred = new Credentials();
+        //		Credentials cred = new Credentials();
 //
 //		try {
 //			Authentification.initializeCredentials(cred, password);
@@ -72,8 +79,6 @@ public class ClientService {
 //			return false;
 //		}
 //      return true
-
-        return false;
     }
 
 }

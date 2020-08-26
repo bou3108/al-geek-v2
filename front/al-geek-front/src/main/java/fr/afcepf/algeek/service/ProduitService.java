@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -21,12 +18,13 @@ public class ProduitService {
     private final ResponseEntityRestCommunicator<Produit> productCommunicator = new ResponseEntityRestCommunicator<Produit>(Produit.class, Produit[].class);
     private final ResponseEntityRestCommunicator<Categorie> categoryCommunicator = new ResponseEntityRestCommunicator<Categorie>(Categorie.class, Categorie[].class);
     private final ResponseEntityRestCommunicator<TypeProduit> typeProduitCommunicator = new ResponseEntityRestCommunicator<TypeProduit>(TypeProduit.class, TypeProduit[].class);
+    private final ResponseEntityRestCommunicator<Produit[]> confCommunicator = new ResponseEntityRestCommunicator<Produit[]>(Produit[].class, Produit[][].class);
 
-    private final String gatewayUrl = "http://ip:port/gateway";
+    private final String gatewayUrl = "http://${algeek.gateway.address}/gateway";
 
     // Remplace l'appel à getProduitAvecCaracteristiques de ProduitService par un appel REST à product-manager
     public Produit getProduitAvecCaracteristiques(Long productId) {
-        String url = gatewayUrl + "/product/details/" + productId;
+        String url = gatewayUrl + "/product/details/id=" + productId;
         ResponseEntity<Produit> response = productCommunicator.get(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -36,7 +34,7 @@ public class ProduitService {
 
     // Remplace l'appel à CatalogueService par un appel à product-manager
     public List<Produit> getNouveautes() {
-        String url = gatewayUrl + "/product/nouveautes";
+        String url = gatewayUrl + "/product/latest";
         ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -46,7 +44,7 @@ public class ProduitService {
 
     // Les méthodes ci-dessous remplacent l'appel à ProduitService par un appel REST au Product-Manager
     public List<Produit> trierMoinsCherAuPlusCher(Long typeProduitId) {
-        String url = gatewayUrl + "/product/sort/price/ascending/" + typeProduitId;
+        String url = gatewayUrl + "/product/filter/sort/price/ascending/type=" + typeProduitId;
         ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -55,30 +53,60 @@ public class ProduitService {
     }
 
     public List<Produit> filtrerUsageIntensif(List<Produit> listOrdi, String typeOrdi) {
+        String url = gatewayUrl + "/product/filter/use/intensive/kind=" + typeOrdi;
+        ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
         return null;
     }
 
     public List<Produit> filtrerUsageRegulier(List<Produit> listOrdi, String typeOrdi) {
+        String url = gatewayUrl + "/product/filter/use/regular/kind=" + typeOrdi;
+        ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
         return null;
     }
 
     public List<Produit> filtrerUsageOccasionnel(List<Produit> listOrdi, String typeOrdi) {
+        String url = gatewayUrl + "/product/filter/use/casual/kind=" + typeOrdi;
+        ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
         return null;
     }
 
     // Remplace l'appel à getProduitsParType de ProduitService par un appel REST à product-manager
     public List<Produit> getProduitsParType(Long id, boolean chargerCaracteristiques) {
+        String url = gatewayUrl + "/product/type=" + id + "&with=" + chargerCaracteristiques;
+        ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
         return null;
     }
 
     // Remplace l'appel à estCompatibleAvec de ConfigurateurService par un appel REST à product-manager
-    public boolean estCompatibleAvec(Produit premier, Produit second) {
-        return false;
+    public Boolean estCompatibleAvec(Produit premier, Produit second) {
+        Boolean result = null;
+        String url = gatewayUrl + "/product/configure/compatibility";
+        Produit[] products = new Produit[]{premier, second};
+        ResponseEntity<Produit[]> response = confCommunicator.post("url", products);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            result = true;
+        } else if (response.getStatusCode() == HttpStatus.NOT_ACCEPTABLE) {
+            result = false;
+        }
+
+        return result;
     }
 
     // Remplace l'appel à estCompatibleAvec de ConfigurateurService par un appel REST à product-manager
     public List<TypeProduit> getTypesComposants() {
-        String url = gatewayUrl + "product/types";
+        String url = gatewayUrl + "/product/configure/product/types/all";
         ResponseEntity<List<TypeProduit>> response = typeProduitCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
