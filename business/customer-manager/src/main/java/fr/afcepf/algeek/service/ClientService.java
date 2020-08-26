@@ -15,6 +15,8 @@ public interface ClientService {
 
 	Client getById(Long id);
 
+	Client doConnecter(String email, String password);
+
 	List<Client> getAll();
 
 

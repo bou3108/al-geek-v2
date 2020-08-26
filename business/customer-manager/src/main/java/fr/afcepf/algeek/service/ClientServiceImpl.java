@@ -1,6 +1,9 @@
 package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Client;
+import fr.afcepf.algeek.service.authentification.Authentification;
+import fr.afcepf.algeek.service.authentification.Credentials;
+import fr.afcepf.algeek.service.authentification.exception.AuthentificationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +15,7 @@ public class ClientServiceImpl implements ClientService {
 
 
     private RestTemplate restTemplate = new RestTemplate();
-    private String urlCustomerApi = "http://localhost:8080/db/customer/";
+    private String urlCustomerApi = "http://localhost:8080/db/customer";
 
 
     @Override
@@ -31,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             restTemplate.delete(url);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -42,20 +45,47 @@ public class ClientServiceImpl implements ClientService {
         try {
             restTemplate.put(url, client);
             return client;
-        }catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }
 
     @Override
     public Client getById(Long id) {
-        String url = urlCustomerApi + "/id=" +id;
+        String url = urlCustomerApi + "/id=" + id;
         try {
             Client client = restTemplate.getForObject(url, Client.class);
             return client;
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public Client doConnecter(String email, String password) {
+        String url = urlCustomerApi + "/email=" + email;
+
+        Client client = restTemplate.getForObject(url, Client.class);
+        if (client == null) {
+            return null;
+        }
+
+        Credentials cred = new Credentials();
+        cred.setSalt(client.getSalt());
+        cred.setHashedPassword(client.getHashedPassword());
+        cred.setLogin(client.getEmail());
+
+        if (client != null) {
+            try {
+                if (Authentification.authentificate(cred, password)) {
+                    return client;
+                }
+            } catch ( Exception e) {
+// TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     @Override

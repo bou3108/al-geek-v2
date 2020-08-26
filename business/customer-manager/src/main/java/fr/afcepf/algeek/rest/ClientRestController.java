@@ -62,6 +62,15 @@ public class ClientRestController {
         }
     }
 
+    @GetMapping(value = "/email={email}/password={password}")
+    public ResponseEntity<Client> doConnecter(@PathVariable String email, @PathVariable String password){
+        if (clientService.doConnecter(email,password) != null){
+            return new ResponseEntity<>(clientService.doConnecter(email, password), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(value = "/all")
     public ResponseEntity<List<Client>> getAll() {
         if (clientService.getAll() != null) {
