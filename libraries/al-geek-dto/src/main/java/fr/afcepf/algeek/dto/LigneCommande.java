@@ -14,9 +14,16 @@ public class LigneCommande implements Serializable {
     private Long id;
     private Integer quantite;
     private Long produitId;
-    private Commande commande;
+    private Long commandeId;
 
     public LigneCommande(Long id, Integer quantite, Long produitId) {
+        super();
+        this.id = id;
+        this.quantite = quantite;
+        this.produitId = produitId;
+    }
+
+    public LigneCommande(Long id, Integer quantite, Long produitId, Long commandeId) {
         super();
         this.id = id;
         this.quantite = quantite;
