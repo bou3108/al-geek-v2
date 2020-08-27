@@ -2,26 +2,25 @@ package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Client;
 import fr.afcepf.algeek.dto.Commande;
-import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
 @Service
 public class ClientService {
 
+    @Value("${algeek.gateway.address}")
+    private String gatewayUrl;
+
     private final ResponseEntityRestCommunicator<Commande> cmdCommunicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
     private final ResponseEntityRestCommunicator<Client> customerCommunicator = new ResponseEntityRestCommunicator<Client>(Client.class, Client[].class);
 
-    private String gatewayUrl = "http://ip:port/al-geek-gateway";
 
     // Remplace l'appel à getCommandesPourClient de CommandeService par un appel REST à customer-manager
     public List<Commande> getCommandesPourClient(Long clientId) {

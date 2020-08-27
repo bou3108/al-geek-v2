@@ -5,6 +5,7 @@ import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,14 @@ import java.util.List;
 @Service
 public class ProduitService {
 
+    @Value("${algeek.gateway.address}")
+    private String gatewayUrl;
+
     private final ResponseEntityRestCommunicator<Produit> productCommunicator = new ResponseEntityRestCommunicator<Produit>(Produit.class, Produit[].class);
     private final ResponseEntityRestCommunicator<Categorie> categoryCommunicator = new ResponseEntityRestCommunicator<Categorie>(Categorie.class, Categorie[].class);
     private final ResponseEntityRestCommunicator<TypeProduit> typeProduitCommunicator = new ResponseEntityRestCommunicator<TypeProduit>(TypeProduit.class, TypeProduit[].class);
     private final ResponseEntityRestCommunicator<Produit[]> confCommunicator = new ResponseEntityRestCommunicator<Produit[]>(Produit[].class, Produit[][].class);
 
-    private final String gatewayUrl = "http://${algeek.gateway.address}/gateway";
 
     // Remplace l'appel à getProduitAvecCaracteristiques de ProduitService par un appel REST à product-manager
     public Produit getProduitAvecCaracteristiques(Long productId) {
