@@ -55,8 +55,8 @@ public class CustomerRestController {
         return communicator.delete(url);
     }
 
-    // "http://ip:port/gateway/customer/authentication?email=dev@dev.dev?password=xxxxxxxx"
-    @GetMapping("/authentication")
+    // "http://ip:port/gateway/customer/authentication/email=dev@dev.dev?password=xxxxxxxx"
+    @GetMapping("/authentication/email={email}&password={password}")
     public ResponseEntity<Client> connect(@RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String password) {
         String url = customerManagerUrl + "/authentication/email=" + email + "&password=" + password;
         return communicator.get(url);
