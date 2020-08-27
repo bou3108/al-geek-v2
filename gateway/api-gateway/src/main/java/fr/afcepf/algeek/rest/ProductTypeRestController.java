@@ -3,6 +3,7 @@ package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.dto.TypeProduit;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,10 @@ import java.util.List;
 @RequestMapping(value = "/product")
 public class ProductTypeRestController {
 
-    ResponseEntityRestCommunicator<TypeProduit> communicator = new ResponseEntityRestCommunicator<TypeProduit>(TypeProduit.class, TypeProduit[].class);
+    private final ResponseEntityRestCommunicator<TypeProduit> communicator = new ResponseEntityRestCommunicator<TypeProduit>(TypeProduit.class, TypeProduit[].class);
 
-    private String productManagerUrl = "http://ip:port/manager/product/";
+    @Value("${algeek.manager.product.address}")
+    private String productManagerUrl;
 
 
     // "http://ip:port/al-geek-gateway/product/types/all"

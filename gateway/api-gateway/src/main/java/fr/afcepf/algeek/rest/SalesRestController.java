@@ -2,6 +2,7 @@ package fr.afcepf.algeek.rest;
 
 import fr.afcepf.algeek.dto.Produit;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +14,10 @@ import java.util.List;
 @RequestMapping(value = "/sales")
 public class SalesRestController {
 
-    ResponseEntityRestCommunicator<Produit> communicator = new ResponseEntityRestCommunicator<Produit>(Produit.class, Produit[].class);
+    private final ResponseEntityRestCommunicator<Produit> communicator = new ResponseEntityRestCommunicator<Produit>(Produit.class, Produit[].class);
 
-    private String salesManagerUrl = "http://ip:port/manager/sales";
+    @Value("${algeek.manager.sales.address}")
+    private String salesManagerUrl;
 
 
     // "http://ip:port/gateway/sales/"

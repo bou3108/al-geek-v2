@@ -4,6 +4,7 @@ import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.InfosBancaires;
 import fr.afcepf.algeek.dto.LigneCommande;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +16,12 @@ import java.util.List;
 @RequestMapping(value = "/order")
 public class OrderRestController {
 
-    ResponseEntityRestCommunicator<Commande> communicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
-    ResponseEntityRestCommunicator<LigneCommande> lgCommunicator = new ResponseEntityRestCommunicator<LigneCommande>(LigneCommande.class, LigneCommande[].class);
-    ResponseEntityRestCommunicator<InfosBancaires> biCommunicator = new ResponseEntityRestCommunicator<InfosBancaires>(InfosBancaires.class, InfosBancaires[].class);
+    private final ResponseEntityRestCommunicator<Commande> communicator = new ResponseEntityRestCommunicator<Commande>(Commande.class, Commande[].class);
+    private final ResponseEntityRestCommunicator<LigneCommande> lgCommunicator = new ResponseEntityRestCommunicator<LigneCommande>(LigneCommande.class, LigneCommande[].class);
+    private final ResponseEntityRestCommunicator<InfosBancaires> biCommunicator = new ResponseEntityRestCommunicator<InfosBancaires>(InfosBancaires.class, InfosBancaires[].class);
 
-    private String orderManagerUrl = "http://ip:port/manager/order";
+    @Value("${algeek.manager.order.address}")
+    private String orderManagerUrl;
 
 
     // "http://ip:port/gateway/order/all"

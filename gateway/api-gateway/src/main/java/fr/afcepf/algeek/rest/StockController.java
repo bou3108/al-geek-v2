@@ -1,6 +1,7 @@
 package fr.afcepf.algeek.rest;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,11 @@ import java.util.List;
 @RequestMapping(value = "/sales")
 public class StockController {
 
-    ResponseEntityRestCommunicator<Object> communicator = new ResponseEntityRestCommunicator<Object>(Object.class, Object[].class);
+    private final ResponseEntityRestCommunicator<Object> communicator = new ResponseEntityRestCommunicator<Object>(Object.class, Object[].class);
 
-    private String stockManagerUrl = "http://ip:port/manager/stock/";
+    @Value("${algeek.manager.stock.address}")
+    private String stockManagerUrl;
+
 
     // "http://ip:port/al-geek-gateway/stock/"
     @GetMapping("")
