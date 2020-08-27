@@ -29,16 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72e5ac62-87e3-49a0-84ed-a296dc58eda0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/InfosBancairesRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/converter/CommandeConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/converter/CommandeConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/converter/LigneCommandeConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/converter/LigneCommandeConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/dao/CommandeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/dao/CommandeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/dao/InfosBancairesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/dao/InfosBancairesDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/dao/LigneCommandeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/dao/LigneCommandeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/entity/CommandeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/entity/CommandeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/CommandeRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/CommandeRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/LigneCommandeRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/LigneCommandeRestController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,17 +78,6 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="Spring Boot.OrderApiApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AlGeekFrontApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="al-geek-front" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.AlGeekFrontApplication" />
@@ -201,6 +181,8 @@
       <workItem from="1598530788733" duration="48000" />
       <workItem from="1598534108133" duration="167000" />
       <workItem from="1598534284203" duration="14106000" />
+      <workItem from="1598551891062" duration="1668000" />
+      <workItem from="1598553622041" duration="13000" />
     </task>
     <servers />
   </component>
@@ -244,38 +226,38 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="575" y="140" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1598551190957" />
-    <state width="1493" height="317" key="GridCell.Tab.0.bottom" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.0.bottom" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.0.center" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.0.center" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.0.left" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.0.left" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.0.right" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.0.right" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.1.bottom" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.bottom" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.1.center" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.center" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.1.left" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.left" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
-    <state width="1493" height="317" key="GridCell.Tab.1.right" timestamp="1598551354222">
+    <state width="1493" height="317" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.right" timestamp="1598553562438">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="317" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1598551354222" />
+    <state width="1493" height="317" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
     <state width="1493" height="277" key="GridCell.Tab.2.bottom" timestamp="1598551320841">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -300,10 +282,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="500" y="194" key="extract.method.dialog/0.0.1536.864@0.0.1536.864" timestamp="1598542473119" />
-    <state x="426" y="197" key="run.anything.popup" timestamp="1598535295979">
+    <state x="426" y="197" key="run.anything.popup" timestamp="1598552963774">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="426" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1598535295979" />
+    <state x="426" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1598552963774" />
     <state x="431" y="182" width="672" height="678" key="search.everywhere.popup" timestamp="1598541215724">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -321,11 +303,6 @@
           <url>file://$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/CommandeRestController.java</url>
           <line>58</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/converter/LigneCommandeConverter.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

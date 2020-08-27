@@ -32,7 +32,8 @@ public class LigneCommandeRestController {
     public ResponseEntity<LigneCommande> add(@RequestBody LigneCommande ligneCommande) {
         LigneCommande returnedLigneCommande;
         if (ligneCommande.getId() == null) {
-            LigneCommandeEntity addedEntity = ligneCommandeDao.save(converter.ligneCommandeConverter.convertToEntity(ligneCommande));
+            LigneCommandeEntity addedEntity = ligneCommandeDao.save(converter.ligneCommandeConverter.convertToEntity(ligneCommande,
+                    new Converter().commandeConverter.convertToDTO(commandeDao.findById(ligneCommande.getCommandeId()).get())));
             returnedLigneCommande = converter.ligneCommandeConverter.convertToDTO(addedEntity);
             return new ResponseEntity<>(returnedLigneCommande, HttpStatus.OK);
         } else {
@@ -61,7 +62,8 @@ public class LigneCommandeRestController {
 
     @PutMapping(value = "/update")
     public ResponseEntity<LigneCommande> update(@RequestBody LigneCommande ligneCommande) {
-        LigneCommandeEntity ligneCommandeEntity = converter.ligneCommandeConverter.convertToEntity(ligneCommande);
+        LigneCommandeEntity ligneCommandeEntity = converter.ligneCommandeConverter.convertToEntity(ligneCommande,
+                new Converter().commandeConverter.convertToDTO(commandeDao.findById(ligneCommande.getCommandeId()).get()));
         try {
             ligneCommandeEntity = ligneCommandeDao.save(ligneCommandeEntity);
             return new ResponseEntity<>(converter.ligneCommandeConverter.convertToDTO(ligneCommandeEntity), HttpStatus.OK);
