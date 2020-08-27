@@ -18,66 +18,44 @@ public class ClientRestController {
     @Autowired
     private ClientService clientService;
 
-    private String urlCustomerManager = "http://localhost:8180/customer/";
-
-
     @PutMapping(value = "/update")
     public ResponseEntity<Client> modifierClient(@RequestBody Client client) {
-        Client clientModifie = clientService.modifier(client);
-        if (clientModifie != null) {
-            return new ResponseEntity<>(client, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return clientService.modifier(client);
     }
 
-    @PostMapping(value = "add")
+    @PostMapping(value = "/add")
     public ResponseEntity<Client> ajouterClient(@RequestBody Client client) {
-        Client addedClient = clientService.ajouter(client);
-        if (addedClient != null) {
-            return new ResponseEntity<>(addedClient, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
-        } //refaire avec le if
+        return clientService.ajouter(client);
     }
-
 
     @DeleteMapping(value = "/id={id}")
     public ResponseEntity<Client> supprimerClient(@PathVariable Long id) {
-        Client c = clientService.getById(id);
-        try {
-            clientService.supprimer(id);
-            return new ResponseEntity<>(c, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return clientService.supprimer(id);
     }
 
     @GetMapping(value = "/id={id}")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
-        if (clientService.getById(id) != null) {
-            return new ResponseEntity<>(clientService.getById(id), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return clientService.getById(id);
     }
 
-    @GetMapping(value = "/email={email}/password={password}")
-    public ResponseEntity<Client> doConnecter(@PathVariable String email, @PathVariable String password){
-        if (clientService.doConnecter(email,password) != null){
-            return new ResponseEntity<>(clientService.doConnecter(email, password), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+    @GetMapping(value = "/authentication/email={email}&password={password}")
+    public ResponseEntity<Client> doConnecter(@PathVariable String email, @PathVariable String password) {
+        return clientService.doConnecter(email, password);
     }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<Client>> getAll() {
-        if (clientService.getAll() != null) {
-            return new ResponseEntity<>(clientService.getAll(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return clientService.getAll();
+    }
+
+
+    @PostMapping(value = "/register/password={password}")
+    public ResponseEntity<Client> doRegister(@RequestBody Client client, @PathVariable String password) {
+        if (clientService.findByEmail(client.getEmail()).getStatusCode() == HttpStatus.OK) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        return clientService.doRegister(client, password);
     }
 
 

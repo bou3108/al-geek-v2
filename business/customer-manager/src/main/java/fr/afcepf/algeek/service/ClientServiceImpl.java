@@ -1,75 +1,63 @@
 package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Client;
+import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import fr.afcepf.algeek.service.authentification.Authentification;
 import fr.afcepf.algeek.service.authentification.Credentials;
 import fr.afcepf.algeek.service.authentification.exception.AuthentificationException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Service
 public class ClientServiceImpl implements ClientService {
 
 
     private RestTemplate restTemplate = new RestTemplate();
+
+    private ResponseEntityRestCommunicator<Client> clientResponseEntityRestCommunicator
+            = new ResponseEntityRestCommunicator<>(Client.class, Client[].class);
+
     private String urlCustomerApi = "http://localhost:8080/db/customer";
 
 
     @Override
-    public Client ajouter(Client client) {
+    public ResponseEntity<Client> ajouter(Client client) {
         String url = urlCustomerApi + "/add";
-        try {
-            return restTemplate.postForObject(url, client, Client.class);
-        } catch (Exception e) {
-            return null;
-        }
+        return clientResponseEntityRestCommunicator.post(url, client, HttpStatus.CONFLICT);
     }
 
     @Override
-    public boolean supprimer(Long id) {
+    public ResponseEntity<Client> supprimer(Long id) {
         String url = urlCustomerApi + "/id=" + id;
-        try {
-            restTemplate.delete(url);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return clientResponseEntityRestCommunicator.delete(url, HttpStatus.NOT_FOUND);
     }
 
     @Override
-    public Client modifier(Client client) {
+    public ResponseEntity<Client> modifier(Client client) {
         String url = urlCustomerApi + "/update";
-        try {
-            restTemplate.put(url, client);
-            return client;
-        } catch (Exception e) {
-            return null;
-        }
+        return clientResponseEntityRestCommunicator.put(url, client, HttpStatus.NOT_FOUND);
     }
 
     @Override
-    public Client getById(Long id) {
+    public ResponseEntity<Client> getById(Long id) {
         String url = urlCustomerApi + "/id=" + id;
-        try {
-            Client client = restTemplate.getForObject(url, Client.class);
-            return client;
-        } catch (Exception e) {
-            return null;
-        }
+        return clientResponseEntityRestCommunicator.get(url, HttpStatus.NOT_FOUND);
     }
 
     @Override
-    public Client doConnecter(String email, String password) {
+    public ResponseEntity<Client> doConnecter(String email, String password) {
         String url = urlCustomerApi + "/email=" + email;
 
         Client client = restTemplate.getForObject(url, Client.class);
         if (client == null) {
-            return null;
+            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
-
         Credentials cred = new Credentials();
         cred.setSalt(client.getSalt());
         cred.setHashedPassword(client.getHashedPassword());
@@ -77,23 +65,45 @@ public class ClientServiceImpl implements ClientService {
 
         if (client != null) {
             try {
+                log.info("email: " + email + " password :" + password);
                 if (Authentification.authentificate(cred, password)) {
-                    return client;
+
+                    return new ResponseEntity<Client>(client, HttpStatus.OK);
                 }
-            } catch ( Exception e) {
-// TODO Auto-generated catch block
-                e.printStackTrace();
+            } catch (AuthentificationException e) {
+                log.error("Echec authentification", e);
             }
         }
-        return null;
+        return new ResponseEntity<Client>(HttpStatus.CONFLICT);
     }
 
     @Override
-    public List<Client> getAll() {
+    public ResponseEntity<List<Client>> getAll() {
         String url = urlCustomerApi + "/all";
-        Client[] clients = restTemplate.getForObject(url, Client[].class);
-        List<Client> allClients = Arrays.asList(clients);
+        return clientResponseEntityRestCommunicator.getList(url, HttpStatus.NOT_FOUND);
+    }
 
-        return allClients;
+    @Override
+    public ResponseEntity<Client> doRegister(Client client, String password) {
+        String url = urlCustomerApi + "/add";
+        Credentials cred = new Credentials();
+
+        try {
+            Authentification.initializeCredentials(cred, password);
+            client.setSalt(cred.getSalt());
+            client.setHashedPassword(cred.getHashedPassword());
+
+        } catch (AuthentificationException e) {
+            // Gérer erreur d'authentification (message erreur, log...)
+            log.error("doRegister failure", e);
+            return null;
+        }
+        return clientResponseEntityRestCommunicator.post(url, client);
+    }
+
+    @Override
+    public ResponseEntity<Client> findByEmail(String email) {
+        String url = urlCustomerApi + "/email=" + email;
+        return clientResponseEntityRestCommunicator.get(url, HttpStatus.NOT_FOUND);
     }
 }

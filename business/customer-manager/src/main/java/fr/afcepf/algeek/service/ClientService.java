@@ -2,23 +2,25 @@ package fr.afcepf.algeek.service;
 
 
 import fr.afcepf.algeek.dto.Client;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ClientService {
 
-	Client ajouter(Client client);
+	ResponseEntity<Client> ajouter(Client client);
 
-	boolean supprimer(Long id);
+	ResponseEntity<Client> supprimer(Long id);
 
-	Client modifier(Client client);
+	ResponseEntity<Client> modifier(Client client);
 
-	Client getById(Long id);
+	ResponseEntity<Client> getById(Long id);
 
-	Client doConnecter(String email, String password);
+	ResponseEntity<Client> doConnecter(String email, String password);
 
-	List<Client> getAll();
+	ResponseEntity<List<Client>> getAll();
 
+	ResponseEntity<Client> doRegister(Client client, String password);
 
-
+	ResponseEntity<Client> findByEmail(String email);
 }

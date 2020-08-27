@@ -63,7 +63,7 @@ public class Authentification {
 	public static boolean authentificate(Credentials cred, String clearPassword) throws AuthentificationException {
 		String verif = generateHash(clearPassword + cred.getSalt());
 		Boolean success = verif.equals(cred.getHashedPassword());
-		log.info(cred.getLogin() + " s'est connÃ©ctÃ© avec succÃ¨s");
+		log.info(cred.getLogin() + " s'est connÃ©ctÃ© avec succes : " + success);
 		if(!success) {
 			throw new AuthentificationException("Failure", null, cred.getLogin());
 		} 
