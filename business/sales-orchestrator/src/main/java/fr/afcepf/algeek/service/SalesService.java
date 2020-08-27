@@ -75,6 +75,6 @@ public class SalesService {
     // "http://ip:port/manager/product/select"
     public ResponseEntity<List<Produit>> getSelectionOfProducts(List<Long> productIdList) {
         String url = productManagerUrl + "/select";
-        return null;
+        return productCommunicator.postForList(url, productIdList);
     }
 }
