@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/libraries/al-geek-dto/al-geek-dto.iml" filepath="$PROJECT_DIR$/libraries/al-geek-dto/al-geek-dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/front/al-geek-front/al-geek-front.iml" filepath="$PROJECT_DIR$/front/al-geek-front/al-geek-front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/al-geek-v2.iml" filepath="$PROJECT_DIR$/.idea/al-geek-v2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/gateway/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/best-sales-orchestrator/best-sales-orchestrator.iml" filepath="$PROJECT_DIR$/business/best-sales-orchestrator/best-sales-orchestrator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dao/customer-api/customer-api.iml" filepath="$PROJECT_DIR$/dao/customer-api/customer-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/customer-manager/customer-manager.iml" filepath="$PROJECT_DIR$/business/customer-manager/customer-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dao/order-api/order-api.iml" filepath="$PROJECT_DIR$/dao/order-api/order-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/order-manager/order-manager.iml" filepath="$PROJECT_DIR$/business/order-manager/order-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dao/product-api/product-api.iml" filepath="$PROJECT_DIR$/dao/product-api/product-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/product-manager/product-manager.iml" filepath="$PROJECT_DIR$/business/product-manager/product-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dao/stock-api/stock-api.iml" filepath="$PROJECT_DIR$/dao/stock-api/stock-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/stock-manager/stock-manager.iml" filepath="$PROJECT_DIR$/business/stock-manager/stock-manager.iml" />
+    </modules>
+  </component>
+</project>
