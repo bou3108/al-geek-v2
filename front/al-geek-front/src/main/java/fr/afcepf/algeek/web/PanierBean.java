@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.dto.Produit;
+import fr.afcepf.algeek.web.panier.LignePanier;
 import fr.afcepf.algeek.web.panier.Panier;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,7 +52,7 @@ public class PanierBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		panier = new Panier();
-		panier.setListLC(new ArrayList<LigneCommande>());
+		panier.setListLignePanier(new ArrayList<LignePanier>());
 	}
 	
 	
@@ -61,14 +62,14 @@ public class PanierBean implements Serializable {
 	
 	public void ajoutPanier(Produit p) {
 		titrePanier = "Votre panier";
-		for (LigneCommande lc : panier.getListLC()) {
-			if(lc.getProduit().getId().equals(p.getId())) {
-				lc.setQuantite(lc.getQuantite() + p.getQuantite());
+		for (LignePanier lc : panier.getListLignePanier()) {
+			if(lc.getProduitId().equals(p.getId())) {
+				lc.incrementeQuantite(p.getQuantite());
 			}
 		}
 		if(!verifierDansPanier(p)) {
-			LigneCommande newlc = new LigneCommande(null, p.getQuantite(), p);
-			panier.getListLC().add(newlc);			
+			LignePanier newlp = new LignePanier(p);
+			panier.getListLignePanier().add(newlp);
 		}
 	}
 	
@@ -109,8 +110,8 @@ public class PanierBean implements Serializable {
 	
 	public boolean verifierDansPanier(Produit p) {
 		boolean b = false;
-		for (LigneCommande lc : panier.getListLC()) {
-			if (lc.getProduit().getId().equals(p.getId())) {
+		for (LignePanier lp : panier.getListLignePanier()) {
+			if (lp.getProduitId().equals(p.getId())) {
 				return true;
 			} 
 		}
@@ -124,14 +125,14 @@ public class PanierBean implements Serializable {
 //		}	
 		
 		try {
-			for (LigneCommande lc : panier.getListLC()) {
-				if (lc.getProduit().equals(p)) {
+			for (LignePanier lp : panier.getListLignePanier()) {
+				if (lp.getProduitId().equals(p.getId())) {
 
-					if (lc.getQuantite() > 1) {
-						lc.setQuantite(lc.getQuantite() - 1);
+					if (lp.getQuantite() > 1) {
+						lp.decrementeQuantite();
 					} else {					
-						this.panier.getListLC().remove(lc);	
-						if (panier.getListLC().size() == 0) {
+						this.panier.getListLignePanier().remove(lp);
+						if (panier.getListLignePanier().size() == 0) {
 							this.titrePanier = "Panier vide";			
 						}
 					}
@@ -150,13 +151,13 @@ public class PanierBean implements Serializable {
 	
 	public void viderPanier() {
 		panier = new Panier();
-		panier.setListLC(new ArrayList<LigneCommande>());
+		panier.setListLignePanier(new ArrayList<LignePanier>());
 	}
 	
 	public int afficherQuantiteProduitsDansPanier() {
 		int qte = 0;
-		for (LigneCommande llcc : panier.getListLC()) {
-			qte += llcc.getQuantite();			
+		for (LignePanier lp : panier.getListLignePanier()) {
+			qte += lp.getQuantite();
 		}
 		return qte;
 	}
@@ -165,11 +166,12 @@ public class PanierBean implements Serializable {
 		Integer qte = afficherQuantiteProduitsDansPanier();
 		return qte.toString();
 	}
-	
+
+	// TODO: Fix sur le DTO de LigneCommande pour retourner le prix de la ligne
 	public double afficherPrixTotal() {
 		double somme = 0;
-		for (LigneCommande llcc : panier.getListLC()) {
-			somme += llcc.getProduit().getPrix() * llcc.getQuantite();			
+		for (LignePanier lp : panier.getListLignePanier()) {
+			somme += lp.getPrixLigne();
 		}
 		return somme;
 	}

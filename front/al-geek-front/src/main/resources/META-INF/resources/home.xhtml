@@ -20,7 +20,7 @@
 		<div class="homeProduitsContainer">
 			
 			<div class="homeProduits">
-				<ui:repeat value="#{homeBean.nouveautes}" var="p">
+				<ui:repeat value="#{homeBean.nouveautes}" var="p" rendered="#{homeBean.nouveautes != null}">
 					<div class="carteProduit">
 						<h:commandLink class="clink"
 							action="#{ficheProduitBean.afficherProduit(p.id)}">
@@ -55,7 +55,7 @@
 		<div class="homeProduitsContainer">
 		
 			<div class="homeProduits">
-				<ui:repeat value="#{homeBean.meilleuresVentes}" var="p">
+				<ui:repeat value="#{homeBean.meilleuresVentes}" var="p" rendered="#{homeBean.meilleuresVentes != null}">
 					<div class="carteProduit">
 						<h:commandLink class="clink"
 							action="#{ficheProduitBean.afficherProduit(p.id)}">

@@ -15,12 +15,20 @@ import lombok.Setter;
 public class Panier {
 
     private Client client;
-    private List<LigneCommande> listLC;
+    private List<LignePanier> listLignePanier;
 
-    public Panier(Client client, List<LigneCommande> listLC) {
+    public Panier(Client client, List<LignePanier> listLignePanier) {
         super();
         this.client = client;
-        this.listLC = new ArrayList<LigneCommande>();
+        this.listLignePanier = new ArrayList<>();
+    }
+
+    public List<LigneCommande> getListLigneCommande() {
+        List<LigneCommande> ligneCommandeList = new ArrayList<>();
+        for (LignePanier lp: listLignePanier) {
+            ligneCommandeList.add(lp.getLigneCommande());
+        }
+        return ligneCommandeList;
     }
 
 }

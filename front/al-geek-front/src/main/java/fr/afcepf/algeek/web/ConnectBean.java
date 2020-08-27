@@ -7,11 +7,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.afcepf.algeek.dto.Client;
+import fr.afcepf.algeek.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.client.RestTemplate;
 
 @Named
 @SessionScoped
@@ -44,11 +46,8 @@ public class ConnectBean implements Serializable {
 	@Getter @Setter
 	private String password;
 
-
-	// TODO: Remplace l'appel à doConnecter de ClientService par un appel REST à customer-manager
-	public Client connect(String email, String password) {
-		return null;
-	}
+	@Autowired
+	ClientService clientService;
 
 	public String doConnecter() {
 		System.out.println("tentative connexion");
@@ -117,18 +116,20 @@ public class ConnectBean implements Serializable {
 	public String goToEspacePerso() {
 		return "/espaceperso.xhtml?faces-redirect=true";
 	}
-	
-	
+
 	public String goToFormulaireInscription() {
 		hideOverlay();
 		return "/formulaireinscription.xhtml?faces-redirect=true";
 		
 	}
-	
-	
+
 	public void boutonDemoConnect() {
 		email = "adupont@gmail.com";
 		//password = "azerty";
 		//return "home.xhtml?faces-redirect=true";
+	}
+
+	public Client connect(String email, String password) {
+		return clientService.connect(email, password);
 	}
 }

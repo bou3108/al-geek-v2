@@ -10,8 +10,10 @@ import javax.inject.Inject;
 
 import fr.afcepf.algeek.dto.Produit;
 
+import fr.afcepf.algeek.service.ProduitService;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @SessionScoped
@@ -49,7 +51,9 @@ public class AchatGuideBean implements Serializable {
 	
 	@Inject
 	private PanierBean panierBean;
-	
+
+	@Autowired
+	private ProduitService produitService;
 	
 	
 	// chargement de tous les ordinateurs (portables / ordi bureau
@@ -200,21 +204,19 @@ public class AchatGuideBean implements Serializable {
 		return null;
 	}
 
-	// TODO : Les méthodes ci-dessous remplacent l'appel à ProduitService par un appel REST au Product-Manager
-
 	List<Produit> trierMoinsCherAuPlusCher(Long typeProduitId) {
-		return null;
+		return produitService.trierMoinsCherAuPlusCher(typeProduitId);
 	}
 
 	List<Produit> filtrerUsageIntensif(List<Produit> listOrdi, String typeOrdi) {
-		return null;
+		return produitService.filtrerUsageIntensif(listOrdi, typeOrdi);
 	}
 
 	List<Produit> filtrerUsageRegulier(List<Produit> listOrdi, String typeOrdi) {
-		return null;
+		return produitService.filtrerUsageRegulier(listOrdi, typeOrdi);
 	}
 
 	List<Produit> filtrerUsageOccasionnel(List<Produit> listOrdi, String typeOrdi) {
-		return null;
+		return produitService.filtrerUsageOccasionnel(listOrdi, typeOrdi);
 	}
 }
