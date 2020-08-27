@@ -52,7 +52,7 @@
 					<h2 style="margin-top:60px !important">Récapitulatif de votre commande</h2>
 					<div>
 						<table cellpadding="20px" align="center" class="tabl">
-							<ui:repeat var="lc" value="#{panierBean.panier.listLC}">
+							<ui:repeat var="lc" value="#{panierBean.panier.listLignePanier}">
 								<tr>
 									<td class="tdNom"><label>#{lc.produit.type.nom} #{lc.produit.nom}</label></td>
 									<td class="tdQuantite"><label>#{lc.quantite} x</label></td>

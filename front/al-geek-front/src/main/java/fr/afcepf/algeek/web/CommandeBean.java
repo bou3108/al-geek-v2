@@ -13,6 +13,7 @@ import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.InfosBancaires;
 import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.service.CommandeService;
+import fr.afcepf.algeek.web.panier.LignePanier;
 import fr.afcepf.algeek.web.panier.Panier;
 
 
@@ -68,7 +69,7 @@ public class CommandeBean implements Serializable {
 		} else {
 			commande = new Commande();
 			commande.setListLigneCommande(new ArrayList<LigneCommande>());
-			commande.setListLigneCommande(panierBean.getPanier().getListLC());
+			commande.setListLigneCommande(panierBean.getPanier().getListLigneCommande());
 			return "macommande.xhtml?faces-redirect=true";
 		}
 	}
@@ -82,15 +83,17 @@ public class CommandeBean implements Serializable {
 		commande.setDateDeLaCommande(new Date());
 		commande.setPrix(panierBean.afficherPrixTotal());
 		commande.setInfosBank(infosBank);
-		ajouterCommande(commande);
-		
-		for (LigneCommande lc : commande.getListLigneCommande()) {
-			lc.setCommande(commande);
-			ajouterLigneDeCommande(lc);
+		Commande commandeAjoutee = ajouterCommande(commande);
+
+		if (commandeAjoutee != null) {
+			for (LigneCommande lc : commande.getListLigneCommande()) {
+				lc.setCommandeId(commandeAjoutee.getId());
+				ajouterLigneDeCommande(lc);
+			}
 		}
 		// reinitialisation du panier
 		panierBean.setPanier(new Panier());
-		panierBean.getPanier().setListLC(new ArrayList<LigneCommande>());
+		panierBean.getPanier().setListLignePanier(new ArrayList<LignePanier>());
 		infosBank = new InfosBancaires();
 		
 		return "commandeeffectuee.xhtml?faces-redirect=true";
@@ -110,8 +113,8 @@ public class CommandeBean implements Serializable {
 		commandeService.ajouterInformationsBancaire(infos);
 	}
 
-	private void ajouterCommande(Commande commande) {
-		commandeService.ajouterCommande(commande);
+	private Commande ajouterCommande(Commande commande) {
+		return commandeService.ajouterCommande(commande);
 	}
 
 	private void ajouterLigneDeCommande(LigneCommande ligneCommande) {
