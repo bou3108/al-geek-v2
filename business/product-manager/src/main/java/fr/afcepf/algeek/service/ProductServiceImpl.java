@@ -44,11 +44,15 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ResponseEntity<Produit> getProduitAvecCaracteristiques(Long id) {
-        Produit produit = rechercherParId(id).getBody();
-        String url = urlProductApi + "/carac/id=" + id;
-        ResponseEntity<List<Caracteristique>> response = caracteristiqueResponseEntityRestCommunicator.getList(url);
-        produit.setCaracteristiques(response.getBody());
-        return new ResponseEntity<>(produit, response.getStatusCode());
+        try {
+            Produit produit = rechercherParId(id).getBody();
+            String url = urlProductApi + "/carac/id=" + id;
+            ResponseEntity<List<Caracteristique>> response = caracteristiqueResponseEntityRestCommunicator.getList(url);
+            produit.setCaracteristiques(response.getBody());
+            return new ResponseEntity<>(produit, response.getStatusCode());
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     /**

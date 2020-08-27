@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,25 @@ public class ProductRestController {
 
     @Autowired
     private ProductService productService;
+
+    @PostMapping(value = "/select")
+    public ResponseEntity<List<Produit>> getSelectedProducts(@RequestBody Long[] productIds) {
+        List<Produit> products = new ArrayList<>();
+        for (Long id : productIds) {
+            if(productService.getProduitAvecCaracteristiques(id).getStatusCode().equals(HttpStatus.OK)) {
+                products.add(productService.getProduitAvecCaracteristiques(id).getBody());
+            }
+        }
+
+        if(products.size() == productIds.length) {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } else if (products.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(products, HttpStatus.EXPECTATION_FAILED);
+        }
+
+    }
 
     @GetMapping(value = "/latest")
     public ResponseEntity<List<Produit>> getNouveautes(){
