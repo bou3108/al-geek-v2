@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.afcepf.algeek</groupId>
-	<artifactId>best-sales-orchestrator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>best-sales-orchestrator</name>
-	<description>dao pour la base de données des clients</description>
+	<artifactId>sales-orchestrator</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>sales-orchestrator</name>
+	<description>Orchestre les échanges entre les managers Produit et Commande</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -28,6 +28,16 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>fr.afcepf.algeek</groupId>
+			<artifactId>al-geek-dto</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.afcepf.algeek</groupId>
+			<artifactId>al-geek-rest</artifactId>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
