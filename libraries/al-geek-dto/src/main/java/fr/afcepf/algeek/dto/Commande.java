@@ -16,7 +16,7 @@ public class Commande implements Serializable {
     private Long id;
     private List<LigneCommande> listLigneCommande;
     private Date dateDeLaCommande;
-    private Client client;
+    private Long clientId;
     private InfosBancaires infosBank;
     private double prix;
 
