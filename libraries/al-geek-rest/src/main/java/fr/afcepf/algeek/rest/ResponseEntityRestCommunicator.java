@@ -110,6 +110,27 @@ public class ResponseEntityRestCommunicator<T> {
     }
 
 
+    public ResponseEntity<List<T>> postForList(String url, List<Long> list) {
+        return postForList(url, list,null);
+    }
+
+    public ResponseEntity<List<T>> postForList(String url, List<Long> list, HttpStatus customStatus) {
+        log.debug("IN postForList : " + url);
+        if (customStatus == null) {
+            customStatus = defaultHttpStatus;
+        }
+
+        try {
+            T[] response = restTemplate.postForObject(url, list.toArray(), typeArrayObject);
+            log.debug("OUT postForList : " + url);
+            return new ResponseEntity<List<T>>(Arrays.asList(response), HttpStatus.OK);
+        } catch (Exception ex) {
+            log.error("FAULT postForList : " + ex.getMessage(), ex);
+        }
+        return new ResponseEntity<List<T>>(customStatus);
+    }
+
+
     public ResponseEntity<T> put(String url, T t) {
         return put(url, t,null);
     }
