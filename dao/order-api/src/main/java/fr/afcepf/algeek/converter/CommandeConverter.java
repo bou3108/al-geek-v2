@@ -24,7 +24,7 @@ public class CommandeConverter {
         List<LigneCommande> ligneCommandes = new ArrayList<>();
         for (LigneCommandeEntity ligneCommandeEntity : commandeEntity.getListLigneCommande()) {
             Converter converter = new Converter();
-            ligneCommandes.add(converter.ligneCommandeConverter.convertToDTO(ligneCommandeEntity, commande));
+            ligneCommandes.add(converter.ligneCommandeConverter.convertToDTO(ligneCommandeEntity));
         }
         commande.setListLigneCommande(ligneCommandes);
 

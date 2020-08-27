@@ -3,6 +3,7 @@ package fr.afcepf.algeek.converter;
 import fr.afcepf.algeek.dao.CommandeDao;
 import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.LigneCommande;
+import fr.afcepf.algeek.entity.CommandeEntity;
 import fr.afcepf.algeek.entity.LigneCommandeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,12 +12,12 @@ public class LigneCommandeConverter {
     @Autowired
     private CommandeDao commandeDao;
 
-    public LigneCommande convertToDTO(LigneCommandeEntity ligneCommandeEntity, Commande commande) {
+    public LigneCommande convertToDTO(LigneCommandeEntity ligneCommandeEntity) {
         LigneCommande ligneCommande = new LigneCommande(
                 ligneCommandeEntity.getId(),
                 ligneCommandeEntity.getQuantite(),
                 ligneCommandeEntity.getRefProduit());
-        ligneCommande.setCommandeId(commande.getId());
+        ligneCommande.setCommandeId(ligneCommandeEntity.getCommande().getId());
 
         return ligneCommande;
     }
@@ -27,7 +28,8 @@ public class LigneCommandeConverter {
                 ligneCommande.getQuantite(),
                 ligneCommande.getProduitId());
 
-        ligneCommandeEntity.setCommande(commandeDao.findById(ligneCommande.getCommandeId()).get());
+        CommandeEntity commandeEntity = commandeDao.findById(ligneCommande.getCommandeId()).get();
+        ligneCommandeEntity.setCommande(commandeEntity);
         return ligneCommandeEntity;
     }
 
