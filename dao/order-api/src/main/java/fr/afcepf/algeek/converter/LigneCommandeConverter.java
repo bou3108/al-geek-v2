@@ -4,10 +4,12 @@ import fr.afcepf.algeek.dao.CommandeDao;
 import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.entity.LigneCommandeEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class LigneCommandeConverter {
 
-    CommandeDao commandeDao;
+    @Autowired
+    private CommandeDao commandeDao;
 
     public LigneCommande convertToDTO(LigneCommandeEntity ligneCommandeEntity, Commande commande) {
         LigneCommande ligneCommande = new LigneCommande(
