@@ -1,13 +1,20 @@
 package fr.afcepf.algeek.web;
 
+import fr.afcepf.algeek.dto.Client;
 import fr.afcepf.algeek.dto.Produit;
+import fr.afcepf.algeek.service.LocaleService;
+import fr.afcepf.algeek.service.ProduitService;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 
+@Slf4j
 @ManagedBean
 @SessionScoped
 public class FicheProduitBean implements Serializable {
@@ -23,7 +30,12 @@ public class FicheProduitBean implements Serializable {
 	@Getter @Setter
 	private int quantite;
 
-	
+	@Autowired
+	private LocaleService localeService;
+
+	@Autowired
+	private ProduitService produitService;
+
 	public String afficherProduit(Long idProduit) {
 		produit = getProduitAvecCaracteristiques(idProduit);
 		return "ficheproduit.xhtml?faces-redirect=true";
@@ -33,15 +45,12 @@ public class FicheProduitBean implements Serializable {
 		return getLocaleString(cle);
 	}
 
-
-	// TODO: Remplace l'appel à getProduitAvecCaracteristiques de ProduitService par un appel REST à product-manager
 	public Produit getProduitAvecCaracteristiques(Long productId) {
-		return null;
+		return produitService.getProduitAvecCaracteristiques(productId);
 	}
 
-	// TODO: Remplace l'appel à getLocaleString de LocaleService par un appel REST à ???
 	public String getLocaleString(String cle) {
-		return null;
+		return localeService.getLocaleString(cle);
 	}
 
 }

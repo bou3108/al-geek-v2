@@ -23,13 +23,13 @@
 							<tr>
 								<th class="titreCol"></th>
 								<th class="titreCol">
-								<h:outputLabel rendered="#{panierBean.panier.listLC.size() > 0}">Produit</h:outputLabel></th>
+								<h:outputLabel rendered="#{panierBean.panier.listLignePanier.size() > 0}">Produit</h:outputLabel></th>
 								<th class="titreCol"><h:outputLabel
-										rendered="#{panierBean.panier.listLC.size() > 0}">Quantité</h:outputLabel></th>
+										rendered="#{panierBean.panier.listLignePanier.size() > 0}">Quantité</h:outputLabel></th>
 								<th class="titreCol"><h:outputLabel
-										rendered="#{panierBean.panier.listLC.size() > 0}">Prix</h:outputLabel></th>
+										rendered="#{panierBean.panier.listLignePanier.size() > 0}">Prix</h:outputLabel></th>
 							</tr>
-							<ui:repeat var="lc" value="#{panierBean.panier.listLC}">
+							<ui:repeat var="lc" value="#{panierBean.panier.listLignePanier}">
 								<tr>
 									<td class="tdPhoto"><h:graphicImage class="photo"
 											value="IMG/#{lc.produit.photo}" /></td>
@@ -60,7 +60,7 @@
 							</label>
 
 							<h:form id="form2" styleClass="panelGrid"
-								rendered="#{panierBean.panier.listLC.size() > 0}">
+								rendered="#{panierBean.panier.listLignePanier.size() > 0}">
 
 								<div>
 									<label class="somme">Total :</label>
@@ -81,7 +81,7 @@
 
 							<b:commandButton class="btn-warning" action="#{commandeBean.effectuerCommande()}"
 								value="Finaliser ma commande" look="warning" size="lg"
-								rendered="#{panierBean.panier.listLC.size() > 0}" />
+								rendered="#{panierBean.panier.listLignePanier.size() > 0}" />
 						</div>
 					</div>
 
