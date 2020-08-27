@@ -1,7 +1,5 @@
 package fr.afcepf.algeek.service;
 
-import fr.afcepf.algeek.dto.Commande;
-import fr.afcepf.algeek.dto.InfosBancaires;
 import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import org.springframework.http.ResponseEntity;
@@ -15,40 +13,46 @@ public class OrderLineServiceImpl implements OrderLineService {
     private ResponseEntityRestCommunicator<LigneCommande> lineCommunicator =
             new ResponseEntityRestCommunicator<>(LigneCommande.class, LigneCommande[].class);
 
-    private String urlProductAPI = "http://localhost:8080/db/order";
+    private String urlProductAPI = "http://localhost:8080/db/order/orderLine";
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<LigneCommande> getOrderLineById(Long id) {
-        return null;
+        String url = urlProductAPI + "/id=" + id;
+        return lineCommunicator.get(url);
     }
 
-    // TO DO
+    // A TESTER
     @Override
-    public ResponseEntity<LigneCommande> deletOrderLineById(Long id) {
-        return null;
+    public ResponseEntity<LigneCommande> deleteOrderLineById(Long id) {
+        String url = urlProductAPI + "/id=" + id;
+        return lineCommunicator.delete(url);
     }
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<LigneCommande> addOrderLine(LigneCommande line) {
-        return null;
+        String url = urlProductAPI;
+        return lineCommunicator.post(url, line);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<LigneCommande> updateOrderLine(LigneCommande line) {
-        return null;
+        String url = urlProductAPI + "/update";
+        return lineCommunicator.put(url, line);
     }
 
-    // TO DO
+    // A TESTER
     @Override
-    public ResponseEntity<List<LigneCommande>> getAllOrderLinesByOrder(Commande order) {
-        return null;
+    public ResponseEntity<List<LigneCommande>> getAllOrderLinesByOrderId(Long id) {
+        String url = urlProductAPI + "/commande";
+        return lineCommunicator.getList(url);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<List<LigneCommande>> getAllOrderLines() {
-        return null;
+        String url = urlProductAPI + "/all";
+        return lineCommunicator.getList(url);
     }
 }

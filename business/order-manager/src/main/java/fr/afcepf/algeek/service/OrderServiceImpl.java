@@ -1,8 +1,6 @@
 package fr.afcepf.algeek.service;
 
 import fr.afcepf.algeek.dto.Commande;
-import fr.afcepf.algeek.dto.InfosBancaires;
-import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,39 +16,45 @@ public class OrderServiceImpl implements OrderService {
     private String urlProductAPI = "http://localhost:8080/db/order";
 
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<List<Commande>> getOrdersByClient(Long idClient) {
-        return null;
+        String url = urlProductAPI + "/all/id=" + idClient;
+        return orderCommunicator.getList(url);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<List<Commande>> getAllOrders() {
-        return null;
+        String url = urlProductAPI + "/all";
+        return orderCommunicator.getList(url);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<Commande> getOrderById(Long id) {
-        return null;
+        String url  = urlProductAPI + "/id=" + id;
+        return orderCommunicator.get(url);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<Commande> deleteOrderById(Long id) {
-        return null;
+        String url = urlProductAPI + "/id=" + id;
+        return orderCommunicator.get(url);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<Commande> addOrder(Commande order) {
-        return null;
+        String url = urlProductAPI + "/add";
+        return orderCommunicator.post(url, order);
     }
 
-    // TO DO
+    // A TESTER
     @Override
     public ResponseEntity<Commande> updateOrder(Commande order) {
-        return null;
+        String url = urlProductAPI + "/update";
+        return orderCommunicator.put(url, order);
     }
 }
