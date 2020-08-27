@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
 import fr.afcepf.algeek.dto.Categorie;
+import fr.afcepf.algeek.service.ProduitService;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -22,6 +23,9 @@ public class MenuCategoriesBean implements Serializable {
 	private static final long serialVersionUID = 3325278823042584862L;
 
 	private MenuModel model;
+
+	@Autowired
+	ProduitService produitService;
 
 	@PostConstruct
 	public void init() {
@@ -39,9 +43,8 @@ public class MenuCategoriesBean implements Serializable {
 		model.getElements().add(achatGuideItem);
 	}
 
-	// TODO: Remplace l'appel à getRootCategorie de CategorieService par un appel REST à product-manager
 	private Categorie getRootCategorie() {
-		return null;
+		return produitService.getRootCategorie();
 	}
 
 	private MenuElement construireRecursif(Categorie categorie) {

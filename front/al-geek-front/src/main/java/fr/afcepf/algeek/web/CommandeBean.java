@@ -12,11 +12,14 @@ import javax.inject.Inject;
 import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.InfosBancaires;
 import fr.afcepf.algeek.dto.LigneCommande;
+import fr.afcepf.algeek.service.CommandeService;
+import fr.afcepf.algeek.web.panier.LignePanier;
 import fr.afcepf.algeek.web.panier.Panier;
 
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @SessionScoped
@@ -40,6 +43,9 @@ public class CommandeBean implements Serializable {
 	// test
 	@Getter @Setter
 	private String login;
+
+	@Autowired
+	CommandeService commandeService;
 	
 	
 	@PostConstruct
@@ -63,7 +69,7 @@ public class CommandeBean implements Serializable {
 		} else {
 			commande = new Commande();
 			commande.setListLigneCommande(new ArrayList<LigneCommande>());
-			commande.setListLigneCommande(panierBean.getPanier().getListLC());
+			commande.setListLigneCommande(panierBean.getPanier().getListLigneCommande());
 			return "macommande.xhtml?faces-redirect=true";
 		}
 	}
@@ -73,19 +79,21 @@ public class CommandeBean implements Serializable {
 		// persistance des coord.bancaires ( !!! pas bien ...)
 		ajouterInformationsBancaire(infosBank);
 		
-		commande.setClient(connectBean.getClient());
+		commande.setClientId(connectBean.getClient().getId());
 		commande.setDateDeLaCommande(new Date());
 		commande.setPrix(panierBean.afficherPrixTotal());
 		commande.setInfosBank(infosBank);
-		ajouterCommande(commande);
-		
-		for (LigneCommande lc : commande.getListLigneCommande()) {
-			lc.setCommande(commande);
-			ajouterLigneDeCommande(lc);
+		Commande commandeAjoutee = ajouterCommande(commande);
+
+		if (commandeAjoutee != null) {
+			for (LigneCommande lc : commande.getListLigneCommande()) {
+				lc.setCommandeId(commandeAjoutee.getId());
+				ajouterLigneDeCommande(lc);
+			}
 		}
 		// reinitialisation du panier
 		panierBean.setPanier(new Panier());
-		panierBean.getPanier().setListLC(new ArrayList<LigneCommande>());
+		panierBean.getPanier().setListLignePanier(new ArrayList<LignePanier>());
 		infosBank = new InfosBancaires();
 		
 		return "commandeeffectuee.xhtml?faces-redirect=true";
@@ -101,14 +109,15 @@ public class CommandeBean implements Serializable {
 		
 	}
 
-	// TODO: Remplace les appels à méthode des Services par un appel REST à order-manager
 	private void ajouterInformationsBancaire(InfosBancaires infos) {
+		commandeService.ajouterInformationsBancaire(infos);
 	}
 
-	private void ajouterCommande(Commande commande) {
+	private Commande ajouterCommande(Commande commande) {
+		return commandeService.ajouterCommande(commande);
 	}
 
 	private void ajouterLigneDeCommande(LigneCommande ligneCommande) {
-
+		commandeService.ajouterLigneDeCommande(ligneCommande);
 	}
 }

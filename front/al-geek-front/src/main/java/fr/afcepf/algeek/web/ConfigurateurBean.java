@@ -2,10 +2,12 @@ package fr.afcepf.algeek.web;
 
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
+import fr.afcepf.algeek.service.ProduitService;
 import fr.afcepf.algeek.web.configurateur.ChoixComposant;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -36,6 +38,9 @@ public class ConfigurateurBean implements Serializable {
 
 	@Inject
 	private PanierBean panierBean;
+
+	@Autowired
+	ProduitService produitService;
 	
 	@PostConstruct
 	public void init() {
@@ -220,25 +225,20 @@ public class ConfigurateurBean implements Serializable {
 		return null;
 	}
 
-
-	// TODO: Remplace l'appel à getProduitAvecCaracteristiques de ProduitService par un appel REST à product-manager
     private Produit getProduitAvecCaracteristiques(Long id) {
-        return null;
+        return produitService.getProduitAvecCaracteristiques(id);
     }
 
-    // TODO: Remplace l'appel à getProduitsParType de ProduitService par un appel REST à product-manager
     private List<Produit> getProduitsParType(Long id, boolean chargerCaracteristiques) {
-	    return null;
+	    return produitService.getProduitsParType(id, chargerCaracteristiques);
     }
 
-    // TODO: Remplace l'appel à estCompatibleAvec de ConfigurateurService par un appel REST à product-manager
     private boolean estCompatibleAvec(Produit premier, Produit second) {
-	    return false;
+	    return produitService.estCompatibleAvec(premier, second);
     }
 
-    // TODO: Remplace l'appel à estCompatibleAvec de ConfigurateurService par un appel REST à product-manager
     private List<TypeProduit> getTypesComposants() {
-	    return null;
+		return produitService.getTypesComposants();
     }
 
 

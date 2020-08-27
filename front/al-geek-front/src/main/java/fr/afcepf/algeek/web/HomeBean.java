@@ -1,16 +1,24 @@
 package fr.afcepf.algeek.web;
 
 import fr.afcepf.algeek.dto.Produit;
+import fr.afcepf.algeek.service.ProduitService;
+import fr.afcepf.algeek.service.VenteService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @ManagedBean
 @ViewScoped
 @Getter @Setter @NoArgsConstructor
@@ -22,19 +30,23 @@ public class HomeBean implements Serializable {
 	
 	private List<Produit> nouveautes;
 
+	@Autowired
+	ProduitService produitService;
+
+	@Autowired
+	VenteService venteService;
+
 	@PostConstruct
 	public void init() {
 		meilleuresVentes = getMeilleuresVentes(10);
 		nouveautes = getNouveautes();
 	}
 
-	// TODO: Remplace l'appel à CatalogueService par un appel à best-sales-orchestrator
 	private List<Produit> getMeilleuresVentes(int size) {
-		return null;
+		return venteService.getMeilleuresVentes(size);
 	}
 
-	// TODO: Remplace l'appel à CatalogueService par un appel à product-manager
 	private List<Produit> getNouveautes() {
-		return null;
+		return  produitService.getNouveautes();
 	}
 }

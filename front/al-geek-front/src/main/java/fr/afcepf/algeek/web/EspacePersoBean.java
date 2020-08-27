@@ -1,6 +1,8 @@
 package fr.afcepf.algeek.web;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
@@ -9,17 +11,21 @@ import javax.faces.view.ViewScoped;
 
 import fr.afcepf.algeek.dto.Client;
 import fr.afcepf.algeek.dto.Commande;
+import fr.afcepf.algeek.service.ClientService;
+import lombok.extern.slf4j.Slf4j;
+import net.bootsfaces.render.A;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @ManagedBean
 @ViewScoped
 public class EspacePersoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	@Getter @Setter
 	private List<Commande> historique;
@@ -29,8 +35,10 @@ public class EspacePersoBean implements Serializable {
 
 	@Autowired
 	ConnectBean connectBean;
-	
-	
+
+	@Autowired
+	ClientService clientService;
+
 	@PostConstruct
 	public void init(){
 		historique = getCommandesPourClient(connectBean.getClient().getId());
@@ -45,13 +53,11 @@ public class EspacePersoBean implements Serializable {
 		msgModif = "Modifications enregistrées";
 	}
 
-
-	// TODO: Remplace l'appel à getCommandesPourClient de CommandeService par un appel REST à customer-manager
 	private List<Commande> getCommandesPourClient(Long clientId) {
-		return null;
+		return clientService.getCommandesPourClient(clientId);
 	}
 
-	// TODO: Remplace l'appel à modifier de ClientService par un appel REST à customer-manager
-	private void modifierClient(Client clientId) {
+	private void modifierClient(Client client) {
+		clientService.modifierClient(client);
 	}
 }
