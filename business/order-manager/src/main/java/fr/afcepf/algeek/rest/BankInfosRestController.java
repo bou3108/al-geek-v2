@@ -14,28 +14,26 @@ public class BankInfosRestController {
     @Autowired
     private BankInfosService bankInfosService;
 
-
-    // A TESTER
     @GetMapping(value = "/id={id}")
     public ResponseEntity<InfosBancaires> getBankInfosById(@PathVariable Long id) {
         return bankInfosService.getBankInfosById(id);
     }
 
-    // A TESTER
+    // OK
     @PostMapping(value = "/add")
     public ResponseEntity<InfosBancaires> addBankInfos (@RequestBody InfosBancaires infos) {
         return bankInfosService.addBankInfos(infos);
     }
 
-    // A TESTER
+    // OK
     @PutMapping(value = "/update")
     public ResponseEntity<InfosBancaires> updateBankInfos (@RequestBody InfosBancaires infos) {
         return bankInfosService.updateBankInfos(infos);
     }
 
-    // A TESTER
-    @DeleteMapping(value = "/id={id}")
-    public ResponseEntity<InfosBancaires> deleteBankInfos (@PathVariable Long id) {
-        return bankInfosService.deleteBankInfos(id);
-    }
+    //
+    // @DeleteMapping(value = "/id={id}")
+    // public ResponseEntity<InfosBancaires> deleteBankInfos (@PathVariable Long id) {
+    //     return bankInfosService.deleteBankInfos(id);
+    // }
 }
