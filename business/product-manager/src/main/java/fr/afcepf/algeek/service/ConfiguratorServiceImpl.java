@@ -24,7 +24,7 @@ public class ConfiguratorServiceImpl implements ConfiguratorService {
 
 //    @Value("${algeek.db.product.address}")
 //    private String urlProductApi;
-//    private String urlProductApi = "http://localhost:8080/db/product/configure";
+//    private String urlProductApi = "http://localhost:8080/db/product";
     private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product";
 
     /**
