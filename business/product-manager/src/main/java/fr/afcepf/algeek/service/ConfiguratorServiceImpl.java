@@ -19,13 +19,13 @@ import java.util.List;
 @Service
 public class ConfiguratorServiceImpl implements ConfiguratorService {
 
-    private ResponseEntityRestCommunicator responseEntityRestCommunicator =
+    private ResponseEntityRestCommunicator<TypeProduit> responseEntityRestCommunicator =
             new ResponseEntityRestCommunicator(TypeProduit.class, TypeProduit[].class);
 
-    @Value("${algeek.db.product.address}")
-    private String urlProductApi;
+//    @Value("${algeek.db.product.address}")
+//    private String urlProductApi;
 //    private String urlProductApi = "http://localhost:8080/db/product/configure";
-//    private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product/configure";
+    private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product";
 
     /**
      * Cette méthode retourne une liste d'un certain nombre de composants, en fonction du nom (String) qu'ils contiennent
@@ -37,7 +37,7 @@ public class ConfiguratorServiceImpl implements ConfiguratorService {
     public ResponseEntity<List<TypeProduit>> getTypesComposants() {
         List<TypeProduit> typeProduits = new ArrayList<>();
         List<String> typeProduitsByName = new ArrayList<>();
-        String urlGetTypeProduit = urlProductApi + "/typeProduit=";
+        String urlGetTypeProduit = urlProductApi + "/configure/typeProduit=";
 
         typeProduitsByName.add("Processeur");
         typeProduitsByName.add("Ventirad");
@@ -50,9 +50,9 @@ public class ConfiguratorServiceImpl implements ConfiguratorService {
         typeProduitsByName.add("Carte réseau");
 
         for (String name : typeProduitsByName) {
-            TypeProduit typeProduit = (TypeProduit) responseEntityRestCommunicator.get(urlGetTypeProduit + name).getBody();
+            ResponseEntity<TypeProduit> response = responseEntityRestCommunicator.get(urlGetTypeProduit + name);
+            TypeProduit typeProduit = response.getBody();
             typeProduits.add(typeProduit);
-//            addTypeProduitToList(typeProduits, responseEntityRestCommunicator.get(urlGetTypeProduit + name, HttpStatus.BAD_REQUEST));
         }
 
         if (!typeProduits.isEmpty()) {
