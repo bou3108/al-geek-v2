@@ -15,37 +15,37 @@ public class OrderLineServiceImpl implements OrderLineService {
 
     private String urlProductAPI = "http://localhost:8080/db/order/orderLine";
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<LigneCommande> getOrderLineById(Long id) {
         String url = urlProductAPI + "/id=" + id;
         return lineCommunicator.get(url);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<LigneCommande> deleteOrderLineById(Long id) {
         String url = urlProductAPI + "/id=" + id;
         return lineCommunicator.delete(url);
     }
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<LigneCommande> addOrderLine(LigneCommande line) {
-        String url = urlProductAPI;
+        String url = urlProductAPI + "/add";
         return lineCommunicator.post(url, line);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<LigneCommande> updateOrderLine(LigneCommande line) {
         String url = urlProductAPI + "/update";
         return lineCommunicator.put(url, line);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<List<LigneCommande>> getAllOrderLinesByOrderId(Long id) {
-        String url = urlProductAPI + "/order";
+        String url = urlProductAPI + "/order/id=" + id;
         return lineCommunicator.getList(url);
     }
 

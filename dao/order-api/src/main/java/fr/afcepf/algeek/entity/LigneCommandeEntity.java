@@ -85,6 +85,6 @@ public class LigneCommandeEntity implements Serializable {
     }
 
     public void setCommande(CommandeEntity commandeEntity) {
-        this.commande = commande;
+        this.commande = commandeEntity;
     }
 }

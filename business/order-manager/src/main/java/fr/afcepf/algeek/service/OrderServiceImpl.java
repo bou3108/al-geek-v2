@@ -13,7 +13,7 @@ public class OrderServiceImpl implements OrderService {
     private ResponseEntityRestCommunicator<Commande> orderCommunicator =
             new ResponseEntityRestCommunicator<>(Commande.class, Commande[].class);
 
-    private String urlProductAPI = "http://localhost:8080/db/order";
+    private String urlProductAPI = "http://localhost:8080/db/order/order";
 
 
     // A TESTER
@@ -23,35 +23,35 @@ public class OrderServiceImpl implements OrderService {
         return orderCommunicator.getList(url);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<List<Commande>> getAllOrders() {
         String url = urlProductAPI + "/all";
         return orderCommunicator.getList(url);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<Commande> getOrderById(Long id) {
         String url  = urlProductAPI + "/id=" + id;
         return orderCommunicator.get(url);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<Commande> deleteOrderById(Long id) {
         String url = urlProductAPI + "/id=" + id;
-        return orderCommunicator.get(url);
+        return orderCommunicator.delete(url);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<Commande> addOrder(Commande order) {
         String url = urlProductAPI + "/add";
         return orderCommunicator.post(url, order);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<Commande> updateOrder(Commande order) {
         String url = urlProductAPI + "/update";

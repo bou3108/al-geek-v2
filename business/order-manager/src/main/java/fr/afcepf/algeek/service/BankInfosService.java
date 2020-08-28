@@ -12,6 +12,6 @@ public interface BankInfosService {
 
     ResponseEntity<InfosBancaires> updateBankInfos(InfosBancaires infos);
 
-    ResponseEntity<InfosBancaires> deleteBankInfos(Long id);
+    // ResponseEntity<InfosBancaires> deleteBankInfos(Long id);
 
 }

@@ -38,7 +38,7 @@ public class CommandeRestController {
     public ResponseEntity<Commande> add(@RequestBody Commande commande) {
         Commande returnedCommande;
         if (commande.getId() == null) {
-            CommandeEntity addedEntity = commandeDao.save(converter.commandeConverter.convertToEntity(commande));
+            CommandeEntity addedEntity = commandeDao.save(converter.commandeConverter.convertToEntity(commande, commandeDao));
             returnedCommande = converter.commandeConverter.convertToDTO(addedEntity);
             return new ResponseEntity<>(returnedCommande, HttpStatus.OK);
         } else {
@@ -56,10 +56,10 @@ public class CommandeRestController {
                     ligneCommandeDao.delete(ligneCommandeEntity);
                 }
                 CommandeEntity deletedCommandeEntity = commandeDaoDegueu.findById(id).get();
-                infosBancairesDao.delete(deletedCommandeEntity.getInfosBank());
-
                 deletedCommande = converter.commandeConverter.convertToDTO(deletedCommandeEntity);
+
                 commandeDao.delete(commandeDao.findById(id).get());
+                infosBancairesDao.delete(deletedCommandeEntity.getInfosBank());
 
                 return new ResponseEntity<>(deletedCommande, HttpStatus.OK);
             } catch (Exception e) {
@@ -73,7 +73,7 @@ public class CommandeRestController {
 
     @PutMapping(value = "/update")
     public ResponseEntity<Commande> update(@RequestBody Commande commande) {
-        CommandeEntity commandeEntity = converter.commandeConverter.convertToEntity(commande);
+        CommandeEntity commandeEntity = converter.commandeConverter.convertToEntity(commande, commandeDao);
         try {
             commandeEntity = commandeDao.save(commandeEntity);
             return new ResponseEntity<>(converter.commandeConverter.convertToDTO(commandeEntity), HttpStatus.OK);

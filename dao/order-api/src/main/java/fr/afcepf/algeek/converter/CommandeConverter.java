@@ -1,5 +1,6 @@
 package fr.afcepf.algeek.converter;
 
+import fr.afcepf.algeek.dao.CommandeDao;
 import fr.afcepf.algeek.dto.Commande;
 import fr.afcepf.algeek.dto.LigneCommande;
 import fr.afcepf.algeek.entity.CommandeEntity;
@@ -16,14 +17,16 @@ public class CommandeConverter {
         commande.setId(commandeEntity.getId());
         commande.setClientId(commandeEntity.getRefClient());
         commande.setDateDeLaCommande(commandeEntity.getDateDeLaCommande());
+        commande.setPrix(commandeEntity.getPrix());
+
+        Converter converter = new Converter();
 
         commande.setInfosBank(
-                new Converter().infosBancairesConverter.convertToDTO(
+                converter.infosBancairesConverter.convertToDTO(
                         commandeEntity.getInfosBank()));
 
         List<LigneCommande> ligneCommandes = new ArrayList<>();
         for (LigneCommandeEntity ligneCommandeEntity : commandeEntity.getListLigneCommande()) {
-            Converter converter = new Converter();
             ligneCommandes.add(converter.ligneCommandeConverter.convertToDTO(ligneCommandeEntity));
         }
         commande.setListLigneCommande(ligneCommandes);
@@ -31,20 +34,23 @@ public class CommandeConverter {
         return commande;
     }
 
-    public CommandeEntity convertToEntity(Commande commande) {
+    public CommandeEntity convertToEntity(Commande commande, CommandeDao commandeDao) {
         CommandeEntity commandeEntity = new CommandeEntity();
 
         commandeEntity.setId(commande.getId());
         commandeEntity.setRefClient(commande.getClientId());
         commandeEntity.setDateDeLaCommande(commande.getDateDeLaCommande());
+        commandeEntity.setPrix(commande.getPrix());
 
+        Converter converter = new Converter();
         commandeEntity.setInfosBank(
-                new Converter().infosBancairesConverter.convertToEntity(
+                converter.infosBancairesConverter.convertToEntity(
                         commande.getInfosBank()));
 
+        commandeEntity.setListLigneCommande(new ArrayList<>());
         for (LigneCommande ligneCommande : commande.getListLigneCommande()) {
             commandeEntity.getListLigneCommande().add(
-                    new Converter().ligneCommandeConverter.convertToEntity(ligneCommande)
+                    converter.ligneCommandeConverter.convertToEntity(ligneCommande, commandeDao)
             );
         }
 

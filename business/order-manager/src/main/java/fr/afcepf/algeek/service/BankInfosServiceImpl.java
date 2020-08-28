@@ -15,21 +15,21 @@ public class BankInfosServiceImpl implements BankInfosService {
 
 
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<InfosBancaires> getBankInfosById(Long id) {
         String url = urlProductAPI + "/id=" + id;
         return bankInfosCommunicator.get(url);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<InfosBancaires> addBankInfos(InfosBancaires infos) {
         String url = urlProductAPI + "/add";
         return bankInfosCommunicator.post(url, infos);
     }
 
-    // A TESTER
+    // OK
     @Override
     public ResponseEntity<InfosBancaires> updateBankInfos(InfosBancaires infos) {
         String url = urlProductAPI + "/update";
@@ -37,9 +37,9 @@ public class BankInfosServiceImpl implements BankInfosService {
     }
 
     // A TESTER
-    @Override
-    public ResponseEntity<InfosBancaires> deleteBankInfos(Long id) {
-        String url = urlProductAPI + "/id=" + id;
-        return bankInfosCommunicator.delete(url);
-    }
+    // @Override
+    // public ResponseEntity<InfosBancaires> deleteBankInfos(Long id) {
+    //     String url = urlProductAPI + "/id=" + id;
+    //     return bankInfosCommunicator.delete(url);
+    // }
 }
