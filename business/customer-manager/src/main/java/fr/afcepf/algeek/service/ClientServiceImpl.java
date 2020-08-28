@@ -6,6 +6,7 @@ import fr.afcepf.algeek.service.authentification.Authentification;
 import fr.afcepf.algeek.service.authentification.Credentials;
 import fr.afcepf.algeek.service.authentification.exception.AuthentificationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,9 @@ public class ClientServiceImpl implements ClientService {
     private ResponseEntityRestCommunicator<Client> clientResponseEntityRestCommunicator
             = new ResponseEntityRestCommunicator<>(Client.class, Client[].class);
 
-    private String urlCustomerApi = "http://localhost:8080/db/customer";
-
+    @Value("${algeek.db.customer.address}")
+    private String urlCustomerApi;
+//    private String urlCustomerApi = "http://localhost:8080/db/customer";
 
     @Override
     public ResponseEntity<Client> ajouter(Client client) {
