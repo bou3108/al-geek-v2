@@ -29,7 +29,7 @@ public class CustomerRestController {
 
     // http://ip:port/gateway/customer/id={id}"
     @GetMapping("/id={id}")
-    public ResponseEntity<Client> getCustomer(@RequestParam(value = "id", required = false) Long id) {
+    public ResponseEntity<Client> getCustomer(@PathVariable Long id) {
         String url = customerManagerUrl + "/id=" + id;
         return communicator.get(url);
     }
@@ -50,14 +50,14 @@ public class CustomerRestController {
 
     // "http://ip:port/gateway/customer/id={id}"
     @DeleteMapping("/id={id}")
-    public ResponseEntity<Client> deleteCustomer(@RequestBody Client customer) {
-        String url = customerManagerUrl + "/id=" + customer.getId();
+    public ResponseEntity<Client> deleteCustomer(@PathVariable Long id) {
+        String url = customerManagerUrl + "/id=" + id;
         return communicator.delete(url);
     }
 
     // "http://ip:port/gateway/customer/authentication/email=dev@dev.dev?password=xxxxxxxx"
     @GetMapping("/authentication/email={email}&password={password}")
-    public ResponseEntity<Client> connect(@RequestParam(value = "email", required = false) String email, @RequestParam(value = "password", required = false) String password) {
+    public ResponseEntity<Client> connect(@PathVariable String email, @PathVariable String password) {
         String url = customerManagerUrl + "/authentication/email=" + email + "&password=" + password;
         return communicator.get(url);
     }

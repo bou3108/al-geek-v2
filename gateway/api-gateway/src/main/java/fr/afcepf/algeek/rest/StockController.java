@@ -23,7 +23,7 @@ public class StockController {
 
 
     // "http://ip:port/al-geek-gateway/stock/"
-    @GetMapping("")
+    @GetMapping("/all")
     public ResponseEntity<List<Object>> getAllStockEntries() {
         String url = stockManagerUrl + "/all";
         return communicator.getList(stockManagerUrl + "all");
