@@ -37,7 +37,7 @@ public class ConfiguratorServiceImpl implements ConfiguratorService {
     public ResponseEntity<List<TypeProduit>> getTypesComposants() {
         List<TypeProduit> typeProduits = new ArrayList<>();
         List<String> typeProduitsByName = new ArrayList<>();
-        String urlGetTypeProduit = urlProductApi + "/typeProduit=";
+        String urlGetTypeProduit = urlProductApi + "/configure/typeProduit=";
 
         typeProduitsByName.add("Processeur");
         typeProduitsByName.add("Ventirad");
@@ -52,7 +52,6 @@ public class ConfiguratorServiceImpl implements ConfiguratorService {
         for (String name : typeProduitsByName) {
             TypeProduit typeProduit = (TypeProduit) responseEntityRestCommunicator.get(urlGetTypeProduit + name).getBody();
             typeProduits.add(typeProduit);
-//            addTypeProduitToList(typeProduits, responseEntityRestCommunicator.get(urlGetTypeProduit + name, HttpStatus.BAD_REQUEST));
         }
 
         if (!typeProduits.isEmpty()) {
