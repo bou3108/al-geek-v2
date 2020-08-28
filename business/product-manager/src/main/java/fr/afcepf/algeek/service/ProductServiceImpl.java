@@ -5,6 +5,7 @@ import fr.afcepf.algeek.dto.Categorie;
 import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -32,8 +33,10 @@ public class ProductServiceImpl implements ProductService {
             new ResponseEntityRestCommunicator<>(Categorie.class, Categorie[].class);
 
 
+    @Value("${algeek.db.product.address}")
+    private String urlProductApi;
 //    private String urlProductApi = "http://localhost:8080/db/product";
-    private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product";
+//    private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product";
 
 
     /**

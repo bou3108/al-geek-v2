@@ -24,7 +24,7 @@ public class FilterRestController {
      *
      * @return
      */
-    @GetMapping(value = "/use/casual/kind={computerKind}")
+    @PostMapping(value = "/use/casual/kind={computerKind}")
     public List<Produit> getFilteredOccasionalUse (@RequestBody List<Produit> produits, @PathVariable String computerKind) {
         return filterService.filtrerUsageOccasionnel(produits, computerKind);
     }
@@ -36,7 +36,7 @@ public class FilterRestController {
      * @param computerKind : correspond à la clé d'une caractéristique d'usage associée au produit (ex : "ordi_port_usage").
      * @return
      */
-    @GetMapping(value = "/use/regular/kind={computerKind}")
+    @PostMapping(value = "/use/regular/kind={computerKind}")
     public List<Produit> getFilteredRegularUse (@RequestBody List<Produit> produits, @PathVariable String computerKind) {
         return filterService.filtrerUsageRegulier(produits, computerKind);
     }
@@ -49,7 +49,7 @@ public class FilterRestController {
      *
      * @return
      */
-    @GetMapping(value = "/use/intensive/kind={computerKind}")
+    @PostMapping(value = "/use/intensive/kind={computerKind}")
     public List<Produit> getFilteredIntensiveUse (@RequestBody List<Produit> produits, @PathVariable String computerKind) {
         return filterService.filtrerUsageIntensif(produits, computerKind);
     }
