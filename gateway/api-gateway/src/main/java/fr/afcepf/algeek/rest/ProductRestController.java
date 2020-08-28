@@ -32,7 +32,7 @@ public class ProductRestController {
 
     // http://ip:port/gateway/product/id={id}"
     @GetMapping("/id={id}")
-    public ResponseEntity<Produit> getProduct(@RequestParam(value = "id", required = false) Long id) {
+    public ResponseEntity<Produit> getProduct(@PathVariable Long id) {
         String url = productManagerUrl + "/id=" + id;
         return communicator.get(url);
     }
@@ -67,8 +67,8 @@ public class ProductRestController {
 
     // "http://ip:port/gateway/product/details/id={id}"
     @GetMapping("/details/id={id}")
-    public ResponseEntity<Produit> getDetailedProduct(@RequestParam(value = "id", required = false) Long productId) {
-        String url = productManagerUrl + "/details/id=" + productId;
+    public ResponseEntity<Produit> getDetailedProduct(@PathVariable Long id) {
+        String url = productManagerUrl + "/details/id=" + id;
         return communicator.get(url);
     }
 

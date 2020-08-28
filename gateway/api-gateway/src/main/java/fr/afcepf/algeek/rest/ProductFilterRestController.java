@@ -43,8 +43,8 @@ public class ProductFilterRestController {
 
     // "http://ip:port/al-geek-gateway/product/sort/price/ascending"
     @GetMapping("/filter/sort/price/ascending/id={id}")
-    public ResponseEntity<List<Produit>> sortFromCheapestToMostExpensive(@RequestParam(value = "id", required = false) Long idType) {
-        String url = productManagerUrl + "/filter/sort/price/ascending/id=" + idType;
+    public ResponseEntity<List<Produit>> sortFromCheapestToMostExpensive(@PathVariable Long id) {
+        String url = productManagerUrl + "/filter/sort/price/ascending/id=" + id;
         return communicator.getList(url);
     }
 }
