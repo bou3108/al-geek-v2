@@ -11,7 +11,7 @@ public class BankInfosServiceImpl implements BankInfosService {
     private ResponseEntityRestCommunicator<InfosBancaires> bankInfosCommunicator =
             new ResponseEntityRestCommunicator<>(InfosBancaires.class, InfosBancaires[].class);
 
-    private String urlProductAPI = "http://localhost:8080/db/order/bank";
+    private String urlProductAPI = "http://localhost:8080/db/order/bankInfos";
 
 
 

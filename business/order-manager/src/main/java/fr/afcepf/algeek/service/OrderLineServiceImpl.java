@@ -45,7 +45,7 @@ public class OrderLineServiceImpl implements OrderLineService {
     // A TESTER
     @Override
     public ResponseEntity<List<LigneCommande>> getAllOrderLinesByOrderId(Long id) {
-        String url = urlProductAPI + "/commande";
+        String url = urlProductAPI + "/order";
         return lineCommunicator.getList(url);
     }
 

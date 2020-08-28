@@ -29,8 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72e5ac62-87e3-49a0-84ed-a296dc58eda0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__fr_afcepf_algeek_al_geek_dto_1_1_SNAPSHOT.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/LigneCommandeRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/LigneCommandeRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business/order-manager/src/main/java/fr/afcepf/algeek/service/BankInfosServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/business/order-manager/src/main/java/fr/afcepf/algeek/service/BankInfosServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business/order-manager/src/main/java/fr/afcepf/algeek/service/OrderLineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/business/order-manager/src/main/java/fr/afcepf/algeek/service/OrderLineServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business/order-manager/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/business/order-manager/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +186,9 @@
       <workItem from="1598534108133" duration="167000" />
       <workItem from="1598534284203" duration="14106000" />
       <workItem from="1598551891062" duration="1668000" />
-      <workItem from="1598553622041" duration="13000" />
+      <workItem from="1598553622041" duration="275000" />
+      <workItem from="1598602560100" duration="161000" />
+      <workItem from="1598602798315" duration="874000" />
     </task>
     <servers />
   </component>
