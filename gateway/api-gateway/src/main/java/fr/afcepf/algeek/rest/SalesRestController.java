@@ -21,9 +21,9 @@ public class SalesRestController {
 
 
     // "http://ip:port/gateway/sales/"
-    @GetMapping("/best-sales")
-    public ResponseEntity<List<Produit>> getBestSales(@RequestParam(name = "size", required = true) int size) {
-        String url = salesManagerUrl + "/best-sales/" + size;
+    @GetMapping("/best-sales/max={max}")
+    public ResponseEntity<List<Produit>> getBestSales(@PathVariable int max) {
+        String url = salesManagerUrl + "/best-sales/max=" + max;
         return communicator.getList(url);
     }
 

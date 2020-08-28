@@ -33,7 +33,7 @@ public class OrderRestController {
 
     // http://ip:port/gateway/order/id={id}"
     @GetMapping("/id={id}")
-    public ResponseEntity<Commande> getOrder(@RequestParam(value = "id", required = false) Long id) {
+    public ResponseEntity<Commande> getOrder(@PathVariable Long id) {
         String url = orderManagerUrl + "/id=" + id;
         return communicator.get(url);
     }
@@ -54,14 +54,14 @@ public class OrderRestController {
 
     // "http://ip:port/gateway/order/id={id}"
     @DeleteMapping("id={id}")
-    public ResponseEntity<Commande> deleteOrder(@RequestBody Commande order) {
-        String url = orderManagerUrl + "/id=" + order.getId();
+    public ResponseEntity<Commande> deleteOrder(@PathVariable Long id) {
+        String url = orderManagerUrl + "/id=" + id;
         return communicator.delete(url);
     }
 
     // "http://ip:port/gateway/order/customer/id={id}"
     @GetMapping("/customer/id={id}")
-    public ResponseEntity<List<Commande>> getAllOrdersForCustomer(@RequestParam(value = "id", required = true) Long id) {
+    public ResponseEntity<List<Commande>> getAllOrdersForCustomer(@PathVariable Long id) {
         String url = orderManagerUrl + "/customer/id=" + id;
         return communicator.getList(url);
     }
@@ -69,14 +69,14 @@ public class OrderRestController {
     // "http://ip:port/gateway/order/add"
     @PostMapping("/lines/add")
     public ResponseEntity<LigneCommande> addLineOrder(@RequestBody LigneCommande line) {
-        String url = orderManagerUrl + "/add";
+        String url = orderManagerUrl + "/lines/add";
         return lgCommunicator.post(url, line);
     }
 
     // "http://ip:port/gateway/order/add"
     @PostMapping("/bank/add")
     public ResponseEntity<InfosBancaires> addBankInformations(@RequestBody InfosBancaires infos) {
-        String url = orderManagerUrl + "/add";
+        String url = orderManagerUrl + "/bank/add";
         return biCommunicator.post(url, infos);
     }
 
