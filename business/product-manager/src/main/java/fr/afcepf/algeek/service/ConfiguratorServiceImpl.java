@@ -4,6 +4,7 @@ import fr.afcepf.algeek.dto.Produit;
 import fr.afcepf.algeek.dto.TypeProduit;
 import fr.afcepf.algeek.dto.composant.*;
 import fr.afcepf.algeek.rest.ResponseEntityRestCommunicator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,9 @@ public class ConfiguratorServiceImpl implements ConfiguratorService {
     private ResponseEntityRestCommunicator responseEntityRestCommunicator =
             new ResponseEntityRestCommunicator(TypeProduit.class, TypeProduit[].class);
 
-    private String urlProductApi = "http://localhost:8080/db/product/configure";
+    @Value("${algeek.db.product.address}")
+    private String urlProductApi;
+//    private String urlProductApi = "http://localhost:8080/db/product/configure";
 //    private String urlProductApi = "http://productapi-env.eba-fts62g3r.eu-west-3.elasticbeanstalk.com/db/product/configure";
 
     /**
