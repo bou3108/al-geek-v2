@@ -62,7 +62,7 @@ public class SalesService {
     }
 
 
-    // "http://ip:port/manager/oerder/all"
+    // "http://ip:port/manager/order/all"
     private List<LigneCommande> getAllOrderLines() {
         String url = orderManagerUrl + "/all";
         ResponseEntity<List<LigneCommande>> response = orderLinesCommunicator.getList(url);
