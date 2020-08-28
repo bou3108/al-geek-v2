@@ -22,60 +22,60 @@ public class DaoRestController {
     private final ClientConverter clientConverter = new ClientConverter();
 
     @GetMapping(value = "/id={id}")
-    public Client getClientById(@PathVariable Long id){
-        Client client = new ClientConverter().convertToDTO(clientDao.findById(id).get());
+    public fr.afcepf.algeek.dto.Client getClientById(@PathVariable Long id){
+        fr.afcepf.algeek.dto.Client client = new ClientConverter().convertToDTO(clientDao.findById(id).get());
         return client;
     }
 
     @GetMapping(value = "/email={email}")
-    public Client getByEmail(@PathVariable String email){
-        Client client = new ClientConverter().convertToDTO(clientDao.findByEmail(email));
+    public fr.afcepf.algeek.dto.Client getByEmail(@PathVariable String email){
+        fr.afcepf.algeek.dto.Client client = new ClientConverter().convertToDTO(clientDao.findByEmail(email));
         return client;
     }
 
     @GetMapping(value = "/all")
-    public List<Client> getAllClients(){
-        List<fr.afcepf.algeek.entity.Client> clients = new ArrayList<>();
-        clients = (List<fr.afcepf.algeek.entity.Client>) clientDao.findAll();
+    public List<fr.afcepf.algeek.dto.Client> getAllClients(){
+        List<Client> clients = new ArrayList<>();
+        clients = (List<Client>) clientDao.findAll();
 
-        List<Client> clientsDTO = new ArrayList<>();
-        for (fr.afcepf.algeek.entity.Client c : clients){
+        List<fr.afcepf.algeek.dto.Client> clientsDTO = new ArrayList<>();
+        for (Client c : clients){
             clientsDTO.add(clientConverter.convertToDTO(c));
         }
         return clientsDTO;
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<Client> ajouterClient(@RequestBody Client client){
-        Client returnedClient = null;
+    public ResponseEntity<fr.afcepf.algeek.dto.Client> ajouterClient(@RequestBody fr.afcepf.algeek.dto.Client client){
+        fr.afcepf.algeek.dto.Client returnedClient = null;
         if (client.getId()==null){
-            fr.afcepf.algeek.entity.Client addedEntity = clientDao.save(clientConverter.convertToEntity(client));
+            Client addedEntity = clientDao.save(clientConverter.convertToEntity(client));
             returnedClient = clientConverter.convertToDTO(addedEntity);
-            return new ResponseEntity<Client>(returnedClient, HttpStatus.OK);
+            return new ResponseEntity<>(returnedClient, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Client>(returnedClient, HttpStatus.ALREADY_REPORTED);
+            return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
         }
     }
 
     @DeleteMapping(value = "id={id}")
-    public ResponseEntity<Client> supprimerClient(@PathVariable Long id){
-        Client deletedClient = null;
+    public ResponseEntity<fr.afcepf.algeek.dto.Client> supprimerClient(@PathVariable Long id){
+        fr.afcepf.algeek.dto.Client deletedClient = null;
         if (clientDao.findById(id).isPresent()){
             try {
                 deletedClient = clientConverter.convertToDTO(clientDao.findById(id).get());
                 clientDao.delete(clientDao.findById(id).get());
-                return new ResponseEntity<Client>(deletedClient, HttpStatus.OK);
+                return new ResponseEntity<>(deletedClient, HttpStatus.OK);
             } catch (Exception e){
                 e.printStackTrace();
-                return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Client> modifierClient(@RequestBody Client client){
+    public ResponseEntity<fr.afcepf.algeek.dto.Client> modifierClient(@RequestBody fr.afcepf.algeek.dto.Client client){
         System.out.println("Dans la méthode modifierClient, début :");
         Client c = clientConverter.convertToEntity(client);
         System.out.println("Après la conversion en entité");
@@ -83,10 +83,10 @@ public class DaoRestController {
             System.out.println("Dans le try");
             c = clientDao.save(c);
             System.out.println("après le save");
-            return new ResponseEntity<Client>(clientConverter.convertToDTO(c), HttpStatus.OK);
+            return new ResponseEntity<>(clientConverter.convertToDTO(c), HttpStatus.OK);
         } catch (Exception e){
             System.out.println("Dans l'exception");
-            return new ResponseEntity<Client>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
