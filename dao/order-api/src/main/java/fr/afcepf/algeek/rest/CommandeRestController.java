@@ -107,7 +107,7 @@ public class CommandeRestController {
     @GetMapping(value = "/customer/id={id}") // Testé OK dans POSTMAN
     public ResponseEntity<List<Commande>> getAllByCustomer(@PathVariable Long id){
         List<CommandeEntity> commandeEntities;
-        commandeEntities = commandeDao.findAllByRefClient(id);
+        commandeEntities = commandeDao.findAllByRefClientOrderByDateDeLaCommandeDesc(id);
 
         List<Commande> commandesDTO = new ArrayList<>();
         for (CommandeEntity commandeEntity : commandeEntities) {
