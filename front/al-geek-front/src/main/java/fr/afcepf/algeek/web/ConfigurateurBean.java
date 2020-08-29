@@ -60,26 +60,33 @@ public class ConfigurateurBean implements Serializable {
 	}
 	
 	public String afficherOverlay(long typeProduitId) {
-		List<Produit> produits = getProduitsParType(typeProduitId, true);
-		
-		overlayProduits = new ArrayList<Produit>();
-		
-		for (Produit p : produits) {
-			boolean compatible = true;
-			
-			for (ChoixComposant choix : selection) {
-				if (! estCompatibleAvec(p, choix.getProduit())) {
-					compatible = false;
-					break;
+		try {
+			List<Produit> produits = getProduitsParType(typeProduitId, true);
+
+			overlayProduits = new ArrayList<Produit>();
+
+			for (Produit p : produits) {
+				boolean compatible = true;
+
+
+				for (ChoixComposant choix : selection) {
+					if (choix == null) {
+						System.out.println("CHOIX NULL!!!!!!!!!!!!!!!!!!!");
+					}
+					if (!estCompatibleAvec(p, choix.getProduit())) {
+						compatible = false;
+						break;
+					}
 				}
+
+				if (compatible)
+					overlayProduits.add(p);
 			}
-			
-			if (compatible)
-				overlayProduits.add(p);
+
+			overlayVisible = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		
-		overlayVisible = true;
-		
 		return null;
 	}
 	
@@ -97,13 +104,17 @@ public class ConfigurateurBean implements Serializable {
 				break;
 			}
 		}
-		
-		controlerCompatibilite();
+
+		try {
+			controlerCompatibilite();
+		} catch (Exception ex) {
+			System.out.println("ERREUR controlerCompatibilite!!!!!!!!!!!!!!!!!!!!!!");
+		}
 		
 		return null;
 	}
 	
-	private void controlerCompatibilite() {		
+	private void controlerCompatibilite() throws Exception {
 		String msgManquants = "Il manque les composants suivants : ";
 		int numManquants = 0;
 		
@@ -176,8 +187,12 @@ public class ConfigurateurBean implements Serializable {
 				choix.setProduit(null);
 			}				
 		}
-		
-		controlerCompatibilite();
+
+		try {
+			controlerCompatibilite();
+		} catch (Exception ex) {
+			System.out.println("ERREUR controlerCompatibilite !!!!!!!!!!!!!!!!!!!!!!");
+		}
 		
 		return null;
 	}
@@ -219,8 +234,12 @@ public class ConfigurateurBean implements Serializable {
 		selection.get(6).setProduit(getProduitAvecCaracteristiques(102l));
 		selection.get(7).setProduit(getProduitAvecCaracteristiques(3l));
 		selection.get(8).setProduit(getProduitAvecCaracteristiques(405l));
-		
-		controlerCompatibilite();
+
+		try {
+			controlerCompatibilite();
+		} catch (Exception ex) {
+			System.out.println("ERREUR controlerCompatibilite !!!!!!!!!!!!!!!!!!!!!!");
+		}
 		
 		return null;
 	}
@@ -233,8 +252,17 @@ public class ConfigurateurBean implements Serializable {
 	    return produitService.getProduitsParType(id, chargerCaracteristiques);
     }
 
-    private boolean estCompatibleAvec(Produit premier, Produit second) {
-	    return produitService.estCompatibleAvec(premier, second);
+    private boolean estCompatibleAvec(Produit premier, Produit second) throws Exception {
+		try {
+			Boolean result = produitService.estCompatibleAvec(premier, second);
+			if (result == null) {
+				throw new  NullPointerException("Mon résultat est NULL");
+			}
+			return result;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new  Exception(ex);
+		}
     }
 
     private List<TypeProduit> getTypesComposants() {

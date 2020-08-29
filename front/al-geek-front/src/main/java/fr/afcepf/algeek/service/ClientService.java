@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -29,7 +30,7 @@ public class ClientService {
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     // Remplace l'appel à modifier de ClientService par un appel REST à customer-manager
@@ -54,7 +55,7 @@ public class ClientService {
 
     public boolean doInscription(Client client, String password) {
         String url = gatewayUrl + "/customer/register/password=" + password;
-        ResponseEntity<Client> response = customerCommunicator.get(url);
+        ResponseEntity<Client> response = customerCommunicator.post(url, client);
         if (response.getStatusCode() == HttpStatus.OK) {
             return true;
         }

@@ -8,14 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -38,15 +35,17 @@ public class HomeBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		meilleuresVentes = getMeilleuresVentes(10);
-		nouveautes = getNouveautes();
+		meilleuresVentes = getBestSales(10);
+		nouveautes = getLatestProducts();
 	}
 
-	private List<Produit> getMeilleuresVentes(int size) {
+	private List<Produit> getBestSales(int size) {
 		return venteService.getMeilleuresVentes(size);
 	}
 
-	private List<Produit> getNouveautes() {
+	private List<Produit> getLatestProducts() {
 		return  produitService.getNouveautes();
 	}
+
+
 }

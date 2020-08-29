@@ -1,8 +1,7 @@
 package fr.afcepf.algeek.web;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -89,8 +88,13 @@ public class CatalogueBean implements Serializable {
 	
 	public void chargerCatalogue() {
 		produits = getProduitsParType(typeProduitId, false);
-		
-		System.out.println("Chargement du catalogue : " + produits.size() + " produits trouvés.");
+
+		if (produits != null) {
+			System.out.println("Chargement du catalogue : " + produits.size() + " produits trouvés.");
+		} else {
+			System.out.println("Chargement du catalogue : aucun produits trouvés.");
+			produits = new ArrayList<>();
+		}
 		
 		marquesVisibles = new ArrayList<Marque>();
 		
@@ -98,11 +102,13 @@ public class CatalogueBean implements Serializable {
 		double minPrix = -1;
 		double maxPrix = -1;
 
+		List<Long> mesMarques = new LinkedList<>();
 		for (Produit p : produits) {
 			Marque m = p.getMarque();
 			
 			// Ajout des marques
-			if (m != null && ! marquesVisibles.contains(m)) {
+			if (m != null && ! mesMarques.contains(m.getId())) {
+				mesMarques.add(m.getId());
 				marquesVisibles.add(p.getMarque());
 			}
 			
@@ -134,12 +140,19 @@ public class CatalogueBean implements Serializable {
 		produitsFiltres = new ArrayList<Produit>();
 		
 		boolean filtrerParMarques = ! filtreMarques.isEmpty();
-		
+
+		List<Long> idMarquesFiltrees = new ArrayList<>();
+		for (Marque marque: filtreMarques ) {
+			if(idMarquesFiltrees.contains(marque.getId()) != true) {
+				idMarquesFiltrees.add(marque.getId());
+			}
+		}
+
 		for (Produit p : produits) {
 			if (p.getPrix() < prixMinVisible || p.getPrix() > prixMaxVisible)
 				continue;
 			
-			if (filtrerParMarques && ! filtreMarques.contains(p.getMarque()))
+			if (filtrerParMarques && ! idMarquesFiltrees.contains(p.getMarque().getId()))
 				continue;
 			
 			if (filtreReference != null && ! filtreReference.isEmpty())
