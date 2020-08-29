@@ -93,7 +93,7 @@ public class CommandeRestController {
     }
 
     @GetMapping(value = "/all") // Testé OK dans POSTMAN
-    public List<Commande> getAll(){
+    public ResponseEntity<List<Commande>> getAll(){
         List<CommandeEntity> commandeEntities;
         commandeEntities = (List<CommandeEntity>) commandeDao.findAll();
 
@@ -101,6 +101,19 @@ public class CommandeRestController {
         for (CommandeEntity commandeEntity : commandeEntities) {
             commandesDTO.add(converter.commandeConverter.convertToDTO(commandeEntity));
         }
-        return commandesDTO;
+        return new ResponseEntity<>(commandesDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/customer/id={id}") // Testé OK dans POSTMAN
+    public ResponseEntity<List<Commande>> getAllByCustomer(@PathVariable Long id){
+        List<CommandeEntity> commandeEntities;
+        commandeEntities = commandeDao.findAllByRefClientOrderByDateDeLaCommandeDesc(id);
+
+        List<Commande> commandesDTO = new ArrayList<>();
+        for (CommandeEntity commandeEntity : commandeEntities) {
+            commandesDTO.add(converter.commandeConverter.convertToDTO(commandeEntity));
+        }
+        return new ResponseEntity<>(commandesDTO, HttpStatus.OK);
+    }
+
 }

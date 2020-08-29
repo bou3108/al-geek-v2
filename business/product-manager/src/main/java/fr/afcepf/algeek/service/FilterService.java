@@ -13,5 +13,4 @@ public interface FilterService {
 
     List<Produit> filtrerUsageIntensif (List<Produit> produits, String typeOrdi);
 
-    ResponseEntity<List<Produit>> trierMoinsCherAuPlusCher (Long idType);
 }

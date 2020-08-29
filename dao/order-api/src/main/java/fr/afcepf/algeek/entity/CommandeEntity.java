@@ -63,6 +63,7 @@ public class CommandeEntity implements Serializable {
     private Long id;
 
     @OneToMany(mappedBy = "commande", fetch = FetchType.EAGER)
+    @Cascade(CascadeType.PERSIST)
     private List<LigneCommandeEntity> listLigneCommande;
 
     @Column(name = "date_commande")
@@ -72,6 +73,7 @@ public class CommandeEntity implements Serializable {
     private Long refClient;
 
     @OneToOne
+    @Cascade(CascadeType.PERSIST)
     private InfosBancairesEntity infosBank;
 
     private double prix;
