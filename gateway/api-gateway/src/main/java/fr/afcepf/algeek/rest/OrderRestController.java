@@ -25,28 +25,28 @@ public class OrderRestController {
 
 
     // "http://ip:port/gateway/order/all"
-    @GetMapping("/all")
+    @GetMapping("/all") // OK
     public ResponseEntity<List<Commande>> getAllOrders() {
         String url = orderManagerUrl + "/all";
         return communicator.getList(url);
     }
 
     // http://ip:port/gateway/order/id={id}"
-    @GetMapping("/id={id}")
+    @GetMapping("/id={id}") // OK
     public ResponseEntity<Commande> getOrder(@PathVariable Long id) {
         String url = orderManagerUrl + "/id=" + id;
         return communicator.get(url);
     }
 
     // "http://ip:port/gateway/order/add"
-    @PostMapping("/add")
+    @PostMapping("/add") // OK
     public ResponseEntity<Commande> addOrder(@RequestBody Commande order) {
         String url = orderManagerUrl + "/add";
         return communicator.post(url, order);
     }
 
     // "http://ip:port/gateway/order/update"
-    @PutMapping("/update")
+    @PutMapping("/update") // OK
     public ResponseEntity<Commande> updateOrder(@RequestBody Commande order) {
         String url = orderManagerUrl + "/update";
         return communicator.put(url, order);

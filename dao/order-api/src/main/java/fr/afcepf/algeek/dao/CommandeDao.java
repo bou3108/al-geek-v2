@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CommandeDao extends CrudRepository<CommandeEntity, Long> {
-    List<CommandeEntity> findAllByRefClientOrderByDateDeLaCommandeDesc(Long refClient);
+    List<CommandeEntity> findAllByRefClient(Long refClient);
 }
