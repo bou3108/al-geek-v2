@@ -18,10 +18,10 @@ public class OrderRestController {
 
 
     // A TESTER
-    // @GetMapping(value = "/customerId={idClient}")
-    // public ResponseEntity<List<Commande>> getOrdersByClient(@PathVariable Long idClient) {
-    //     return orderService.getOrdersByClient(idClient);
-    // }
+    @GetMapping(value = "/customer/id={idClient}")
+    public ResponseEntity<List<Commande>> getOrdersByClient(@PathVariable Long idClient) {
+        return orderService.getOrdersByClient(idClient);
+    }
 
     // A TESTER
     @GetMapping(value = "/all")
