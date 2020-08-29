@@ -27,35 +27,35 @@ public class OrderRestController {
     // "http://ip:port/gateway/order/all"
     @GetMapping("/all")
     public ResponseEntity<List<Commande>> getAllOrders() {
-        String url = orderManagerUrl + "/all";
+        String url = orderManagerUrl + "/order/all";
         return communicator.getList(url);
     }
 
     // http://ip:port/gateway/order/id={id}"
     @GetMapping("/id={id}")
     public ResponseEntity<Commande> getOrder(@PathVariable Long id) {
-        String url = orderManagerUrl + "/id=" + id;
+        String url = orderManagerUrl + "/order/id=" + id;
         return communicator.get(url);
     }
 
     // "http://ip:port/gateway/order/add"
     @PostMapping("/add")
     public ResponseEntity<Commande> addOrder(@RequestBody Commande order) {
-        String url = orderManagerUrl + "/add";
+        String url = orderManagerUrl + "/order/add";
         return communicator.post(url, order);
     }
 
     // "http://ip:port/gateway/order/update"
     @PutMapping("/update")
     public ResponseEntity<Commande> updateOrder(@RequestBody Commande order) {
-        String url = orderManagerUrl + "/update";
+        String url = orderManagerUrl + "/order/update";
         return communicator.put(url, order);
     }
 
     // "http://ip:port/gateway/order/id={id}"
     @DeleteMapping("id={id}")
     public ResponseEntity<Commande> deleteOrder(@PathVariable Long id) {
-        String url = orderManagerUrl + "/id=" + id;
+        String url = orderManagerUrl + "/order/id=" + id;
         return communicator.delete(url);
     }
 
