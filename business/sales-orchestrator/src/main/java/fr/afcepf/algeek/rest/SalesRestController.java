@@ -27,7 +27,7 @@ public class SalesRestController {
 
 
     // "http://ip:port/manager/sales/best-sales/max={max}"
-    @GetMapping("/best-sales")
+    @GetMapping("/best-sales/max={max}")
     public ResponseEntity<List<Produit>> getBestSales(@PathVariable int max) {
         List<Long> productIdList = salesService.getBestSoldProcuctIds(max);
         if (productIdList == null) {
