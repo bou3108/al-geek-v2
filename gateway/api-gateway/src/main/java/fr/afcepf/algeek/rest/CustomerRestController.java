@@ -61,4 +61,11 @@ public class CustomerRestController {
         String url = customerManagerUrl + "/authentication/email=" + email + "&password=" + password;
         return communicator.get(url);
     }
+
+    // "http://ip:port/gateway/customer/register/password=xxxxxxxx"
+    @PostMapping("/register/password={password}")
+    public ResponseEntity<Client> doRegister(@RequestBody Client customer, @PathVariable String password) {
+        String url = customerManagerUrl + "/register/password=" + password;
+        return communicator.post(url, customer);
+    }
 }
