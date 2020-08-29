@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -29,10 +26,10 @@ public class SalesRestController {
     private SalesService salesService;
 
 
-    // "http://ip:port/manager/sales/best-sales/max={size}"
+    // "http://ip:port/manager/sales/best-sales/max={max}"
     @GetMapping("/best-sales")
-    public ResponseEntity<List<Produit>> getBestSales(@RequestParam(name = "size", required = true) int size) {
-        List<Long> productIdList = salesService.getBestSoldProcuctIds(size);
+    public ResponseEntity<List<Produit>> getBestSales(@PathVariable int max) {
+        List<Long> productIdList = salesService.getBestSoldProcuctIds(max);
         if (productIdList == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

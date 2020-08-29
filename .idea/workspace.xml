@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:odc-order" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="72e5ac62-87e3-49a0-84ed-a296dc58eda0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/order-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/LigneCommandeRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/LigneCommandeRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/al-geek-rest/target/al-geek-rest-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/al-geek-rest/target/al-geek-rest-1.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/al-geek-rest/target/classes/fr/afcepf/algeek/rest/ResponseEntityRestCommunicator.class" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/al-geek-rest/target/classes/fr/afcepf/algeek/rest/ResponseEntityRestCommunicator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/al-geek-rest/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/al-geek-rest/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/al-geek-rest/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/al-geek-rest/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1gg0JhcyqWnnMD8jCPaALE3N7Zj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.OrderApiApplication">
+    <configuration name="AlGeekFrontApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="al-geek-front" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.AlGeekFrontApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BestSalesOrchestratorApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="best-sales-orchestrator" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.BestSalesOrchestratorApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="customer-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.CustomerApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="customer-manager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.CustomerManagerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="order-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.afcepf.algeek.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.OrderApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="order-manager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.OrderManagerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="product-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.ProductApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="product-manager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.ProductManagerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StockApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="stock-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.StockApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StockManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="stock-manager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.afcepf.algeek.StockManagerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.OrderApiApplication" />
+        <item itemvalue="Spring Boot.OrderApiApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="72e5ac62-87e3-49a0-84ed-a296dc58eda0" name="Default Changelist" comment="" />
+      <created>1598520858694</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598520858694</updated>
+      <workItem from="1598520860271" duration="1930000" />
+      <workItem from="1598529567469" duration="1206000" />
+      <workItem from="1598530788733" duration="48000" />
+      <workItem from="1598534108133" duration="167000" />
+      <workItem from="1598534284203" duration="14106000" />
+      <workItem from="1598551891062" duration="1668000" />
+      <workItem from="1598553622041" duration="275000" />
+      <workItem from="1598602560100" duration="161000" />
+      <workItem from="1598602798315" duration="2225000" />
+      <workItem from="1598605851080" duration="173000" />
+      <workItem from="1598606583702" duration="1969000" />
+      <workItem from="1598609837839" duration="31000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="odc-order" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="250" y="8" key="#Project_Structure" timestamp="1598534158959">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="250" y="8" key="#Project_Structure/0.0.1536.864@0.0.1536.864" timestamp="1598534158959" />
+    <state x="225" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598520939817">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="225" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1598520939817" />
+    <state x="575" y="140" key="#com.intellij.ide.util.MemberChooser" timestamp="1598551190957">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="575" y="140" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1598551190957" />
+    <state width="1493" height="317" key="GridCell.Tab.0.bottom" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.0.center" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.0.left" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.0.right" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.bottom" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.center" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.left" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="317" key="GridCell.Tab.1.right" timestamp="1598553562438">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="317" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1598553562438" />
+    <state width="1493" height="277" key="GridCell.Tab.2.bottom" timestamp="1598551320841">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1598551320841" />
+    <state width="1493" height="277" key="GridCell.Tab.2.center" timestamp="1598551320841">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1598551320841" />
+    <state width="1493" height="277" key="GridCell.Tab.2.left" timestamp="1598551320841">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1598551320841" />
+    <state width="1493" height="277" key="GridCell.Tab.2.right" timestamp="1598551320841">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1598551320841" />
+    <state x="300" y="88" key="Maven.ArtifactSearchDialog" timestamp="1598530723860">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="300" y="88" key="Maven.ArtifactSearchDialog/0.0.1536.864@0.0.1536.864" timestamp="1598530723860" />
+    <state x="500" y="194" key="extract.method.dialog" timestamp="1598542473119">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="500" y="194" key="extract.method.dialog/0.0.1536.864@0.0.1536.864" timestamp="1598542473119" />
+    <state x="426" y="197" key="run.anything.popup" timestamp="1598552963774">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="426" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1598552963774" />
+    <state x="431" y="182" width="672" height="678" key="search.everywhere.popup" timestamp="1598541215724">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="182" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1598541215724" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/CommandeRestController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dao/order-api/src/main/java/fr/afcepf/algeek/rest/CommandeRestController.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="fr.afcepf.algeek.entity.CommandeEntity" memberName="listLigneCommande" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>

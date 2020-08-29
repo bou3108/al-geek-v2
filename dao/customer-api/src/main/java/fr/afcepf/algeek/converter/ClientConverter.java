@@ -4,8 +4,8 @@ import fr.afcepf.algeek.entity.Client;
 
 public class ClientConverter {
 
-    public Client convertToDTO(fr.afcepf.algeek.entity.Client client){
-        Client dto = new Client();
+    public fr.afcepf.algeek.dto.Client convertToDTO(Client client){
+        fr.afcepf.algeek.dto.Client dto = new fr.afcepf.algeek.dto.Client();
 
         dto.setId(client.getId());
         dto.setNom(client.getNom());
@@ -23,8 +23,8 @@ public class ClientConverter {
 
 
 
-    public fr.afcepf.algeek.entity.Client convertToEntity(Client client){
-        fr.afcepf.algeek.entity.Client entity = new fr.afcepf.algeek.entity.Client();
+    public Client convertToEntity(fr.afcepf.algeek.dto.Client client){
+        Client entity = new Client();
 
         entity.setId(client.getId());
         entity.setNom(client.getNom());
