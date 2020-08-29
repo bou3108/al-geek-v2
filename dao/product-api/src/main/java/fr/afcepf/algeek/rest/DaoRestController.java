@@ -105,23 +105,28 @@ public class DaoRestController {
     }
 
     @GetMapping(value = "/type={id}&with={chargerCaracs}")
-    public List<Produit> getProduitParType(@PathVariable Long id, @PathVariable boolean chargerCaracs){
-        List<fr.afcepf.algeek.entity.Produit> products = produitDao.findByTypeId(id);
-        List<Produit> productsDTO = new ArrayList<>();
+    public ResponseEntity<List<Produit>> getProduitParType(@PathVariable Long id, @PathVariable boolean chargerCaracs){
+        try {
+            List<fr.afcepf.algeek.entity.Produit> products = produitDao.findByTypeId(id);
+            List<Produit> productsDTO = new ArrayList<>();
 
-        for (fr.afcepf.algeek.entity.Produit p : products) {
-            Produit produitDTO = produitConverter.convertToDTO(p);
-            if(chargerCaracs) {
-                List<fr.afcepf.algeek.entity.Caracteristique> caracsEntity = caracteristiqueDao.findByProduit(p);
-                List<Caracteristique> caracteristiques = new ArrayList<>();
-                for (fr.afcepf.algeek.entity.Caracteristique c : caracsEntity) {
-                    caracteristiques.add(caracteristiqueConverter.convertToDTO(c));
+            for (fr.afcepf.algeek.entity.Produit p : products) {
+                Produit produitDTO = produitConverter.convertToDTO(p);
+                if(chargerCaracs) {
+                    List<fr.afcepf.algeek.entity.Caracteristique> caracsEntity = caracteristiqueDao.findByProduit(p);
+                    List<Caracteristique> caracteristiques = new ArrayList<>();
+                    for (fr.afcepf.algeek.entity.Caracteristique c : caracsEntity) {
+                        caracteristiques.add(caracteristiqueConverter.convertToDTO(c));
+                    }
+                    produitDTO.setCaracteristiques(caracteristiques);
                 }
-                produitDTO.setCaracteristiques(caracteristiques);
+                productsDTO.add(produitDTO);
             }
-            productsDTO.add(produitDTO);
+            return new ResponseEntity<>(productsDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return productsDTO;
+
     }
 
     @GetMapping(value = "/carac/id={id}")
