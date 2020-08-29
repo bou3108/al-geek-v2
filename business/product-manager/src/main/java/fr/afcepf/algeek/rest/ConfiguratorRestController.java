@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -36,15 +37,15 @@ public class ConfiguratorRestController {
      */
     @PostMapping(value = "/compatibility")
     // PASSER LA METHODE EN GET
-    public ResponseEntity<Produit> isCompatibleWith (@RequestBody Produit[] produits) {
+    public ResponseEntity<Produit[]> isCompatibleWith (@RequestBody Produit[] produits) {
         try {
             if (configuratorService.estCompatibleAvec(produits[0], produits[1])) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(produits, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+                return new ResponseEntity<>(produits, HttpStatus.NOT_ACCEPTABLE);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(produits, HttpStatus.BAD_REQUEST);
         }
 
     }

@@ -93,15 +93,20 @@ public class DaoRestController {
     }
 
     @GetMapping(value = "/all")
-    public List<Produit> getAllProduit(){
-        List<fr.afcepf.algeek.entity.Produit> products = new ArrayList<>();
-        products = (List<fr.afcepf.algeek.entity.Produit>) produitDao.findAll();
+    public ResponseEntity<List<Produit>> getAllProduit(){
+        try {
+            List<fr.afcepf.algeek.entity.Produit> products = new ArrayList<>();
+            products = (List<fr.afcepf.algeek.entity.Produit>) produitDao.findAll();
 
-        List<Produit> productsDTO = new ArrayList<>();
-        for (fr.afcepf.algeek.entity.Produit p : products) {
-            productsDTO.add(produitConverter.convertToDTO(p));
+            List<Produit> productsDTO = new ArrayList<>();
+            for (fr.afcepf.algeek.entity.Produit p : products) {
+                productsDTO.add(produitConverter.convertToDTO(p));
+            }
+            return new ResponseEntity<>(productsDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return productsDTO;
+
     }
 
     @GetMapping(value = "/type={id}&with={chargerCaracs}")
@@ -147,12 +152,17 @@ public class DaoRestController {
 
     @GetMapping(value = "/nouveautes")
     public ResponseEntity<List<Produit>> getNouveautes() {
-        List<fr.afcepf.algeek.entity.Produit> nouveautesEntity = produitDao.findTop30ByOrderByDateAjoutDesc();
-        List<Produit> nouveautesDTO = new ArrayList<>();
-        for (fr.afcepf.algeek.entity.Produit p : nouveautesEntity) {
-            nouveautesDTO.add(produitConverter.convertToDTO(p));
+        try {
+            List<fr.afcepf.algeek.entity.Produit> nouveautesEntity = produitDao.findTop30ByOrderByDateAjoutDesc();
+            List<Produit> nouveautesDTO = new ArrayList<>();
+            for (fr.afcepf.algeek.entity.Produit p : nouveautesEntity) {
+                nouveautesDTO.add(produitConverter.convertToDTO(p));
+            }
+            return new ResponseEntity<>(nouveautesDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(nouveautesDTO, HttpStatus.OK);
+
     }
 
     @GetMapping(value = "/configure/typeProduit={nomProduit}")

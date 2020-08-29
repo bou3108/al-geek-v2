@@ -74,21 +74,5 @@ public class FilterServiceImpl implements FilterService {
         return listeFiltree;
     }
 
-    /**
-     * retourne dans une ResponseEntity une liste de Produit du type passé en paramètre, triée par prix croissant
-     * @param idType
-     * @return
-     */
-    @Override
-    public ResponseEntity<List<Produit>> trierMoinsCherAuPlusCher(Long idType) {
-        if(productService.getProduitsParType(idType, true).getStatusCode() == HttpStatus.OK) {
-            List<Produit> listTriPrix = productService.getProduitsParType(idType, true).getBody();
-            listTriPrix.sort(new TriPrixCroissant());
-            return new ResponseEntity<>(listTriPrix, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
 
 }
