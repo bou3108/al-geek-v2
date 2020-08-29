@@ -33,10 +33,10 @@ public class SalesService {
         if (lines == null) {
             return null;
         }
-        return extractBestSoldProcuctIds(lines, maxResult);
+        return extractBestSoldProductIds(lines, maxResult);
     }
 
-    private List<Long> extractBestSoldProcuctIds(List<LigneCommande> lines, Integer maxNumberOfProduct) {
+    private List<Long> extractBestSoldProductIds(List<LigneCommande> lines, Integer maxNumberOfProduct) {
         Map<Long, Integer> salesQuantity = new HashMap<>();
 
         for (LigneCommande line : lines) {
@@ -64,7 +64,7 @@ public class SalesService {
 
     // "http://ip:port/manager/order/all"
     private List<LigneCommande> getAllOrderLines() {
-        String url = orderManagerUrl + "/all";
+        String url = orderManagerUrl + "/orderLine/all";
         ResponseEntity<List<LigneCommande>> response = orderLinesCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
