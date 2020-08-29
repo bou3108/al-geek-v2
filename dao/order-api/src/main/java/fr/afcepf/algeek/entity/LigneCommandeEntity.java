@@ -1,6 +1,8 @@
 package fr.afcepf.algeek.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.io.Serializable;
 
@@ -53,7 +55,6 @@ public class LigneCommandeEntity implements Serializable {
     private Long refProduit;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
     private CommandeEntity commande;
 
     public Long getId() {
