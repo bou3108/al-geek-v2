@@ -20,6 +20,7 @@ public class LignePanier {
         this.produit = produit;
         this.ligneCommande.setProduitId(produit.getId());
         this.ligneCommande.setQuantite(produit.getQuantite());
+        this.ligneCommande.setCommandeId(0L);
     }
 
 

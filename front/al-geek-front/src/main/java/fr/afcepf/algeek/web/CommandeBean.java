@@ -76,21 +76,12 @@ public class CommandeBean implements Serializable {
 	
 	
 	public String validerPaiement() {	
-		// persistance des coord.bancaires ( !!! pas bien ...)
-		ajouterInformationsBancaire(infosBank);
-		
 		commande.setClientId(connectBean.getClient().getId());
 		commande.setDateDeLaCommande(new Date());
 		commande.setPrix(panierBean.afficherPrixTotal());
 		commande.setInfosBank(infosBank);
 		Commande commandeAjoutee = ajouterCommande(commande);
 
-		if (commandeAjoutee != null) {
-			for (LigneCommande lc : commande.getListLigneCommande()) {
-				lc.setCommandeId(commandeAjoutee.getId());
-				ajouterLigneDeCommande(lc);
-			}
-		}
 		// reinitialisation du panier
 		panierBean.setPanier(new Panier());
 		panierBean.getPanier().setListLignePanier(new ArrayList<LignePanier>());
