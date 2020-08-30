@@ -39,6 +39,10 @@ public class CommandeRestController {
         Commande returnedCommande;
         if (commande.getId() == null) {
             CommandeEntity addedEntity = commandeDao.save(converter.commandeConverter.convertToEntity(commande, commandeDao));
+            for (LigneCommandeEntity ligneCommandeEntity : addedEntity.getListLigneCommande()) {
+                ligneCommandeEntity.setCommande(addedEntity);
+            }
+            addedEntity = commandeDao.save(addedEntity);
             returnedCommande = converter.commandeConverter.convertToDTO(addedEntity);
             return new ResponseEntity<>(returnedCommande, HttpStatus.OK);
         } else {

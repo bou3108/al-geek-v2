@@ -29,7 +29,7 @@ public class LigneCommandeConverter {
                 ligneCommande.getQuantite(),
                 ligneCommande.getProduitId());
 
-        CommandeEntity commandeEntity = commandeDao.findById(ligneCommande.getCommandeId()).get();
+        CommandeEntity commandeEntity = commandeDao.findById(ligneCommande.getCommandeId()).orElse(null);
         ligneCommandeEntity.setCommande(commandeEntity);
         return ligneCommandeEntity;
     }
