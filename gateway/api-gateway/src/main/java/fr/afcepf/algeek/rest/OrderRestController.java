@@ -62,7 +62,7 @@ public class OrderRestController {
     // "http://ip:port/gateway/order/customer/id={id}"
     @GetMapping("/customer/id={id}")
     public ResponseEntity<List<Commande>> getAllOrdersForCustomer(@PathVariable Long id) {
-        String url = orderManagerUrl + "/customer/id=" + id;
+        String url = orderManagerUrl + "/order/customer/id=" + id;
         return communicator.getList(url);
     }
 
