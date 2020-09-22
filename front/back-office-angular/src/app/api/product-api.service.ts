@@ -26,6 +26,11 @@ export class ProductApiService {
     return this.http.get<Product[]>(PRODUCT_API_URL + "/all", {headers}).pipe(catchError(this.handleError));
   }
 
+  getProductById(id: number): Observable<Product>{
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.get<Product>(PRODUCT_API_URL + "/id=" + id, {headers}).pipe(catchError(this.handleError)); 
+  }
+
 
 
 

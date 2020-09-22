@@ -1,0 +1,78 @@
+<div class="card">
+
+    <div class="card-header">
+        <!-- data Binding -->
+        {{ pageTitle }} 
+    </div>
+
+    <div class="card-body">
+
+        <!--  -->
+        <div class="row">
+            <div class="col-md-2"> Filtrer par</div>
+            <div class="col-md-2">Produit :
+                <input type="text" [(ngModel)]='listFilter' >
+            </div>
+            <div class="col-md-2">Catégorie :
+                <input type="text" [(ngModel)]='listFilter' >
+            </div>
+            <div class="col-md-2">Marque :
+                <input type="text" [(ngModel)]='listFilter' >
+            </div>
+        </div>
+
+        
+
+        <!--  -->
+        <div class="table-responsive">
+
+            <!--  -->
+
+            <table class="table" *ngIf='products && products.length'>
+
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Produit</th>
+                        <th>Catégorie</th>
+                        <th>Marque</th>
+                        <th>Date d'ajout</th>
+                        <th>Prix</th>
+                        <th>Stock</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- Structural directive -->
+                    <!-- <tr *ngFor='let product of products'> -->
+                    <tr *ngFor='let product of filteredProducts'>
+                        <!-- Property binding -->
+                        <td> <img src='assets/{{product.photo}}'
+                            [style.width.px]='imageWidth'
+                            [style.margin-left.px]='imageMargin'> </td>
+                        <!-- Interpolation -->
+                        <td>{{ product.nom }}</td>
+                        <td>{{ product.type.nom }}</td>
+                        <td>{{ product.marque.nom }}</td>
+                        <td>{{ product.dateAjout | date : 'EEEE d MMMM y'}}</td>
+                        <!-- <td>{{ product.starRating }}</td> -->
+                        <td>{{ product.prix }}</td>
+                        <td>stock</td>
+                        <td><button class="btn btn-primary" (click)='goToDetails(product.id)'>
+                            Editer
+                        </button></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+

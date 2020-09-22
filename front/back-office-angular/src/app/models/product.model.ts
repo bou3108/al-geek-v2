@@ -10,6 +10,7 @@ export class Product {
         public photo: string,
         public prix: number,
         public marque: Marque,
-        public typeProduit: TypeProduit
+        public type: TypeProduit
     ) {}
+
 }
