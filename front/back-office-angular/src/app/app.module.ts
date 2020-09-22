@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { ProductsComponent } from './products/products.component';
 import { CustomersComponent } from './customers/customers.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CustomerApiService } from './api/customer-api.service';
 import { OrderApiService } from './api/order-api.service';
 import { ProductApiService } from './api/product-api.service';
 import { StockApiService } from './api/stock-api.service';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,10 @@ import { StockApiService } from './api/stock-api.service';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    ProductsComponent,
     CustomersComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductDetailComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
