@@ -1,11 +1,11 @@
 <div class='card'
    *ngIf='product'>
-   <div class='card-header'>
+   <div class='card-header' style="margin-left: 20px;">
       {{product.nom}}
    </div>
    <div class='card-body'>
       <div class='row'>
-         <div class='col-md-8'>
+         <div class='col-md-8' style="margin-left: 20px; width: 50vw;">
             <div class='row'>
                <div class='col-md-4'>Article :</div>
                <div class='col-md-8'>{{product.nom}}</div>
@@ -20,11 +20,15 @@
             </div>
             <div class='row'>
                <div class='col-md-4'>Quantité disponible :</div>
-               <div class='col-md-8'>stock en dur</div>
+               <div class='col-md-8' *ngIf="isDataAvailable">
+                {{ stock.quantityInStock }} 
+               </div>
             </div>
             <div class='row'>
                <div class='col-md-4'>Niveau d'alerte :</div>
-               <div class='col-md-8'>stock mini en dur</div>
+               <div class='col-md-8' *ngIf="isDataAvailable">
+                  {{ stock.minimumQuantity }}
+               </div>
             </div>
          </div>
          <div class='col-md-4'>
@@ -37,10 +41,29 @@
       </div>
    </div>
 
-   <div class='card-footer'>
-       <button class='btn btn-outline-secondary' (click)='onBack()'>
-           <i class='fa fa-chevron-left'></i> BACK
-       </button>
+   <div class='card-footer' style="margin-left: 20px; margin-top: 100px;">
+      <div>
+         <button class='btn btn-outline-secondary' (click)='onModify()' style="margin-left: 500px;">
+            <i class='fa fa-chevron-left'></i> MODIFIER
+         </button>
+      </div>
+      
+      <button class='btn btn-outline-secondary' (click)='onBack()'style="margin-left: 400px;">
+         <i class='fa fa-chevron-left'></i> RETOUR A LA LISTE
+     </button>
    </div>
-
 </div>
+
+<div class='product-form' *ngIf='isFormVisible'>
+   <div>
+      <span>BLA BLA BLA</span>
+      <input>
+   </div>
+   <button class='btn btn-outline-secondary' (click)='onCancelModifications()'style="margin-left: 400px; background-color:red">
+      <i class='fa fa-chevron-left'></i> ANNULER
+  </button>
+  <button class='btn btn-outline-secondary' (click)='onUpdateProduct()'style="margin-left: 400px; background-color:green">
+   <i class='fa fa-chevron-left'></i> VALIDER
+</button>
+</div>
+

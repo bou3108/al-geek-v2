@@ -1,4 +1,5 @@
 import { Marque } from './marque.model';
+import { Stock } from './stock.model';
 import { TypeProduit } from './typeProduit.model';
 
 export class Product {
@@ -10,7 +11,8 @@ export class Product {
         public photo: string,
         public prix: number,
         public marque: Marque,
-        public type: TypeProduit
+        public type: TypeProduit,
+        public stock: Stock
     ) {}
 
 }
