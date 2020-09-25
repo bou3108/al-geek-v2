@@ -19,12 +19,17 @@ export class StockApiService {
 
   getStockById(productId: number): Observable<Stock>{
     const headers = new HttpHeaders().set("Content-Type", "application/json");
-    return this.http.get<Stock>(STOCK_API_URL + "/" + productId, {headers});
+    return this.http.get<Stock>(STOCK_API_URL + "/id/" + productId, {headers});
   }
 
   getStocks() : Observable<Stock[]>{
     const headers = new HttpHeaders().set("Content-Type", "application/json");
-    return this.http.get<Stock[]>(STOCK_API_URL, {headers}).pipe(catchError(this.handleError));
+    return this.http.get<Stock[]>(STOCK_API_URL + "/all", {headers}).pipe(catchError(this.handleError));
+  }
+
+  updateStock(stock: Stock) : Observable<Stock> {
+
+    return null;
   }
 
 

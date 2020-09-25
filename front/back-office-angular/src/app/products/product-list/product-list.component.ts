@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductApiService } from '../../api/product-api.service';
 import { StockApiService } from '../../api/stock-api.service';
@@ -15,6 +15,8 @@ export class ProductListComponent implements OnInit {
   // PROPRIETES :
   filteredProducts : Product[];
   products : Product[];
+  selectedProduct : Product;
+  isSelected : boolean = false;
   stocks : Stock[];
   errorMessage : string;
 
@@ -74,8 +76,15 @@ export class ProductListComponent implements OnInit {
   }
 
   // REDIRECTION VERS PRODUCT-DETAIL
-  goToDetails(productId: number) {
-    this.router.navigateByUrl('/product-detail/' + productId);
+  goToDetails(productId: number, product: Product) : void {
+    this.selectedProduct = product;
+    this.isSelected = true;
+    // this.router.navigateByUrl('/product-detail/' + productId);
+  }
+
+  onBack() : void {
+    this.selectedProduct = null;
+    this.isSelected = false;
   }
 
   onEUR() : void {

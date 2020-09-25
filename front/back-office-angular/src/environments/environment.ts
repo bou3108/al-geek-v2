@@ -3,14 +3,12 @@ export const environment = {
   production: false,
 
   // url vers l'api gateway de aws
-  // dans un premier temps, url vers le manager en local pour tester le front
-  customerApiUrl: 'http://localhost:8380/manager/customer',
+  customerApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/customer',
   
-  orderApiUrl: 'http://localhost:8280/manager/order',
+  orderApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/order',
 
-  productApiUrl: 'http://localhost:8180/manager/product',
+  productApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/product',
 
-  // stockApiUrl: 'http://15.236.212.75:5000/api/stock'
-  stockApiUrl: 'http://127.0.0.1:5000/api/stock'
+  stockApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/stock'
 };
 

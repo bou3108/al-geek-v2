@@ -1,69 +1,56 @@
-<div class='card'
-   *ngIf='product'>
-   <div class='card-header' style="margin-left: 20px;">
-      {{product.nom}}
-   </div>
+<div class='product-recap' *ngIf='product'>
    <div class='card-body'>
       <div class='row'>
-         <div class='col-md-8' style="margin-left: 20px; width: 50vw;">
+         <div class='col-md-8' style="margin-left: 20px; width: 50vw; margin-top: 20px; font-weight: bolder; font-size: larger;">
             <div class='row'>
-               <div class='col-md-4'>Article :</div>
-               <div class='col-md-8'>{{product.nom}}</div>
+               <div class='col-md-3'>Article :</div>
+               <div class='col-md-5' style="text-align: right;">{{product.nom}}</div>
+               <input type="text" *ngIf="isFormVisible" [(ngModel)]="modifiedProduct.nom">
             </div>
             <div class='row'>
-               <div class='col-md-4'>Description :</div>
-               <div class='col-md-8'>{{product.description}}</div>
+               <div class='col-md-3'>Prix :</div>
+               <div class='col-md-5' style="text-align: right;">{{product.prix}}</div>
+               <input type="text" *ngIf="isFormVisible" [(ngModel)]="product.prix" style="text-align: right;">
             </div>
             <div class='row'>
-               <div class='col-md-4'>Prix :</div>
-               <div class='col-md-8'>{{product.prix}}</div>
-            </div>
-            <div class='row'>
-               <div class='col-md-4'>Quantité disponible :</div>
-               <div class='col-md-8' *ngIf="isDataAvailable">
-                {{ stock.quantityInStock }} 
+               <div class='col-md-3'>
+                  <div *ngIf="isDataAvailable" [class.lowStock]="stock.quantityInStock<stock.minimumQuantity" >Quantité disponible :</div>
+               </div>
+               <div class='col-md-5' *ngIf="isDataAvailable" style="text-align: right;">
+                  <div [class.lowStock]="stock.quantityInStock<stock.minimumQuantity" >{{ stock.quantityInStock }}</div>
                </div>
             </div>
             <div class='row'>
-               <div class='col-md-4'>Niveau d'alerte :</div>
-               <div class='col-md-8' *ngIf="isDataAvailable">
+               <div class='col-md-3'>Niveau d'alerte :</div>
+               <div class='col-md-5' *ngIf="isDataAvailable" style="text-align: right;">
                   {{ stock.minimumQuantity }}
                </div>
+               <input type="text" *ngIf="isFormVisible" [(ngModel)]="stock.minimumQuantity" style="text-align: right;">
+               
             </div>
          </div>
          <div class='col-md-4'>
             <img class='center-block img-responsive'
             [style.width.px]='200'
             [style.margin.px]='2'
-            src='assets/{{product.photo}}'
+            src='assets/images/{{product.photo}}'
             [title]='product.nom'>
          </div>
       </div>
    </div>
 
-   <div class='card-footer' style="margin-left: 20px; margin-top: 100px;">
-      <div>
-         <button class='btn btn-outline-secondary' (click)='onModify()' style="margin-left: 500px;">
-            <i class='fa fa-chevron-left'></i> MODIFIER
-         </button>
-      </div>
+   <div class='card-footer' style="margin-left: 20px; margin-top: 10vh; margin-bottom: 3vh;">
+      <button class='btn btn-outline-secondary' (click)='onModify()' style="margin-left: 500px;" *ngIf="!isFormVisible">
+         <i class='fa fa-chevron-left'></i> MODIFIER
+      </button>
+      <button class='btn btn-outline-secondary' (click)='onCancelModifications()'style="margin-left: 500px; background-color:red" *ngIf="isFormVisible">
+         <i class='fa fa-chevron-left'></i> ANNULER
+      </button>
+      <button class='btn btn-outline-secondary' (click)='onUpdateProduct()'style="margin-left: 50px; background-color:green" *ngIf="isFormVisible">
+         <i class='fa fa-chevron-left'></i> VALIDER
+      </button>
       
-      <button class='btn btn-outline-secondary' (click)='onBack()'style="margin-left: 400px;">
-         <i class='fa fa-chevron-left'></i> RETOUR A LA LISTE
-     </button>
    </div>
 </div>
 
-<div class='product-form' *ngIf='isFormVisible'>
-   <div>
-      <span>BLA BLA BLA</span>
-      <input>
-   </div>
-   <button class='btn btn-outline-secondary' (click)='onCancelModifications()'style="margin-left: 400px; background-color:red">
-      <i class='fa fa-chevron-left'></i> ANNULER
-  </button>
-  <button class='btn btn-outline-secondary' (click)='onUpdateProduct()'style="margin-left: 400px; background-color:green">
-   <i class='fa fa-chevron-left'></i> VALIDER
-</button>
-</div>
 

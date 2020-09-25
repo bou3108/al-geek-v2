@@ -21,3 +21,7 @@
 .divFlags {
      margin: 1px;   
 }
+
+.tbody .tr:hover{
+    background: #578cd1;
+}
