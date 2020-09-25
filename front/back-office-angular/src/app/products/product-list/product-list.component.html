@@ -19,12 +19,12 @@
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <div class="column">
-                    <div><img src="assets/images/EUR.png" onclick="onEUR()" class="imgD"></div>
-                <div><img src="assets/images/GBP.png" onclick="onGBP()" class="imgD"></div>
+                    <div><img src="assets/images/EUR.png" (click)="onEUR()" class="imgD"></div>
+                    <div><img src="assets/images/GBP.png" (click)="onGBP()" class="imgD"></div>
                 </div>
                 <div class="">
-                    <div><img src="assets/images/USD.png" onclick="onUSD()" class="imgD"></div>
-                    <div><img src="assets/images/JPY.png" onclick="onJPY()" class="imgD"></div>
+                    <div><img src="assets/images/USD.png" (click)="onUSD()" class="imgD"></div>
+                    <div><img src="assets/images/JPY.png" (click)="onJPY()" class="imgD"></div>
                 </div>
             </div>
         </div>
@@ -40,6 +40,7 @@
                         <th>Date d'ajout</th>
                         <th>Prix</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -52,7 +53,8 @@
                         <td>{{ product.type.nom }}</td>
                         <td>{{ product.marque.nom }}</td>
                         <td>{{ product.dateAjout | date : 'EEEE d MMMM y'}}</td>
-                        <td>{{ product.prix }}</td>
+                        <td>{{ convertCurrency(product.prix) | number : '1.2-2' }}</td>
+                        <td>{{ devise }} </td>
                         <td><button class="btn btn-primary" (click)='goToDetails(product.id, product)'>
                             Editer
                         </button></td>
@@ -68,7 +70,7 @@
                 <i class='fa fa-chevron-left'></i> RETOUR A LA LISTE
             </button>
         </div>
-        <app-product-detail [product]="selectedProduct" *ngIf="isSelected"></app-product-detail>
+        <app-product-detail [product]="selectedProduct" [devise]="devise" *ngIf="isSelected"></app-product-detail>
 
     </div>
 

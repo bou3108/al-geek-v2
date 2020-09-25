@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   isSelected : boolean = false;
   stocks : Stock[];
   errorMessage : string;
+  devise : string;
 
   _listFilterByName : string;
   _listFilterByCategory : string;
@@ -72,7 +73,9 @@ export class ProductListComponent implements OnInit {
         this.filteredProducts = this.products;
       },
       error: err => this.errorMessage = err
-    }); 
+    });
+
+    this.devise = "€";
   }
 
   // REDIRECTION VERS PRODUCT-DETAIL
@@ -87,19 +90,42 @@ export class ProductListComponent implements OnInit {
     this.isSelected = false;
   }
 
-  onEUR() : void {
+  convertCurrency(price: number) : number {
+    var displayedPrice : number;
+    switch(this.devise) {
+      case "$": {
+        displayedPrice = price*1.1;
+        break;
+      }
+      case "£": {
+        displayedPrice = price*1.5;
+        break;
+      }
+      case "Y": {
+        displayedPrice = price*123;
+        break;
+      }
+      default: {
+        displayedPrice = price;
+        break;
+      }
+    }
+    return displayedPrice;
+  }
 
+  onEUR() : void {
+    this.devise = "€";
   }
 
   onUSD() : void {
-
+    this.devise = "$";
   }
 
   onGBP() : void {
-
+    this.devise = "£";
   }
 
   onJPY() : void {
-    
+    this.devise = "Y";
   }
 }
