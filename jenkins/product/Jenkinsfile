@@ -1,0 +1,79 @@
+pipeline {
+  agent any 
+  tools {
+    maven 'M3'
+  }
+  stages {
+    stage('checkout') {
+      steps {
+        git 'https://github.com/oville92/al-geek-v2.git'
+      }
+    }
+    stage ('Package dto library') {
+		steps {
+				echo "=== Packaging al-geek-dto library ==="
+                sh 'mvn -f libraries/al-geek-dto clean install -DskipTests'
+        }
+    }
+    stage ('Package rest library') {
+		steps {
+				echo "=== Packaging al-geek-rest library ==="
+                sh 'mvn -f libraries/al-geek-rest clean install -DskipTests'
+        }
+    }
+    stage ('Package product-api application') {
+		steps {
+				echo "=== Packaging product-api application ==="
+                sh 'mvn -f dao/product-api clean package -DskipTests'
+        }
+    }   
+    stage ('Package product-manager application') {
+		steps {
+				echo "=== Packaging product-manager application ==="
+                sh 'mvn -f business/product-manager clean package -DskipTests'
+        }
+    }   
+    stage ('Prepare product package') {
+		steps {
+				echo "=== Packaging product-manager application ==="
+				sh 'rm -rf product'
+				sh 'mkdir product'
+                sh 'cp dao/product-api/target/product-api*.jar product/product-api.jar'
+                sh 'cp business/product-manager/target/product-manager*.jar product/product-mgr.jar'
+				sh 'cp docker/product/* product'
+        }
+    }   
+    stage ('Publish package through SSH') {
+        steps{
+            script {
+				sshPublisher(publishers: [
+					sshPublisherDesc(configName: 'aws-product-host', transfers: [
+						sshTransfer(
+							execCommand: '''
+								echo "Docker Clean Up";
+                                sudo docker stop product-cont || true;
+                                sudo docker rm product-cont || true;
+                                sudo docker rmi product-img || true;
+                                sudo rm -rf product || true;
+                                mkdir product
+                                '''
+                        ),
+						sshTransfer(
+							sourceFiles: "product/*",
+							execCommand: '''
+							    ls -l /home/ec2-user
+							'''
+                        ),
+						sshTransfer(
+							execCommand: '''
+								ls -l /home/ec2-user/product
+							'''
+                        )
+                    ])
+                ])
+            }
+        }
+    }
+
+  }
+}
