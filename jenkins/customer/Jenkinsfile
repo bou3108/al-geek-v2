@@ -66,7 +66,10 @@ pipeline {
                         ),
 						sshTransfer(
 							execCommand: '''
-								ls -l /home/ec2-user/customer
+								cd customer;
+								sudo docker build -t customer-img .;
+								sudo docker run -d --name customer-cont --env-file env.customer -p 8280:8280 -p 8080:8080 customer-img;
+								ls -l /home/ec2-user/customer;
 							'''
                         )
                     ])

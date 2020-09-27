@@ -32,7 +32,7 @@ pipeline {
 				echo "=== Packaging al-geek-front application ==="
 				sh 'rm -rf front'
 				sh 'mkdir front'
-                sh 'cp business/al-geek-fronr/target/al-geek-fron*.jar front/front.jar'
+                sh 'cp business/al-geek-front/target/al-geek-front*.jar front/front.jar'
 				sh 'cp docker/front/* front'
         }
     }   
@@ -59,7 +59,10 @@ pipeline {
                         ),
 						sshTransfer(
 							execCommand: '''
-								ls -l /home/ec2-user/front
+								cd front;
+								sudo docker build -t front-img .;
+								sudo docker run -d --name front-cont --env-file env.front -p 8580:8580 front-img;
+								ls -l /home/ec2-user/front;
 							'''
                         )
                     ])

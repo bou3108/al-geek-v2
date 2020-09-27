@@ -59,7 +59,10 @@ pipeline {
                         ),
 						sshTransfer(
 							execCommand: '''
-								ls -l /home/ec2-user/sales
+								cd sales;
+								sudo docker build -t sales-img .;
+								sudo docker run -d --name sales-cont --env-file env.sales -p 8580:8580 sales-img;
+								ls -l /home/ec2-user/sales;
 							'''
                         )
                     ])

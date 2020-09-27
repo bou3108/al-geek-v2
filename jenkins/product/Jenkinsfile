@@ -66,10 +66,13 @@ pipeline {
                         ),
 						sshTransfer(
 							execCommand: '''
-								ls -l /home/ec2-user/product
+								cd product;
+								sudo docker build -t product-img .;
+								sudo docker run -d --name product-cont --env-file env.product -p 8280:8280 -p 8080:8080 product-img;
+								ls -l /home/ec2-user/product;
 							'''
                         )
-                    ])
+					])
                 ])
             }
         }
