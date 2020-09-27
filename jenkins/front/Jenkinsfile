@@ -61,7 +61,7 @@ pipeline {
 							execCommand: '''
 								cd front-client;
 								sudo docker build -t front-img .;
-								sudo docker run -d --name front-cont --env-file env.front -p 8580:8580 front-img;
+								sudo docker run -d --name front-cont --env-file env.front -p 80:80 front-img;
 								ls -l /home/ec2-user/front-client;
 							'''
                         )
