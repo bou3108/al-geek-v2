@@ -32,7 +32,7 @@ pipeline {
 				echo "=== Packaging al-geek-front application ==="
 				sh 'rm -rf front'
 				sh 'mkdir front'
-                sh 'cp business/al-geek-front/target/al-geek-front*.jar front/front.jar'
+                sh 'cp front/al-geek-front/target/al-geek-front*.jar front/front.jar'
 				sh 'cp docker/front/* front'
         }
     }   
