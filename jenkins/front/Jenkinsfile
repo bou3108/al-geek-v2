@@ -30,10 +30,10 @@ pipeline {
     stage ('Create al-geek-front package') {
 		steps {
 				echo "=== Packaging al-geek-front application ==="
-				sh 'rm -rf front'
-				sh 'mkdir front'
-                sh 'cp front/al-geek-front/target/al-geek-front*.jar front/front.jar'
-				sh 'cp docker/front/* front'
+				sh 'rm -rf front-client'
+				sh 'mkdir front-client'
+                sh 'cp front/al-geek-front/target/al-geek-front*.jar front-client/front.jar'
+				sh 'cp docker/front/* front-client'
         }
     }   
     stage ('Publish package through SSH') {
@@ -47,22 +47,22 @@ pipeline {
                                 sudo docker stop front-cont || true;
                                 sudo docker rm front-cont || true;
                                 sudo docker rmi front-img || true;
-                                sudo rm -rf front || true;
-                                mkdir front
+                                sudo rm -rf front-client || true;
+                                mkdir front-client
                                 '''
                         ),
 						sshTransfer(
-							sourceFiles: "front/*",
+							sourceFiles: "front-client/*",
 							execCommand: '''
 							    ls -l /home/ec2-user
 							'''
                         ),
 						sshTransfer(
 							execCommand: '''
-								cd front;
+								cd front-client;
 								sudo docker build -t front-img .;
 								sudo docker run -d --name front-cont --env-file env.front -p 8580:8580 front-img;
-								ls -l /home/ec2-user/front;
+								ls -l /home/ec2-user/front-client;
 							'''
                         )
                     ])
