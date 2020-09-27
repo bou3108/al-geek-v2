@@ -23,7 +23,7 @@ public class VenteService {
 
     // Remplace l'appel à CatalogueService par un appel à sales-orchestrator
     public List<Produit> getMeilleuresVentes(int size) {
-        String url = gatewayUrl + "/sales/best-sales/max=" + size;
+        String url = gatewayUrl + "/sales/best-sales/" + size;
         ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();

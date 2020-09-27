@@ -25,7 +25,7 @@ public class ClientService {
 
     // Remplace l'appel à getCommandesPourClient de CommandeService par un appel REST à customer-manager
     public List<Commande> getCommandesPourClient(Long clientId) {
-        String url = gatewayUrl + "/order/customer/id=" + clientId;
+        String url = gatewayUrl + "/order/customer/" + clientId;
         ResponseEntity<List<Commande>> response = cmdCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -45,7 +45,7 @@ public class ClientService {
 
     // Remplace l'appel à doConnecter de ClientService par un appel REST à customer-manager
     public Client connect(String email, String password) {
-        String url = gatewayUrl + "/customer/authentication/email=" + email + "&password=" + password;
+        String url = gatewayUrl + "/customer/authentication/" + email + "/" + password;
         ResponseEntity<Client> response = customerCommunicator.get(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -54,7 +54,7 @@ public class ClientService {
     }
 
     public boolean doInscription(Client client, String password) {
-        String url = gatewayUrl + "/customer/register/password=" + password;
+        String url = gatewayUrl + "/customer/register/" + password;
         ResponseEntity<Client> response = customerCommunicator.post(url, client);
         if (response.getStatusCode() == HttpStatus.OK) {
             return true;

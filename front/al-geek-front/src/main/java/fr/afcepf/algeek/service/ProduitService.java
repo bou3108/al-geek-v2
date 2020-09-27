@@ -28,7 +28,7 @@ public class ProduitService {
 
     // Remplace l'appel à getProduitAvecCaracteristiques de ProduitService par un appel REST à product-manager
     public Produit getProduitAvecCaracteristiques(Long productId) {
-        String url = gatewayUrl + "/product/details/id=" + productId;
+        String url = gatewayUrl + "/product/details/" + productId;
         ResponseEntity<Produit> response = productCommunicator.get(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -48,7 +48,7 @@ public class ProduitService {
 
     // Les méthodes ci-dessous remplacent l'appel à ProduitService par un appel REST au Product-Manager
     public List<Produit> trierMoinsCherAuPlusCher(Long typeProduitId) {
-        String url = gatewayUrl + "/product/filter/sort/price/ascending/id=" + typeProduitId;
+        String url = gatewayUrl + "/product/filter/sort/price/ascending/" + typeProduitId;
         ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -57,7 +57,7 @@ public class ProduitService {
     }
 
     public List<Produit> filtrerUsageIntensif(List<Produit> listOrdi, String typeOrdi) {
-        String url = gatewayUrl + "/product/filter/use/intensive/kind=" + typeOrdi;
+        String url = gatewayUrl + "/product/filter/use/intensive/" + typeOrdi;
         ResponseEntity<List<Produit>> response = productCommunicator.postList(url, listOrdi);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -66,7 +66,7 @@ public class ProduitService {
     }
 
     public List<Produit> filtrerUsageRegulier(List<Produit> listOrdi, String typeOrdi) {
-        String url = gatewayUrl + "/product/filter/use/regular/kind=" + typeOrdi;
+        String url = gatewayUrl + "/product/filter/use/regular/" + typeOrdi;
         ResponseEntity<List<Produit>> response = productCommunicator.postList(url, listOrdi);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -75,7 +75,7 @@ public class ProduitService {
     }
 
     public List<Produit> filtrerUsageOccasionnel(List<Produit> listOrdi, String typeOrdi) {
-        String url = gatewayUrl + "/product/filter/use/casual/kind=" + typeOrdi;
+        String url = gatewayUrl + "/product/filter/use/casual/" + typeOrdi;
         ResponseEntity<List<Produit>> response = productCommunicator.postList(url, listOrdi);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
@@ -85,7 +85,7 @@ public class ProduitService {
 
     // Remplace l'appel à getProduitsParType de ProduitService par un appel REST à product-manager
     public List<Produit> getProduitsParType(Long id, boolean chargerCaracteristiques) {
-        String url = gatewayUrl + "/product/type=" + id + "&with=" + chargerCaracteristiques;
+        String url = gatewayUrl + "/product/type/" + (chargerCaracteristiques?"full":"short") + "/" + id;
         ResponseEntity<List<Produit>> response = productCommunicator.getList(url);
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
