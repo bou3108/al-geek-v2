@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductApiService } from '../../api/product-api.service';
 import { StockApiService } from '../../api/stock-api.service';
@@ -12,62 +12,94 @@ import { Stock } from './../../models/stock.model';
 })
 export class ProductListComponent implements OnInit {
 
+  // PROPRIETES :
+  filteredProducts : Product[];
+  products : Product[];
+  selectedProduct : Product;
+  isSelected : boolean = false;
+  stocks : Stock[];
+  errorMessage : string;
+
+  _listFilterByName : string;
+  _listFilterByCategory : string;
+  _listFilterByBrand : string;
+
   pageTitle : string = 'Product List';
   imageWidth: number = 50;
   imageMargin: number = 50;
-  _listFilter : string;
 
-  get listFilter() : string {
-        return this._listFilter;
+  // CONSTRUCTEUR :
+  constructor(private productApi: ProductApiService,
+    private stockApi: StockApiService,
+    private router : Router) { }
+
+  // GESTION DES FILTRES :
+  get listFilterByName() : string {
+        return this._listFilterByName;
   }
-
-  set listFilter(value : string) {
-        this._listFilter = value;
-        this.filteredProducts = this._listFilter ? this.performFilter(this.listFilter) : this.products;
+  set listFilterByName(value : string) {
+        this._listFilterByName = value;
+        this.filteredProducts = this._listFilterByName ? this.performFilter(this.listFilterByName) : this.products;
   }
-
-  filteredProducts : Product[];
-  products : Product[];
-  errorMessage : string;
+  get listFilterByCategory() : string {
+    return this._listFilterByCategory;
+  }
+  set listFilterByCategory(value : string) {
+    this._listFilterByCategory = value;
+    this.filteredProducts = this._listFilterByCategory ? this.performFilter(this.listFilterByCategory) : this.products;
+  }
+  get listFilterByBrand() : string {
+    return this._listFilterByBrand;
+  }
+  set listFilterByBrand(value : string) {
+    this._listFilterByBrand = value;
+    this.filteredProducts = this._listFilterByBrand ? this.performFilter(this.listFilterByBrand) : this.products;
+  }
 
   performFilter(filter : string) : any[] {
-    // En argument je récupère le filtre inséré dans l'input text
-    // je vais filtrer mon tableau products
-    // et je vais garder de products que les produits dont le nom en minuscule
-    // contient le caractère de mon filtre
-    // return this.products.filter( (product : any ) =>
-    // (<string>product.productName).toLocaleLowerCase().lastIndexOf(filter) !== -1 );
     return this.products.filter( (product : Product ) =>
     product.nom.toLocaleLowerCase().lastIndexOf(filter) !== -1 );
   }
 
-  constructor(private productApi: ProductApiService,
-              private stockApi: StockApiService,
-              private router : Router) { }
+  
 
+  // INITIALISATION DU COMPONENT :
   ngOnInit(): void {
     this.productApi.getProducts().subscribe({
       next:products => {
         this.products = products;
+        
         this.filteredProducts = this.products;
       },
       error: err => this.errorMessage = err
     }); 
   }
 
-
-  getProducts() {
-    this.productApi.getProducts().subscribe(
-      (data) => {this.products = data}
-    );
+  // REDIRECTION VERS PRODUCT-DETAIL
+  goToDetails(productId: number, product: Product) : void {
+    this.selectedProduct = product;
+    this.isSelected = true;
+    // this.router.navigateByUrl('/product-detail/' + productId);
   }
 
-  getImageUrl(product: Product): string {
-    console.log("src/assets/" + product.photo);
-    return "src/assets/" + product.photo;
-}
+  onBack() : void {
+    this.selectedProduct = null;
+    this.isSelected = false;
+  }
 
-  goToDetails(productId: number) {
-    this.router.navigateByUrl('/product-detail/' + productId);
+  onEUR() : void {
+
+  }
+
+  onUSD() : void {
+
+  }
+
+  onGBP() : void {
+
+  }
+
+  onJPY() : void {
+    
   }
 }

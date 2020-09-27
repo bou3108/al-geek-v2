@@ -16,13 +16,20 @@ export class StockApiService {
 
   constructor(private http: HttpClient) { }
 
-  // TO DO :
-  // implémenter en-dessous les méthodes dont tu as besoin (celles qui vont attaquer les services exposés par Product-manager,
-  // puis par le gateway/customer quand on aura fini l'intégration)
 
   getStockById(productId: number): Observable<Stock>{
     const headers = new HttpHeaders().set("Content-Type", "application/json");
-    return this.http.get<Stock>(STOCK_API_URL + "/" + productId, {headers}).pipe(catchError(this.handleError));
+    return this.http.get<Stock>(STOCK_API_URL + "/id/" + productId, {headers});
+  }
+
+  getStocks() : Observable<Stock[]>{
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.get<Stock[]>(STOCK_API_URL + "/all", {headers}).pipe(catchError(this.handleError));
+  }
+
+  updateStock(stock: Stock) : Observable<Stock> {
+
+    return null;
   }
 
 
