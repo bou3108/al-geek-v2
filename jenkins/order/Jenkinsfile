@@ -61,12 +61,15 @@ pipeline {
 						sshTransfer(
 							sourceFiles: "order/*",
 							execCommand: '''
-							    ls -l /home/ec2-user
+							    ls -l /home/ec2-user;
 							'''
                         ),
 						sshTransfer(
 							execCommand: '''
-								ls -l /home/ec2-user/order
+								cd order;
+								sudo docker build -t order-img;
+								sudo docker run -d --name order-cont --env-file env.order -p 8280:8280 -p 8080:8080 order-img;
+								ls -l /home/ec2-user/order;
 							'''
                         )
                     ])
