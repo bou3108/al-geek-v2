@@ -21,7 +21,7 @@ export class OrderApiService {
     console.log('=====IN getOrders from order api service ====');
     const headers = new HttpHeaders().set("Content-Type", "application/json");
   
-    return this.http.get<IOrder[]>(ORDER_API_URL + '/order/all', { headers }) 
+    return this.http.get<IOrder[]>(ORDER_API_URL + '/all', { headers }) 
     .pipe(catchError(this.handleError));
   }
 
@@ -29,7 +29,7 @@ export class OrderApiService {
     console.log('=====IN getOrderById from order api service ====');
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
-    return this.http.get<IOrder>(ORDER_API_URL + "/order/id=" + id, {headers})
+    return this.http.get<IOrder>(ORDER_API_URL + "/id/" + id, {headers})
     .pipe(catchError(this.handleError));
   }
 
@@ -40,7 +40,7 @@ export class OrderApiService {
     console.log('=====IN getOrderByClient from order api service ====');
     const headers = new HttpHeaders().set("Content-Type", "application/json");
 
-    return this.http.get<IOrder[]>(ORDER_API_URL + "/order/customer/id=" + id, {headers})
+    return this.http.get<IOrder[]>(ORDER_API_URL + "/customer/" + id, {headers})
     .pipe(catchError(this.handleError));
   }
 

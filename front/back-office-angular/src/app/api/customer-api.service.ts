@@ -59,7 +59,7 @@ export class CustomerApiService {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     //+ ajouter token-id et la value de session id que renverra Cognito
 
-    return this.http.get<ICustomer>(CUSTOMER_API_URL + "/id=" + id, { headers }).pipe(catchError(this.handleError));
+    return this.http.get<ICustomer>(CUSTOMER_API_URL + "/id/" + id, { headers }).pipe(catchError(this.handleError));
   }
 
   // ordersByClient() : '.../manager/order/customer/id={id} pour orderManager
