@@ -28,8 +28,10 @@ export class StockApiService {
   }
 
   updateStock(stock: Stock) : Observable<Stock> {
-
-    return null;
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    console.log("dans le service update stock");
+    console.log(stock);
+    return this.http.put<Stock>(STOCK_API_URL + "/update", stock, {headers});
   }
 
 
