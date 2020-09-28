@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "back-office-angular"
+    }
+  },
+  "defaultProject": "back-office-angular",
+  "cli": {
+    "analytics": false
+  }
 }
