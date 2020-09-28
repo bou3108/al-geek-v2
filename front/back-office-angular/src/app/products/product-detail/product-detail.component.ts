@@ -18,10 +18,13 @@ export class ProductDetailComponent implements OnInit {
   modifiedProduct : Product;
   stock : Stock;
   modifiedStock : Stock;
-  errorMessage : string;
+  errorMessageProduct : string;
+  errorMessageStock : string;
   isFormVisible : boolean = false;
   isBtnModifyVisible : boolean = true;
   isDataAvailable:boolean = false;
+  @Input()
+  devise : string;
 
   constructor(private route : ActivatedRoute,
               private router : Router,
@@ -42,6 +45,7 @@ export class ProductDetailComponent implements OnInit {
     this.stockService.getStockById(this.product.id).subscribe({
       next: data => {
         this.stock = data;
+        this.modifiedStock = {...this.stock};
         this.isDataAvailable = true;
       },
       error: err => {
@@ -50,8 +54,7 @@ export class ProductDetailComponent implements OnInit {
       }
     });
 
-    this.modifiedProduct = this.product;
-    this.modifiedStock = new Stock(null, null, 0, 0);
+    this.modifiedProduct = {...this.product};;
     
   }
 
@@ -60,10 +63,12 @@ export class ProductDetailComponent implements OnInit {
   onModify() : void {
     this.isFormVisible = true;
     this.isBtnModifyVisible = false;
+    this.devise = "€";
   }
 
   onCancelModifications() : void {
-    this.modifiedProduct = null;
+    this.modifiedProduct = {...this.product};
+    this.modifiedStock = {...this.stock};
     this.isFormVisible = false;
   }
 
@@ -74,16 +79,60 @@ export class ProductDetailComponent implements OnInit {
     } else {
       if(this.modifiedProduct != this.product) {
         console.log("le produit a été modifié");
+        this.productService.updateProduct(this.modifiedProduct).subscribe({
+          next: data => {
+            this.product = data;
+          },
+          error: () => {
+            this.errorMessageProduct = "Problème de mise à jour du produit.";
+            this.modifiedProduct = {...this.product};
+          }
+        })
       }
       if(this.modifiedStock != this.stock) {
         console.log("le stock a été modifié");
+        console.log("stock initial : ");
+        console.log(this.stock);
+        console.log("stock modifié : ");
+        console.log(this.modifiedStock);
+        this.stockService.updateStock(this.modifiedStock).subscribe({
+          next: data => {
+            this.stock = data;
+          },
+          error: err => {
+            this.errorMessageStock = "Problème de mise à jour du stock."
+            console.log(this.errorMessageStock);
+            console.log(err);
+            this.modifiedStock = {...this.stock};
+          }
+        })
       }
     }
-
-    
-    this.modifiedProduct = this.product;
-    this.modifiedStock = this.stock;
     this.isFormVisible = false;
+  }
+
+
+  convertCurrency(price: number) : number {
+    var displayedPrice : number;
+    switch(this.devise) {
+      case "$": {
+        displayedPrice = price*1.1;
+        break;
+      }
+      case "£": {
+        displayedPrice = price*1.5;
+        break;
+      }
+      case "Y": {
+        displayedPrice = price*123;
+        break;
+      }
+      default: {
+        displayedPrice = price;
+        break;
+      }
+    }
+    return displayedPrice;
   }
 
 }

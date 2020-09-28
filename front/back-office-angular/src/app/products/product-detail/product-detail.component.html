@@ -9,8 +9,9 @@
             </div>
             <div class='row'>
                <div class='col-md-3'>Prix :</div>
-               <div class='col-md-5' style="text-align: right;">{{product.prix}}</div>
-               <input type="text" *ngIf="isFormVisible" [(ngModel)]="product.prix" style="text-align: right;">
+               <div class='col-md-5' style="text-align: right;">{{convertCurrency(product.prix) | number : '1.2-2'}}</div>
+               <div>{{this.devise}}</div>
+               <input type="number" *ngIf="isFormVisible" [(ngModel)]="modifiedProduct.prix" style="text-align: right;">
             </div>
             <div class='row'>
                <div class='col-md-3'>
@@ -25,7 +26,7 @@
                <div class='col-md-5' *ngIf="isDataAvailable" style="text-align: right;">
                   {{ stock.minimumQuantity }}
                </div>
-               <input type="text" *ngIf="isFormVisible" [(ngModel)]="stock.minimumQuantity" style="text-align: right;">
+               <input type="number" *ngIf="isFormVisible" [(ngModel)]="modifiedStock.minimumQuantity" style="text-align: right;">
                
             </div>
          </div>

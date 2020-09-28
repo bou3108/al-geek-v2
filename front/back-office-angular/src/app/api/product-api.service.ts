@@ -32,13 +32,13 @@ export class ProductApiService {
   }
 
   addProduct(product: Product) : Observable<Product> {
-
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
     return null;
   }
 
   updateProduct(product: Product) : Observable<Product> {
-
-    return null;
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.put<Product>(PRODUCT_API_URL + "/update", product, { headers }).pipe(catchError(this.handleError));
   }
 
 

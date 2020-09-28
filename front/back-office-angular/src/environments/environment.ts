@@ -3,6 +3,7 @@ export const environment = {
   production: false,
 
   // url vers l'api gateway de aws
+
   customerApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/customer',
   
   orderApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/order',
