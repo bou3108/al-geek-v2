@@ -1,0 +1,79 @@
+pipeline {
+  agent any 
+  tools {
+    maven 'M3'
+  }
+  stages {
+    stage('checkout') {
+      steps {
+        git 'https://github.com/oville92/al-geek-v2.git'
+      }
+    }
+    stage ('Package dto library') {
+		steps {
+				echo "=== Packaging al-geek-dto library ==="
+                sh 'mvn -f libraries/al-geek-dto clean install -DskipTests'
+        }
+    }
+    stage ('Package rest library') {
+		steps {
+				echo "=== Packaging al-geek-rest library ==="
+                sh 'mvn -f libraries/al-geek-rest clean install -DskipTests'
+        }
+    }
+    stage ('Package customer-api application') {
+		steps {
+				echo "=== Packaging customer-api application ==="
+                sh 'mvn -f dao/customer-api clean package -DskipTests'
+        }
+    }   
+    stage ('Package customer-manager application') {
+		steps {
+				echo "=== Packaging customer-manager application ==="
+                sh 'mvn -f business/customer-manager clean package -DskipTests'
+        }
+    }   
+    stage ('Prepare customer package') {
+		steps {
+				echo "=== Packaging customer applications ==="
+				sh 'rm -rf customer'
+				sh 'mkdir customer'
+                sh 'cp dao/customer-api/target/customer-api*.jar customer/customer-api.jar'
+                sh 'cp business/customer-manager/target/customer-manager*.jar customer/customer-mgr.jar'
+				sh 'cp docker/customer/* customer'
+        }
+    }   
+    stage ('Publish package through SSH') {
+        steps{
+            script {
+				sshPublisher(publishers: [
+					sshPublisherDesc(configName: 'aws-customer-host', transfers: [
+						sshTransfer(
+							execCommand: '''
+								echo "Docker Clean Up";
+                                sudo docker stop customer-cont || true;
+                                sudo docker rm customer-cont || true;
+                                sudo docker rmi customer-img || true;
+                                sudo rm -rf customer || true;
+                                mkdir customer
+                                '''
+                        ),
+						sshTransfer(
+							sourceFiles: "customer/*",
+							execCommand: '''
+							    ls -l /home/ec2-user
+							'''
+                        ),
+						sshTransfer(
+							execCommand: '''
+								ls -l /home/ec2-user/customer
+							'''
+                        )
+                    ])
+                ])
+            }
+        }
+    }
+
+  }
+}
