@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.afcepf.algeek.dto.Client;
+import fr.afcepf.algeek.dto.Meteo;
 import fr.afcepf.algeek.service.ClientService;
+import fr.afcepf.algeek.service.MeteoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -27,6 +29,8 @@ public class ConnectBean implements Serializable {
 	private Client client = new Client();
 	//private static Logger log = LogManager.getLogger();
 	private String messageErreur;
+	@Getter @Setter
+	private Meteo customerMeteo;
 	
 	@Inject
 	private PanierBean panierBean;
@@ -48,6 +52,8 @@ public class ConnectBean implements Serializable {
 
 	@Autowired
 	ClientService clientService;
+	@Autowired
+	MeteoService meteoService;
 
 	public String doConnecter() {
 		System.out.println("tentative connexion");
@@ -57,6 +63,9 @@ public class ConnectBean implements Serializable {
 			return "/home.xhtml?faces-redirect=true";
 		}
 		System.out.println("Client connecté : " + client.getNom());
+
+		customerMeteo = meteoService.getMeteoByZipCode(client.getCodePostal());
+//		Object meteo = meteoService.getObjectMeteo(client.getCodePostal());
 		hideOverlay();
 		email = "";
 		password= "";

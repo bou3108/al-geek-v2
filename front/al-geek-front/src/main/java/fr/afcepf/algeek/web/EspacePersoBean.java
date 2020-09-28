@@ -11,7 +11,9 @@ import javax.faces.view.ViewScoped;
 
 import fr.afcepf.algeek.dto.Client;
 import fr.afcepf.algeek.dto.Commande;
+import fr.afcepf.algeek.dto.Meteo;
 import fr.afcepf.algeek.service.ClientService;
+import fr.afcepf.algeek.service.MeteoService;
 import lombok.extern.slf4j.Slf4j;
 import net.bootsfaces.render.A;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class EspacePersoBean implements Serializable {
 
 	@Getter @Setter
 	private List<Commande> historique;
-	
+
 	@Getter @Setter
 	private String msgModif;
 
@@ -45,7 +47,7 @@ public class EspacePersoBean implements Serializable {
 		for (Commande commande : historique) {
 			System.out.println(commande.getDateDeLaCommande());
 		}
-		
+
 	}
 	
 	public void modifInfosClient() {
