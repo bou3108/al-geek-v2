@@ -12,7 +12,7 @@ export const environment = {
 
   stockApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/stock',
 
-  converterApiUrl: 'http://35.181.58.59:8080/currency-converter'
+  converterApiUrl: 'https://h1y8l5co8c.execute-api.eu-west-3.amazonaws.com/portal/gateway/currency-converter'
   // converterApiUrl: 'http://localhost:8080/currency-converter'
 };
 

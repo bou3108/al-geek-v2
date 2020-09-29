@@ -16,7 +16,7 @@ const CONVERTER_API_URL = environment.converterApiUrl;
 
     convertFromEuro(targetCurrency: string, amount: number) : Observable<number> {
         const headers = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.get<number>(CONVERTER_API_URL + "/from/EUR/to/" + targetCurrency + "/amount/" + amount,
+        return this.http.get<number>(CONVERTER_API_URL + "/convert/from/EUR/to/" + targetCurrency + "/amount/" + amount,
                                         {headers}).pipe(catchError(this.handleError));
     }
 
