@@ -34,13 +34,6 @@ export class StockApiService {
     return this.http.put<Stock>(STOCK_API_URL + "/update", stock, {headers});
   }
 
-  updatePatchStock(stock: Stock) : Observable<Stock> {
-    const headers = new HttpHeaders().set("Content-Type", "application/json");
-    console.log("dans le service update via patch");
-    console.log(stock);
-    return this.http.patch<Stock>(STOCK_API_URL + "/update", stock, {headers});
-  }
-
 
 
 

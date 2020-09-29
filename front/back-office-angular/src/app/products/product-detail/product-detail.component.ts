@@ -95,7 +95,7 @@ export class ProductDetailComponent implements OnInit {
         console.log(this.stock);
         console.log("stock modifié : ");
         console.log(this.modifiedStock);
-        this.stockService.updatePatchStock(this.modifiedStock).subscribe({
+        this.stockService.updateStock(this.modifiedStock).subscribe({
           next: data => {
             this.stock = data;
           },
