@@ -18,7 +18,6 @@ public class MeteoService {
     private String gatewayUrl;
 
     private final ResponseEntityRestCommunicator<Meteo> communicator = new ResponseEntityRestCommunicator<>(Meteo.class, Meteo[].class);
-    private final ResponseEntityRestCommunicator<Object> communicatorMeteo = new ResponseEntityRestCommunicator<>(Object.class, Object[].class);
 
     public Meteo getMeteoByZipCode (String zipCode) {
         String url = gatewayUrl + "/meteo/zipcode/" + zipCode;
@@ -31,17 +30,6 @@ public class MeteoService {
                 return null;
             }
         } catch (Exception ex) {
-            return null;
-        }
-
-    }
-
-    public Object getObjectMeteo (String zipcode) {
-        String url = gatewayUrl + "/meteo/zipcode/" + zipcode;
-        ResponseEntity<Object> response = communicatorMeteo.get(url);
-        if(response.getStatusCode() == HttpStatus.OK) {
-            return response.getBody();
-        } else {
             return null;
         }
     }

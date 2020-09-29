@@ -68,6 +68,16 @@ td {
 	margin-left: 5px;
 }
 
+.weatherBox {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-left: 15px;
+	border : 1px solid #18254a;
+	padding: 80px 80px;
+	background: #f4efdc;
+}
+
 
 
 .champLabel {

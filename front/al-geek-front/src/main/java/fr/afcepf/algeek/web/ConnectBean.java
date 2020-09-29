@@ -65,7 +65,6 @@ public class ConnectBean implements Serializable {
 		System.out.println("Client connecté : " + client.getNom());
 
 		customerMeteo = meteoService.getMeteoByZipCode(client.getCodePostal());
-//		Object meteo = meteoService.getObjectMeteo(client.getCodePostal());
 		hideOverlay();
 		email = "";
 		password= "";

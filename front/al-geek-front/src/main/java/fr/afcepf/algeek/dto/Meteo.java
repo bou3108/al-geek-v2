@@ -11,14 +11,6 @@ public class Meteo implements Serializable {
     private String photo;
     private String temperature;
 
-    public String getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
-    }
-
 
 
     public Meteo() {
@@ -32,6 +24,8 @@ public class Meteo implements Serializable {
         this.photo = photo;
         this.temperature = temperature;
     }
+
+
 
     public String getMeteoId() {
         return meteoId;
@@ -70,5 +64,13 @@ public class Meteo implements Serializable {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+	
+	public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 }
